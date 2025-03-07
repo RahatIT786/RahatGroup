@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Http\Controllers\Agent\Settings;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
+
+class SubAgentListComponent extends Component
+{
+    #[Layout('agent.layouts.app')]
+    public function render()
+    {
+        return view('agent.settings.sub-agent-list-component');
+    }
+}
