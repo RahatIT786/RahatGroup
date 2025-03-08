@@ -33,14 +33,15 @@ class IDCardsComponent extends Component
         $agent = auth()->user();
 
         $guest_data = GuestDetail::where('booking_id', $booking_data->booking_id)->get();
-        
+
         if ($guest_data->isEmpty()) {
             $this->alert('error', 'Please add passengers to download ID Card');
             return response()->json(['error' => 'not found'], 404);
         }
-        
+
         // Prepare data for each guest
         $datas = $guest_data->map(function ($guest) use ($booking_data, $agent) {
+
             return [
                 'pax_name' => $guest->guest_first_name . ' ' . $guest->guest_last_name,
                 'pax_passport' => $guest->passport_number ?? '',
@@ -56,13 +57,14 @@ class IDCardsComponent extends Component
                 'booking_id' => $booking_data->booking_id
             ];
         })->toArray(); // Convert collection to an array
-        
+
+        //  dd($datas);
         // Generate the PDF with the Blade template
         $pdf = Pdf::loadView('agent.downloads.i-cards.i-d-cards-pdf-component', ['datas' => $datas])
             ->setPaper('a4', 'landscape');
         $docName = "ID_CARD_" . time() . ".pdf";
         return response()->streamDownload(function () use ($pdf) {
-            echo $pdf->stream();
+            // echo $pdf->stream();
         }, $docName);
     }
 
