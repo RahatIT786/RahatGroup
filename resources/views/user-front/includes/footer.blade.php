@@ -72,6 +72,8 @@
                                         Kit</span></a></li>
                             <li><a href="{{ route('customer.agency') }}" font-size="smallest"
                                     class="gnRJtI"><span>Authorised Agents</span></a></li>
+                            <li><a href="{{ route('customer.childRefundPolicy') }}" font-size="smallest"
+                                    class="gnRJtI"><span>Child & Refund Policy</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -100,8 +102,6 @@
 
                             <li><a href="{{ route('customer.bookingCancellationPolicy') }}" font-size="smallest"
                                     class="gnRJtI"><span>Booking & Cancellation Policy</span></a></li>
-                            <li><a href="{{ route('customer.childRefundPolicy') }}" font-size="smallest"
-                                    class="gnRJtI"><span>Child & Refund Policy</span></a></li>
                             <li><a href="{{ route('customer.HajjKit') }}" font-size="smallest"
                                     class="gnRJtI"><span>Hajj Kit</span></a></li>
                             <li><a href="{{ route('customer.Reward') }}" font-size="smallest"
