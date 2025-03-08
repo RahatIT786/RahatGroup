@@ -42,6 +42,9 @@ class IDCardsComponent extends Component
         // Prepare data for each guest
         $datas = $guest_data->map(function ($guest) use ($booking_data, $agent) {
 
+            $agencyLogoPath = storage_path('app/public/company_logo/' . $agent->company_logo);
+            $agencyLogoUrl = $agent->company_logo ? 'storage/company_logo/' . $agent->company_logo : asset('assets/imgages/mainlogo.png'); // Fallback image
+            // dd($agencyLogoUrl);
             return [
                 'pax_name' => $guest->guest_first_name . ' ' . $guest->guest_last_name,
                 'pax_passport' => $guest->passport_number ?? '',
@@ -52,8 +55,9 @@ class IDCardsComponent extends Component
                 'front_background' => 'assets/img/icard/card-bg-front.jpg',
                 'rear_background' => 'assets/img/icard/card-bg-front.jpg',
                 'pax_photo' => 'storage/photos/passenger_photo/' . $guest->photo,
-                'agency_name' => $agent->agency_name,
-                'agency_logo' => 'storage/company_logo/' . $agent->company_logo,
+                'agency_name' => $agent->agency_name ?? '',
+                // 'agency_logo' => 'storage/company_logo/' . $agent->company_logo,
+                'agency_logo' => $agencyLogoUrl,
                 'booking_id' => $booking_data->booking_id
             ];
         })->toArray(); // Convert collection to an array
@@ -64,7 +68,7 @@ class IDCardsComponent extends Component
             ->setPaper('a4', 'landscape');
         $docName = "ID_CARD_" . time() . ".pdf";
         return response()->streamDownload(function () use ($pdf) {
-            // echo $pdf->stream();
+          echo $pdf->stream();
         }, $docName);
     }
 
