@@ -61,7 +61,7 @@ class BookingListComponent extends Component
             $this->hotels = HotelMaster::where('id', $hotel_ids->makka_hotel_id)->orwhere('id', $hotel_ids->madina_hotel_id)->with('hotelimage', 'city')->get();
         }
 
-          
+
     }
 
     public function getPaymentContent($bookingId)
@@ -76,7 +76,7 @@ class BookingListComponent extends Component
     {
         $resultArray = $this->allBookings->map(function ($all_bookings) {
             $tot_payments = 0;
-            
+
             foreach ($all_bookings->payment as $payment) {
                 $tot_payments += $payment->amount + $all_bookings->full_payment_discount;
             }
@@ -104,7 +104,7 @@ class BookingListComponent extends Component
             ->Approved()
             ->with('payment')
             ->get();
-        
+
         // dd($booking);
         if (!$booking) {
             return response()->json(['error' => 'not found'], 404);
@@ -130,20 +130,25 @@ class BookingListComponent extends Component
             return response()->json(['error' => 'not found'], 404);
         }
 
+
         // Retrieve the content for page_id = 23
         $pageContent = Content::where('page_id', 23)->first();
         $pageDescription = $pageContent->description ?? 'No description available';
-
-
+       // dd($voucherData->package_type);
         // Access the first pkgDetails record (assuming you want to retrieve the first)
-        $pkgDetails = $voucherData->package->pkgDetails->first();
+       // $pkgDetails = $voucherData->package->pkgDetails;
+       $pkgDetails = $voucherData->package->pkgDetails
+                        ->where('pkg_type_id', $voucherData->package_type)
+                        ->first();
 
+        // dd($pkgDetails);
         if ($pkgDetails) {
             // Makkah and Madinah hotel details
             $makkaHotel = $pkgDetails->makkahotel->hotel_name ?? '';
             $madinaHotel = $pkgDetails->madinahotel->hotel_name ?? '';
             $makkaDistance = $pkgDetails->makkahotel->distance ?? '';
             $madinaDistance = $pkgDetails->madinahotel->distance ?? '';
+
         } else {
             // Set default values if pkgDetails is empty
             $makkaHotel = '';
