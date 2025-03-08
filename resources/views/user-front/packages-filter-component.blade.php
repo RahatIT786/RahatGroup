@@ -2,8 +2,17 @@
     <section class="section hero-section"
         style="background: url('/assets/user-front/images/hero-image.jpg') center no-repeat; background-size: cover;">
         <div class="container">
-            <div class="banner-content">
-                <h2 class="text-h2">Find Your Perfect Umrah Package</h2>
+            <div class="banner-content" >
+                <div class="d-flex justify-content-center" >
+                   <div style="background-color: rgba(0, 0, 0, 0.2); width: fit-content; box-shadow:2px 2px 4px rgba(0, 0, 0, 0.2); border-radius: 5px;">
+                    <h2 class="text-h2" style="
+                    text-shadow: 5px 3px 5px black;
+        color: white; 
+        font-weight: bold;
+                        
+                        ">Find Your Perfect Umrah Package</h2>
+                   </div>
+                </div>
                 <div class="home-banner-form">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="nav-item">
