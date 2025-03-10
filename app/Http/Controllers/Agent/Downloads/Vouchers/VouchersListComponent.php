@@ -22,7 +22,7 @@ class VouchersListComponent extends Component
     public function getVoucher()
     {
         //  dd(auth()->user('agents')->id);
-        $records = Booking::query()->approved(a)
+        $records = Booking::query()->approved()
             ->where('agency_id', auth()->user()->id)
             ->whereIn('service_type', [1, 2, 20, 21])
             ->with('agency', 'servicetype') // Load the agent relationship
