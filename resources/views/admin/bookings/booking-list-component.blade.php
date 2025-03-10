@@ -192,11 +192,11 @@
                                                                 wire:click="getPaymentContent({{ $booking->id }})">View
                                                                 Payments
                                                                 Details</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                            {{-- <a class="dropdown-item" href="javascript:void(0)"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#paymentsStatusModal"
                                                                 wire:click="getPaymentStatus({{ $booking->booking_id }})">Make
-                                                                Payment</a>
+                                                                Payment</a> --}}
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item"
                                                                 href="{{ route('admin.booking.edit', ['booking_id' => $booking->id]) }}">Edit</a>
