@@ -35,6 +35,7 @@ class PaymentService
         $this->encRequestKey = $config['encRequestKey'];
         $this->decResponseKey = $config['decResponseKey'];
         $this->api_url = $config['api_url'];
+
     }
 
     public function createPayData($amount, $user_email, $user_contact_number, $return_url, $request_id)
@@ -62,6 +63,7 @@ class PaymentService
             'udf4' => '',
             'udf5' => ''
         ];
+        
     }
 
     public function createTokenId($data)
@@ -101,7 +103,7 @@ class PaymentService
         }';
 
         $encData = $this->encrypt($jsondata, $data['encKey'], $data['encKey']);
-
+        // dd( $encData);
         $response = $this->httpClient->post($data['payUrl'], [
             'form_params' => [
                 'encData' => $encData,
@@ -109,6 +111,9 @@ class PaymentService
             ],
             'verify' => true,  // This is to ensure SSL verification
         ]);
+       
+
+        // dd('your response is ', $response);
         $atomTokenId = null;
         $responseBody = (string) $response->getBody();
         // dd($responseBody);
@@ -116,14 +121,17 @@ class PaymentService
         // dd($getresp);
         $encresp = substr($getresp[1], strpos($getresp[1], "=") + 1);
         $decData = $this->decrypt($encresp, $data['decKey'], $data['decKey']);
-
+        // dd( $decData );
         $res = json_decode($decData, true);
+
         if ($res && $res['responseDetails']['txnStatusCode'] == 'OTS0000') {
             $atomTokenId = $res['atomTokenId'];
+            
+           
         } else {
             echo "Error getting data";
         }
-
+        
         return $atomTokenId;
     }
 
@@ -156,10 +164,13 @@ class PaymentService
 
     public function parseResponse($data)
     {
+       
         $decData = $this->decrypt($data, $this->decResponseKey, $this->decResponseKey);
         $jsonData = json_decode($decData, true);
+        // dd($jsonData );
 
         if ($jsonData['payInstrument']['responseDetails']['statusCode'] == 'OTS0000') {
+        // if ($jsonData['payInstrument']['responseDetails']['txnStatusCode'] == 'OTS0000') {
             return [
                 'status' => 'success',
                 'transaction_id' => $jsonData['payInstrument']['merchDetails']['merchTxnId'],

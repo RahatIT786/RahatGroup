@@ -62,6 +62,8 @@ use App\Http\Controllers\Admin\Payments\ApprovedPayments\ApprovedPaymentEditComp
 use App\Http\Controllers\Admin\Payments\PendingPayments\PendingPaymentListComponent;
 use App\Http\Controllers\Admin\Payments\PendingPayments\PendingPaymentEditComponent;
 
+use App\http\Controllers\PaymentController as TestPaymentController;
+
 //Downloads
 use App\Http\Controllers\Admin\Download\Invoice\InvoiceListComponent;
 use App\Http\Controllers\Admin\Download\PrintReceipt\PaymentReceiptListComponent;
@@ -316,8 +318,7 @@ use App\Http\Controllers\Admin\Gallery\CustomerTestimonials\CustomerTestimonialE
 use App\Http\Controllers\Admin\ManageEnquiry\AssistantEnquiry\AssistantEnquiryListComponent;
 
 use App\Http\Controllers\Admin\ManageEnquiry\Enquiries\EnquiriesComponent;
-
-
+use App\Http\Controllers\Agent\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -693,4 +694,7 @@ Auth::routes();
     Route::get('/coming-soon', function () {
         return view('coming-soon');
     })->name('comingSoon');
+
+    Route::post('payment/request', [TestPaymentController::class, 'requestPayment'])->name('payment.request');
+Route::post('payment/response', [TestPaymentController::class, 'paymentResponse'])->name('payment.response');
 });
