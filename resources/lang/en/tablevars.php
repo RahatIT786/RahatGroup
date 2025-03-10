@@ -387,6 +387,7 @@ return [
     'start_date' => "Start Date",
     'end_date' => "End Date",
     'txn_no' => "TXN No.",
+    'bank_name' => "Bank Name",
     'txn_date' => "TXN Date.",
     'Approved_payment' => "Approved Payment",
     'pending_payment' => "Pending Payment",

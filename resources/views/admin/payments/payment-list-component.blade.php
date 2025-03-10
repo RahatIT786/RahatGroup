@@ -113,7 +113,8 @@
                                             <th>{{ __('tablevars.deposite_type') }}</th>
                                             <th>{{ __('tablevars.amount') }} ( {{ Aihut::get('currency') }} )</th>
                                             <th>{{ __('tablevars.txn_no') }}</th>
-                                            {{-- <th>{{ __('tablevars.TXN_date') }}</th> --}}
+                                            <th>{{__('tablevars.bank_name')}}</th>
+                                            <th>{{ __('tablevars.TXN_date') }}</th>
                                             <th>{{ __('tablevars.status') }}</th>
                                             <th>{{ 'Action' }}</th>
                                         </tr>
@@ -132,8 +133,9 @@
                                                 <td>{{ $AllPayment->deposite_type }}</td>
                                                 <td>{{ Helper::properDecimals($AllPayment->amount) }}</td>
                                                 <td>{{ $AllPayment->txn_id }}</td>
-                                                {{-- <td style="white-space: nowrap;">
-                                                    {{ Helper::getCanonicalDate($AllPayment->txn_date) }}</td> --}}
+                                                <td>{{ $AllPayment->bank_name }}</td>
+                                                <td style="white-space: nowrap;">
+                                                    {{ Helper::getCanonicalDate($AllPayment->txn_date) }}</td>
                                                 <td>
                                                     @php
                                                         $statusLabels = [
