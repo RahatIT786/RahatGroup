@@ -49,7 +49,10 @@ class QuotesCreateComponent extends Component
 
         $this->serviceType = ServiceType::get();
 
-        $this->cities = City::active()->get();
+        $this->cities = City::whereIn('id', Pnr::distinct()->pluck('dept_city_id'))->get();
+
+        // $this->cities = City::active()->get();
+        
         $this->months = Helper::months();
         $this->sharingType = SharingType::active()->get();
         // $this->packageMaster = Packages::active()->get();
