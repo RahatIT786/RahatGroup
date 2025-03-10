@@ -30,6 +30,7 @@ class PrintReceiptsListComponent extends Component
             ->whereHas('booking', function ($query) {
                 $query->where('agency_id', auth()->user()->id);
             })
+            ->where('is_paid',1)
             ->SearchLikeInRelation('booking.booking_id', $this->booking_id)
             ->searchLike('receipt_id', $this->receipt_id)
             ->desc()

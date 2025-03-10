@@ -676,7 +676,7 @@ Auth::routes();
 
     // Shopping Enquiry
     Route::get('/shopping-enquiry', ShoppingEnquiryListComponent::class)->name('shoppingenquiry.index');
-    Route::get('/transport-enquiry', TransportEnquiryListComponent::class)->name('trnsportEnquiry.index');
+    Route::get('/trawnsport-enquiry', TransportEnquiryListComponent::class)->name('trnsportEnquiry.index');
 
     //Food-enquiry
     Route::get('/food-enquiry', FoodEnquiryListComponent::class)->name('foodenquiry.index');
