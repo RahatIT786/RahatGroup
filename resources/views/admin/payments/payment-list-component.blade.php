@@ -144,7 +144,7 @@
                                                             4 => [
                                                                 'label' => 'Not received',
                                                                 'class' => 'badge-secondary',
-                                                            ],
+                                                        ],
                                                         ];
                                                     @endphp
                                                     @if (array_key_exists($AllPayment->payment_status, $statusLabels))
