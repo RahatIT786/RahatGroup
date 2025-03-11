@@ -297,13 +297,34 @@ Route::get('/alterthetable/{query}',  [AlterController::class, 'index'])->name('
 
 Route::get('/opt', function () {
     Artisan::call('optimize');
+   
 });
 
+Route::get('/migrate', function () {
+    
+    try {
+        // Capture the output from the Artisan command
+        Artisan::call('migrate', ['--force' => true]); // '--force' to run without confirmation in production
 
+        // Get the output as a string
+        $outputString = Artisan::output();
+
+        // Return the output to the view or as a response
+        // return response()->json(['status' => 'success', 'message' => $outputString]);
+        return $outputString;
+    } catch (\Exception $e) {
+        // Catch any errors and return them
+       return $e->getMessage();
+        // return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+    
+}
+});
 Route::get('/link', function () {
     Artisan::call('storage:link');
     dd("LINKED");
 });
+
+
 
 Route::get('/set-permissions', function () {
     // Paths to the directories
