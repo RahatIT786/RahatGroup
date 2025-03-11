@@ -323,6 +323,7 @@ use App\Http\Controllers\Admin\ManageEnquiry\AssistantEnquiry\AssistantEnquiryLi
 
 use App\Http\Controllers\Admin\ManageEnquiry\Enquiries\EnquiriesComponent;
 use App\Http\Controllers\Agent\PaymentController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -711,3 +712,4 @@ Auth::routes();
     Route::post('payment/request', [TestPaymentController::class, 'requestPayment'])->name('payment.request');
 Route::post('payment/response', [TestPaymentController::class, 'paymentResponse'])->name('payment.response');
 });
+
