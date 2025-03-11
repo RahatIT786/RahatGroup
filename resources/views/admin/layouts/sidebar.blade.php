@@ -25,6 +25,101 @@
             <li
                 class="dropdown {{ Request::is('admin/quotes*') ? 'active' : '' }} {{ Request::is('admin/bookings*') ? 'active' : '' }}{{ Request::is('admin/negotiated-requests*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                    class="fas fa-building"></i><span>Company Management</span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/quotes') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.quotes.index') }}" wire:navigate>All Requests</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/negotiated-requests') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.quotes.negotiated') }}" wire:navigate>Negotiated Requests</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/bookings') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.booking.index') }}" wire:navigate>All Bookings</a>
+                    </li>
+                    {{-- <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/approved') ? 'menu-active' : '' }}" href="{{ route('admin.booking.approved') }}" wire:navigate>Approved Bookings</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/pending') ? 'menu-active' : '' }}" href="{{ route('admin.booking.pending') }}" wire:navigate>Pending Bookings</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/rejected') ? 'menu-active' : '' }}" href="{{ route('admin.booking.rejected') }}" wire:navigate>Rejected Bookings</a>
+                    </li> --}}
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/cancelled') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.booking.cancelled') }}" wire:navigate>Cancelled Bookings</a>
+                    </li>
+                    {{-- <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/suspended') ? 'menu-active' : '' }}" href="{{ route('admin.booking.suspended') }}" wire:navigate>Suspended Bookings</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/deleted') ? 'menu-active' : '' }}" href="{{ route('admin.booking.deleted') }}" wire:navigate>Deleted Bookings</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/online') ? 'menu-active' : '' }}" href="{{ route('admin.booking.online') }}" wire:navigate>Online Bookings</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/waiting') ? 'menu-active' : '' }}" href="{{ route('admin.booking.waiting') }}" wire:navigate>Waiting list</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/bookings/under-review') ? 'menu-active' : '' }}" href="{{ route('admin.booking.review') }}" wire:navigate>Under Review</a>
+                    </li> --}}
+                </ul>
+            </li>
+            <li
+                class="dropdown {{ Request::is('admin/agent-list*') || Request::is('admin/sub-agent-list*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-handshake"></i>
+                    <span>Agent Management</span></a>
+
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/agent-list*') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.agentlist.index') }}" wire:navigate>Agent List</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/sub-agent-list*') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.subagentlist.index') }}" wire:navigate>Sub Agent List</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li
+                class="dropdown {{ Request::is('admin/staff*') || Request::is('admin/staffsalary*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-user-cog"></i>
+                    <span>Staff Management</span></a>
+
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/staff*') && !Request::is('admin/staffsalary*') ? 'menu-active' : '' }}"
+                        href="{{ route('admin.staff.index') }}" wire:navigate>Staff List</a>
+
+                    </li>
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/staffsalary*') ? 'menu-active' : '' }}"
+                        href="{{ route('admin.staff-salary.index') }}" wire:navigate>Staff Salary</a>
+
+                    </li>
+
+                </ul>
+            </li>
+            <li class="dropdown {{ Request::is('admin/customer*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i>
+                    <span>User Management </span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link {{ Request::is('admin/customer*') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.customer.index') }}" wire:navigate>User List</a>
+                    </li>
+                </ul>
+            </li>
+            <li
+                class="dropdown {{ Request::is('admin/quotes*') ? 'active' : '' }} {{ Request::is('admin/bookings*') ? 'active' : '' }}{{ Request::is('admin/negotiated-requests*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                         class="fas fa-book"></i><span>Booking Management</span></a>
                 <ul class="dropdown-menu">
                     <li>
@@ -84,46 +179,6 @@
             			<a class="nav-link {{ Request::is('admin/payments/offline*') ? 'menu-active' : '' }}" href="{{ route('admin.payment.pending') }}" wire:navigate>Offline Payments</a>
             		</li>
             	</ul>
-            </li>
-
-            <li
-                class="dropdown {{ Request::is('admin/agent-list*') || Request::is('admin/sub-agent-list*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-credit-card"></i>
-                    <span>Agent Management</span></a>
-
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/agent-list*') ? 'menu-active' : '' }}"
-                            href="{{ route('admin.agentlist.index') }}" wire:navigate>Agent List</a>
-                    </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/sub-agent-list*') ? 'menu-active' : '' }}"
-                            href="{{ route('admin.subagentlist.index') }}" wire:navigate>Sub Agent List</a>
-                    </li>
-
-                </ul>
-            </li>
-
-            <li
-                class="dropdown {{ Request::is('admin/staff*') || Request::is('admin/staffsalary*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-credit-card"></i>
-                    <span>Staff Management</span></a>
-
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/staff*') && !Request::is('admin/staffsalary*') ? 'menu-active' : '' }}"
-                        href="{{ route('admin.staff.index') }}" wire:navigate>Staff List</a>
-
-                    </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/staffsalary*') ? 'menu-active' : '' }}"
-                        href="{{ route('admin.staff-salary.index') }}" wire:navigate>Staff Salary</a>
-
-                    </li>
-
-                </ul>
             </li>
 
             {{-- Download --}}
@@ -515,16 +570,7 @@
                         class="fas fa-headset"></i><span>Manage Enquiries</span></a>
             </li>
 
-            <li class="dropdown {{ Request::is('admin/customer*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i>
-                    <span>User Management </span></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/customer*') ? 'menu-active' : '' }}"
-                            href="{{ route('admin.customer.index') }}" wire:navigate>User List</a>
-                    </li>
-                </ul>
-            </li>
+
             <li
                 class="dropdown {{ Request::is('admin/car-type*') ? 'active' : '' }}{{ Request::is('admin/car-sector*') ? 'active' : '' }}{{ Request::is('admin/car-rental*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
