@@ -313,6 +313,10 @@ use App\Http\Controllers\Admin\ManageEnquiry\FoodEnquiry\FoodEnquiryListComponen
 use App\Http\Controllers\Admin\Services\ManageLaundry\LaundryListComponent;
 use App\Http\Controllers\Admin\ManageEnquiry\TransportEnquiry\TransportEnquiryListComponent;
 
+//Company Management
+use App\Http\Controllers\Admin\Company\Companies;
+use App\Http\Controllers\Admin\Company\AddCompanies;
+
 use App\Http\Controllers\Admin\Gallery\CustomerTestimonials\CustomerTestimonialCreateComponent;
 use App\Http\Controllers\Admin\Gallery\CustomerTestimonials\CustomerTestimonialEditComponent;
 use App\Http\Controllers\Admin\ManageEnquiry\AssistantEnquiry\AssistantEnquiryListComponent;
@@ -383,6 +387,15 @@ Auth::routes();
     Route::get('/payments/offline/edit/{payment}', PendingPaymentEditComponent::class)->name('payment.pending.edit');
 
     /*****************************   PNR Management *****************************************/
+
+    /*****************************   Company Management *****************************************/
+
+    Route::get('/companies',Companies::class)->name('companies');
+    Route::get('/add-companies',AddCompanies::class)->name('add-companies');
+    Route::get('/edit-companies/{id}',AddCompanies::class)->name('edit-companies');
+
+    /*****************************   Company Management *****************************************/
+
 
     // PNR Management
     Route::get('/pnr', PnrListComponent::class)->name('pnr.index');

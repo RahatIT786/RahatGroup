@@ -12,61 +12,19 @@
                 <a href="{{ route('admin.dashboard') }}" wire:navigate class="nav-link"><i
                         class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
-            {{-- <li class="dropdown {{ Request::is('admin/quotes*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-book"></i>
-                    <span>Quotes Management</span></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/quotes') ? 'menu-active' : '' }}" href="{{ route('admin.quotes.index') }}" wire:navigate>All Quotes</a>
-                    </li>
-                </ul>
-            </li> --}}
-            {{-- Bookings --}}
             <li
-                class="dropdown {{ Request::is('admin/quotes*') ? 'active' : '' }} {{ Request::is('admin/bookings*') ? 'active' : '' }}{{ Request::is('admin/negotiated-requests*') ? 'active' : '' }}">
+                class="dropdown {{ Request::is('admin/companies') ? 'active' : '' }} {{ Request::is('admin/bookings*') ? 'active' : '' }}{{ Request::is('admin/negotiated-requests*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                     class="fas fa-building"></i><span>Company Management</span></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="nav-link {{ Request::is('admin/quotes') ? 'menu-active' : '' }}"
-                            href="{{ route('admin.quotes.index') }}" wire:navigate>All Requests</a>
+                        <a class="nav-link {{ Request::is('admin/companies') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.companies') }}" wire:navigate>Companies</a>
                     </li>
                     <li>
                         <a class="nav-link {{ Request::is('admin/negotiated-requests') ? 'menu-active' : '' }}"
-                            href="{{ route('admin.quotes.negotiated') }}" wire:navigate>Negotiated Requests</a>
+                            href="{{ route('admin.quotes.negotiated') }}" wire:navigate>Bank Account</a>
                     </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/bookings') ? 'menu-active' : '' }}"
-                            href="{{ route('admin.booking.index') }}" wire:navigate>All Bookings</a>
-                    </li>
-                    {{-- <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/approved') ? 'menu-active' : '' }}" href="{{ route('admin.booking.approved') }}" wire:navigate>Approved Bookings</a>
-                    </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/pending') ? 'menu-active' : '' }}" href="{{ route('admin.booking.pending') }}" wire:navigate>Pending Bookings</a>
-                    </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/rejected') ? 'menu-active' : '' }}" href="{{ route('admin.booking.rejected') }}" wire:navigate>Rejected Bookings</a>
-                    </li> --}}
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/cancelled') ? 'menu-active' : '' }}"
-                            href="{{ route('admin.booking.cancelled') }}" wire:navigate>Cancelled Bookings</a>
-                    </li>
-                    {{-- <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/suspended') ? 'menu-active' : '' }}" href="{{ route('admin.booking.suspended') }}" wire:navigate>Suspended Bookings</a>
-                    </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/deleted') ? 'menu-active' : '' }}" href="{{ route('admin.booking.deleted') }}" wire:navigate>Deleted Bookings</a>
-                    </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/online') ? 'menu-active' : '' }}" href="{{ route('admin.booking.online') }}" wire:navigate>Online Bookings</a>
-                    </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/waiting') ? 'menu-active' : '' }}" href="{{ route('admin.booking.waiting') }}" wire:navigate>Waiting list</a>
-                    </li>
-                    <li>
-                        <a class="nav-link {{ Request::is('admin/bookings/under-review') ? 'menu-active' : '' }}" href="{{ route('admin.booking.review') }}" wire:navigate>Under Review</a>
-                    </li> --}}
                 </ul>
             </li>
             <li
@@ -104,7 +62,6 @@
                         href="{{ route('admin.staff-salary.index') }}" wire:navigate>Staff Salary</a>
 
                     </li>
-
                 </ul>
             </li>
             <li class="dropdown {{ Request::is('admin/customer*') ? 'active' : '' }}">
