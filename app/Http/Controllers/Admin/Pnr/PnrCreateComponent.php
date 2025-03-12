@@ -8,6 +8,7 @@ use App\Models\PackageMaster;
 use App\Models\Packages;
 use App\Models\Pnr;
 use App\Models\SectorMaster;
+use App\Models\MainCompany;
 use Illuminate\Support\Facades\Lang;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -18,6 +19,8 @@ class PnrCreateComponent extends Component
 {
     use LivewireAlert, WithFileUploads;
     public $packageNames;
+    public $companyName;
+    public $company_name;
     public $pack_id = [];
     public  $flights, $citys, $sectorData, $group_no, $contact_no, $rawda_permit, $sub_agent_name;
     public $pnr_code, $group_name, $flight_id, $dept_city_id, $flight_type, $departure_sector, $return_sector, $pnr_pack_type, $dept_date, $dept_time, $return_date, $return_time, $days, $seats, $avai_seats, $tour_leader, $supp_name, $transco_name, $mobno_tc, $adult_cost, $child_cost, $infant_cost, $itenary, $baggage, $cancel_fee, $transport_brn, $status, $minReturnDate;
@@ -25,8 +28,7 @@ class PnrCreateComponent extends Component
     public function mount()
     {
         $this->packageNames = Packages::where('service_id', 2)->where('umrah_type', 1)->orwhere('service_id', 20)->pluck('name', 'id');
-
-        
+        $this->companyName = MainCompany::where('delete_status', 1)->get();
         $this->flights = FlightMaster::pluck('flight_name', 'id');
         $this->citys = City::pluck('city_name', 'id');
         $this->sectorData = SectorMaster::pluck('sector_name', 'id');
@@ -67,6 +69,7 @@ class PnrCreateComponent extends Component
             'contact_no' => 'required',
             'rawda_permit' => 'required|date',
             'sub_agent_name' => 'required',
+            'company_name' => 'required',
         ], [], [
             'pack_id' => 'package name',
             'flight_id' => 'flight name',
@@ -84,7 +87,6 @@ class PnrCreateComponent extends Component
             'return_date.after' => 'The return date must be a date after the departure date.',
         ]);
         $validated['pack_id'] = implode(',', $this->pack_id);
-
         $validated['is_active'] = $this->status ?? 1;
         Pnr::create($validated);
         $this->alert('success', Lang::get('messages.pnr_save'));

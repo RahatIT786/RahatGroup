@@ -42,7 +42,7 @@ class QuotesListComponent extends Component
         // }, $bindings));
         // dd($fullSql);
 
-        $this->allQuotes = $query->get(); 
+        $this->allQuotes = $query->get();
         // dd($this->allQuotes);
         return $query ->desc()->paginate($this->perPage);
     }
@@ -74,11 +74,12 @@ class QuotesListComponent extends Component
     }
 
     public function getRequestContent(Booking $booking)
-    {   
-        $booking->load('agency', 'servicetype', 'pnr', 'city','packagetype','sharingtype');
+    {
+       
+        $booking->load('agency', 'servicetype', 'pnr.company', 'city','packagetype','sharingtype');
         $this->request_modal_data = $booking;
-        //  dd($this->request_modal_data);
-        // dd($this->request_modal_data);
+
+       //dd($this->request_modal_data);
     }
 
     public function getTotCost(Booking $booking)

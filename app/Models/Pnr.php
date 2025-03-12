@@ -46,8 +46,14 @@ class Pnr extends Model
         'contact_no',
         'sub_agent_name',
         'rawda_permit',
+        'company_name',
         'is_active',
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(MainCompany::class, 'company_name', 'id');
+    }
 
     public function getPackagesAttribute()
     {
@@ -128,7 +134,7 @@ class Pnr extends Model
 
     public function scopeSearchPnrDate($q, $from)
     {
-       
+
         return $q->when(!empty($from), function ($qr) use ($from) {
 
             $qr->whereDate('dept_date', '=', $from)->orwhereDate('return_date', '=', $from);

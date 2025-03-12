@@ -20,26 +20,25 @@ class AddPaymentComponent extends Component
     use LivewireAlert;
     public $quote, $advance, $companies, $agencies, $payment_amount = '';
     public $company_name, $banks, $bank_name, $acountDetails, $txn_id, $balance, $deposite_type, $txn_date, $personName, $comment;
+
     public function mount($quote_id)
     {
 
         $this->payment_amount = session()->get('payment_amount');
-        // dd($this->payment_amount);
-        $this->quote = Booking::whereId($quote_id)->with('package')->first();
-
+        //dd($this->payment_amount);
+        $this->quote = Booking::whereId($quote_id)->with('package','pnr.company')->first();
+        // dd($this->quote->pnr->company->company_name);
         $this->agencies = Agent::active()->OrderBy('agency_name', 'ASC')->get();
         $this->companies = BankDetail::select('id', 'company_name')
             ->groupBy('id', 'company_name')
             ->orderBy('company_name', 'asc')
             ->get();
-        //   dd($this->companies);
+        // dd($this->companies);
 
         if ($this->quote->booking_id) {
             $all_payments = Payment::where('booking_id', $this->quote->booking_id)->where('payment_status', 1)->get();
             $this->tot_paid = $all_payments->sum('amount');
             $this->tot_cost = Booking::where('booking_id', $this->quote->booking_id)->value('tot_cost');
-
-
             $this->balance = $this->tot_cost - $this->tot_paid;
         } else {
             $this->balance = $this->quote->tot_cost;
@@ -148,7 +147,7 @@ class AddPaymentComponent extends Component
                         'avai_seats' => $updated_avai_seats
                     ]);
                 }
-            }   
+            }
         }
         // Send Payment Offline Confirmation Email
         // Mail::to($this->booking->email_id)->cc('joddhajitputel143@gmail.com')->send(new PaymentOfflineConfirmationMail($payment, $thisBooking));

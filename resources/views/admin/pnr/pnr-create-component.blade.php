@@ -17,16 +17,27 @@
                     <div class="card card-primary">
                         <div class="card-header d-flex justify-content-between">
                             <h4>{{ __('tablevars.add') }} {{ __('tablevars.pnr') }}</h4>
-                            <a href="{{ route('admin.pnr.index') }}" class="btn btn-danger" wire:navigate><i
-                                    class="fas fa-long-arrow-alt-left"></i> &nbsp;{{ __('tablevars.back') }}</a>
+                            <a href="{{ route('admin.pnr.index') }}" class="btn btn-danger" wire:navigate>
+                                <i class="fas fa-long-arrow-alt-left"></i> &nbsp;{{ __('tablevars.back') }}</a>
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-12 mb-4">
+                                    <label>{{ 'Company Name' }}<span class="text-danger">*</span></label>
+                                    <select class="form-control" wire:model="company_name">
+                                        <option value="">{{ __('tablevars.select') }} Company Name</option>
+                                        @foreach ($companyName as $id => $company)
+                                            <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('company_name')
+                                        <span class="v-msg-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label>PNR Code<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" wire:model="pnr_code"
-                                            placeholder="Enter PNR Code">
+                                        <input type="text" class="form-control" wire:model="pnr_code" placeholder="Enter PNR Code">
                                         @error('pnr_code')
                                             <span class="v-msg-500">{{ $message }}</span>
                                         @enderror
@@ -47,6 +58,7 @@
                                         @enderror
                                     </div>
                                 </div> --}} -->
+
 
                                 <div class="col-4">
                                     <div class="form-group" wire:ignore>
@@ -422,6 +434,6 @@
             });
         });
     </script>
-  
+
 
 @endpush

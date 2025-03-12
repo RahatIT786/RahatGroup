@@ -182,8 +182,7 @@
                                                                             data-toggle="tooltip"
                                                                             data-bs-target="#requestModal"
                                                                             title="View Request Details"
-                                                                            wire:click="getRequestContent({{ $quote->id }})">View
-                                                                            Request Details</a>
+                                                                            wire:click="getRequestContent({{ $quote->id }})">View Request Details</a>
 
                                                                         @if ($quote->negotiation_status == '')
                                                                             <a class="dropdown-item"
@@ -264,6 +263,17 @@
                                                 <label><strong>{{ __('tablevars.request') }}
                                                         {{ __('tablevars.id') }}</strong></label>
                                                 <div> {{ $request_modal_data->request_id ?: 'N/A' }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-4">
+                                                <label><strong>Company Name</strong></label>
+                                                @if($request_modal_data->pnr && $request_modal_data->pnr->company)
+                                                    <div>{{ $request_modal_data->pnr->company->company_name }}</div>
+                                                @else
+                                                    <div>N/A</div>
+                                                @endif
+
                                             </div>
                                         </div>
                                         <div class="col-md-6">
