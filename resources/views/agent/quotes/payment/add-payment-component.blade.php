@@ -59,17 +59,22 @@
                                                 </div>
                                                 <div class="col-4 mb-2">
                                                     <div class="form-group">
-                                                        <label>{{ __('tablevars.company_name') }} <span
-                                                                class="text-danger">*</span></label>
-                                                        <select class="form-select" wire:model='company_name'
-                                                            wire:change='getBank'>
-                                                            <option value="">{{ __('tablevars.select') }}
-                                                                {{ __('tablevars.company_name') }}</option>
-                                                            @foreach ($companies as $company)
-                                                                <option value="{{ $company->company_name }}">
-                                                                    {{ $company->company_name }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                        <label> {{ __('tablevars.company_name') }} <span class="text-danger">*</span></label>
+
+                                                        <!-- Check if pnr and company exist -->
+                                                        @if ($quote->pnr && $quote->pnr->company)
+                                                            <input type="text" name="txn_id" class="form-control" value="{{ $quote->pnr->company->company_name }}"
+                                                                maxlength="50" readonly>
+                                                        @else
+                                                            <!-- Show the dropdown if no company information is available -->
+                                                            <select class="form-select" wire:model='company_name' wire:change='getBank'>
+                                                                <option value="">{{ __('tablevars.select') }} {{ __('tablevars.company_name') }}</option>
+                                                                @foreach ($companies as $company)
+                                                                    <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        @endif
+
                                                         @error('company_name')
                                                             <span class="text-danger v-msg-500">{{ $message }}</span>
                                                         @enderror

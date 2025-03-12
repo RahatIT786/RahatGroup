@@ -209,6 +209,10 @@
                     @if ($modalData)
                         <table class="table table-striped">
                             <tr>
+                                <th>Company Name</th>
+                                <td>{{ is_array($company_name) ? ($company_name[0] ?? '---') : ($company_name ?? '---') }}</td>
+                            </tr>
+                            <tr>
                                 <th>{{ __('tablevars.pnr_code') }}</th>
                                 <td>{{ $modalData->pnr_code ?? '---' }}</td>
                             </tr>

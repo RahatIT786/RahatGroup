@@ -10,6 +10,7 @@ use App\Models\Packages;
 use App\Models\Pnr;
 use App\Models\Relation;
 use App\Models\VoucherContent;
+use App\Models\MainCompany;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Lang;
@@ -31,6 +32,7 @@ class PnrListComponent extends Component
     public $package_name, $package_type, $pnr_code, $search_dept_date;
     public $modalData, $Id, $fireticket, $bookings, $pnr_id, $airlineformat, $roomplan;
     public $package_details,$package_names,$passenger_modaldata;
+    public $company_name;
 
     public function getPnr()
     {
@@ -57,7 +59,9 @@ class PnrListComponent extends Component
     {
         $this->modalData = Pnr::whereId($pnr)->first();
         $pack_ids = explode(',',$this->modalData->pack_id);
-
+        $company_id = explode(',',$this->modalData->company_name);
+        $this->company_name = MainCompany::whereIn('id',$company_id)->pluck('company_name')->toArray();
+       
         $this->package_details = Packages::whereIn('id',$pack_ids)->pluck('name')->toArray();
 
         $this->package_names = implode(',', $this->package_details);
