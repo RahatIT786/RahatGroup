@@ -846,4 +846,22 @@ return [
     'imp_notes' => 'Important Notes',
     'terms_cond' => 'Terms & Conditions',
     'packages' => 'Packages',
+
+
+//form heading 
+ 'bankacc'=>'Bank Account',
+
+ //bank account 
+ 'cmpname'=>'Company Name',
+ 'accname'=>'Account Name',
+ 'accno'=>'Account No',
+ 'ifsc'=>'IFSC/SWIFT',
+ 'iban'=>'IBAN NO',
+ 'bank'=>'Bank',
+ 'branch'=>'Branch',
+ 'gst'=>'GST',
+ 'pan'=>'Pan Card',
+ 'accstatus'=>'Account Status',
+
+
 ];
