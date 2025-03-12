@@ -22,8 +22,8 @@
                             href="{{ route('admin.companies') }}" wire:navigate>Companies</a>
                     </li>
                     <li>
-                        <a class="nav-link {{ Request::is('admin/negotiated-requests') ? 'menu-active' : '' }}"
-                            href="{{ route('admin.quotes.negotiated') }}" wire:navigate>Bank Account</a>
+                        <a class="nav-link {{ Request::is('admin/bankaccount') ? 'menu-active' : '' }}"
+                            href="{{ route('admin.bankaccount.list') }}" wire:navigate>Bank Account</a>
                     </li>
                 </ul>
             </li>

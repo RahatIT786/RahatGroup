@@ -1,4 +1,8 @@
 <?php
+
+use App\Http\Controllers\Admin\BankAccount\AddBankAccount;
+use App\Http\Controllers\Admin\BankAccount\BankAccountList;
+use App\Http\Controllers\Admin\BankAccount\EditBankAccount;
 use App\Http\Controllers\Admin\Bookings\BookingAddPaxComponent;
 use App\Http\Controllers\Admin\DashboardComponent;
 use App\Http\Controllers\Admin\Payments\PaymentCreateComponent;
@@ -20,6 +24,7 @@ use App\Http\Controllers\Admin\Bookings\Suspended\SuspendedBookingListComponent;
 use App\Http\Controllers\Admin\Bookings\UnderReviewBooking\UnderReviewBookingListComponent;
 use App\Http\Controllers\Admin\Bookings\WaitingBooking\WaitingBookingListComponent;
 use App\Http\Controllers\Admin\Bookings\BookingMadePayemntComponent;
+use App\Http\Controllers\Admin\Bookings\NegotiatedBookings\BankAcoountList;
 use App\Http\Controllers\Admin\Bookings\NegotiatedBookings\NegotiatedBookingsListComponent;
 use App\Http\Controllers\Admin\Pnr\PnrListComponent;
 use App\Http\Controllers\Admin\Pnr\PnrCreateComponent;
@@ -397,6 +402,11 @@ Auth::routes();
 
     /*****************************   Company Management *****************************************/
 
+    /**************************BANK ACCOUNT MANAGEMENT*****************************************************************************/
+    Route::get('/bankaccount',BankAccountList::class)->name('bankaccount.list');
+    Route::get('/add/bankaccount',AddBankAccount::class)->name('bankaccount.add');
+    Route::get('/edit/bankaccount/{id}',EditBankAccount::class)->name('bankaccount.edit');
+    /**************************BANK ACCOUNT MANAGEMENT*Z****************************************************************************/
 
     // PNR Management
     Route::get('/pnr', PnrListComponent::class)->name('pnr.index');
