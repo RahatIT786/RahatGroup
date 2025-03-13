@@ -10,12 +10,17 @@ use App\Models\MainCompany;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 
+
 class AddBankAccount extends Component
 {
     use WithFileUploads, LivewireAlert;
 
-    public $company_name, $account_name, $account_no, $ifsc_swift, $bank_name;
+    public $company_name, $account_name, $account_no, $ifsc_swift, $bank_name, $companies = [];
     public $branch_name, $iban_no, $gst, $pan_card;
+
+    public function mount(){
+       $this->companies = MainCompany::where('delete_status', 1)->get();
+    }
 
     protected $rules = [
         'company_name' => 'required|string|max:150',

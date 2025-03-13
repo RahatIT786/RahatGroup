@@ -624,9 +624,11 @@
                     <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
+                                {{-- <img src="{{ asset('assets/user-front/images/navbar/majid_flight.png') }}" alt="Hajj Icon" style="width: 40px; height: 40px; margin-right: 0px;"> --}}
                                 <a href="{{ route('customer.hajjPackage') }}">Hajj</a>
                             </li>
                             <li class="nav-item">
+                                {{-- <img src="{{ asset('assets/user-front/images/navbar/majid_flight.png') }}" alt="Hajj Icon" style="width: 20px; height: 20px; margin-right: 5px;"> --}}
                                 <a href="#">Umrah</a>
                                 <ul class="sub-menu">
                                     <li><a href="{{ route('customer.umrahPackage') }}">Fixed Group Departures</a></li>
@@ -657,7 +659,7 @@
                                 <a class="" href="javascript:void(0);" data-toggle="modal"
                                     data-target="#applyVisaModal" title="Apply Visa">Visa</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="#" class="drop-arrow">Hajj Kit</a>
                                 <ul class="sub-menu">
                                     @foreach ($kits as $kit)
@@ -665,13 +667,17 @@
                                                 title=" {{ $kit->name }}"> {{ $kit->name }}</a></li>
                                     @endforeach
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a href="#" class="drop-arrow">Services</a>
                                 <ul class="sub-menu">
                                     @foreach ($services as $service)
                                         <li><a href="{{ route('customer.service', ['slug' => $service->slug]) }}"
                                                 title=" {{ $service->name }}"> {{ $service->name }}</a></li>
+                                    @endforeach
+                                    @foreach ($kits as $kit)
+                                        <li><a href="{{ route('customer.hajjKit', ['slug' => $kit->slug]) }}"
+                                                title=" {{ $kit->name }}"> {{ $kit->name }}</a></li>
                                     @endforeach
 
                                     <li><a href="{{ route('customer.Shopping') }}">Shopping </a></li>
