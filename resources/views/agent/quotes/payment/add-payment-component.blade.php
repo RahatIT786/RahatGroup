@@ -87,7 +87,7 @@
                                                     <div class="form-group">
                                                         <label>{{ __('tablevars.bankname') }} <span
                                                                 class="text-danger">*</span></label>
-                                                        <select class="form-select" wire:model='bank_name'
+                                                        {{-- <select class="form-select" wire:model='bank_name'
                                                             wire:change='getBeneficiaryDetails'>
                                                             <option value="">{{ __('tablevars.select') }}
                                                                 {{ __('tablevars.bankname') }}</option>
@@ -97,6 +97,20 @@
                                                                         {{ $bank->bank_name }}</option>
                                                                 @endforeach
                                                             @endif
+                                                        </select> --}}
+                                                        <select class="form-select" wire:model='bank_name'
+                                                            wire:change='getBeneficiaryDetails'>
+                                                            <option value="">{{ __('tablevars.select') }}
+                                                                {{ __('tablevars.bankname') }}</option>
+                                                                @if (!empty($allAccounts) && $allAccounts->count())
+                                                                @foreach ($allAccounts as $account)
+                                                                    <option value="{{ $account->bank_name }}">{{ $account->bank_name }}</option>
+                                                                @endforeach
+                                                                @elseif (!empty($banks) && $banks->count())
+                                                                    @foreach ($banks as $bank)
+                                                                        <option value="{{ $bank->bank_name }}">{{ $bank->bank_name }}</option>
+                                                                    @endforeach
+                                                                @endif
                                                         </select>
                                                         @error('bank_name')
                                                             <span class="text-danger v-msg-500">{{ $message }}</span>
@@ -108,7 +122,7 @@
                                                         <label>{{ __('tablevars.beneficiary_account_no') }} <span
                                                                 class="text-danger">*</span></label>
                                                         <input type="text" name="beneficiary_account_no"
-                                                            class="form-control" wire:model="acountDetails" readonly>
+                                                                class="form-control" wire:model.defer="accountDetails" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 mb-2">

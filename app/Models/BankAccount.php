@@ -24,4 +24,8 @@ class BankAccount extends Model
     {
         return $this->belongsTo(State::class, 'state_id');
     }
+    public function company()
+    {
+        return $this->belongsTo(MainCompany::class, 'company_name', 'id');
+    }
 }

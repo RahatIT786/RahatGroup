@@ -12,6 +12,7 @@ use App\Models\Payment;
 use App\Models\Agent;
 use App\Models\Pnr;
 use App\Models\BankDetail;
+use App\Models\BankAccount;
 use App\Mail\PaymentOfflineConfirmationMail;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,7 +20,7 @@ class AddPaymentComponent extends Component
 {
     use LivewireAlert;
     public $quote, $advance, $companies, $agencies, $payment_amount = '';
-    public $company_name, $banks, $bank_name, $acountDetails, $txn_id, $balance, $deposite_type, $txn_date, $personName, $comment;
+    public $company_name, $banks, $bank_name,$accountDetails = '', $txn_id, $balance, $deposite_type, $txn_date, $personName, $comment, $allAccounts, $companyId;
 
     public function mount($quote_id)
     {
@@ -27,7 +28,20 @@ class AddPaymentComponent extends Component
         $this->payment_amount = session()->get('payment_amount');
         //dd($this->payment_amount);
         $this->quote = Booking::whereId($quote_id)->with('package','pnr.company')->first();
-        // dd($this->quote->pnr->company->company_name);
+        // dd($this->quote->pnr->company->id);
+        if ($this->quote->pnr && $this->quote->pnr->company) {
+            $this->companyId = $this->quote->pnr->company->id;
+        } else {
+            $this->companyId = null; // Or a default value
+        }
+        if(!empty($this->companyId)){
+            $this->allAccounts = BankAccount::where('company_name', $this->companyId)
+            ->where('delete_status', 1)
+            ->orderByDesc('created_at')
+            ->get();
+        }
+
+        // dd($this->allAccounts);
         $this->agencies = Agent::active()->OrderBy('agency_name', 'ASC')->get();
         $this->companies = BankDetail::select('id', 'company_name')
             ->groupBy('id', 'company_name')
@@ -53,13 +67,24 @@ class AddPaymentComponent extends Component
         }
         //    dd($this->banks);
     }
+
+    // public function getBeneficiaryDetails()
+    // {
+    //     // dd($this->bank_name);
+    //     $acount = BankDetail::where('company_name', $this->company_name)->where('bank_name', $this->bank_name)->first();
+    //     $this->acountDetails = $acount->bank_details;
+    //     //    dd($this->acountDetails);
+    // }
+
     public function getBeneficiaryDetails()
     {
         // dd($this->bank_name);
-        $acount = BankDetail::select('bank_details')->where('company_name', $this->company_name)->where('bank_name', $this->bank_name)->first();
-        $this->acountDetails = $acount->bank_details;
-
-        //    dd($this->acountDetails);
+        $acount = BankAccount::where('company_name', $this->companyId)->where('bank_name', $this->bank_name)->where('delete_status',1)->first();
+        //  $this->acountDetails = $acount->account_name;
+        // dd($this->acountDetails);
+        $this->accountDetails = $acount
+            ? "Account Name: {$acount->account_name}, Account No: {$acount->account_no}, IFSC/SWIFT: {$acount->ifsc_swift}, Bank Name: {$acount->branch_name}"
+            : "No bank details found.";
     }
 
     public function save()

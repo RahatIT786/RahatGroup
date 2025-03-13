@@ -25,13 +25,13 @@
         <div class="section-body">
             <div class="row mt-4">
                 <div class="col-12">
-                    
+
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             {{-- <h4>{{ __('tablevars.negotiated_request') }} {{ __('tablevars.list') }}</h4> --}}
                             <span></span>
-                            <a href="{{route('admin.bankaccount.add')}}" 
-                                class="btn btn-icon btn-sm m-1 btn-primary" 
+                            <a href="{{route('admin.bankaccount.add')}}"
+                                class="btn btn-icon btn-sm m-1 btn-primary"
                                 >{{ __('tablevars.add') }}
                                 {{ __('tablevars.new') }}</a>
                         </div>
@@ -48,11 +48,11 @@
                                             <th>{{ __('tablevars.bank') }}</th>
                                             <th>{{ __('tablevars.branch') }}</th>
                                             <th>{{ __('tablevars.iban') }}</th>
-                                            
+
                                             <th>{{ __('tablevars.gst') }}</th>
                                             <th>{{ __('tablevars.pan') }}</th>
-                                            
-                                            
+
+
                                             <th>{{ __('tablevars.accstatus') }}</th>
                                             <th>{{ __('tablevars.action') }}</th>
                                         </tr>
@@ -61,7 +61,7 @@
                                         @forelse ($accounts as $key => $account)
                                         <tr>
                                             <td>{{ $key + $accounts->firstItem() }}</td>
-                                            <td>{{ $account->company_name }}</td>
+                                            <td>{{ $account->company->company_name ?? 'N/A' }}</td>
                                             <td>{{ $account->account_name }}</td>
                                             <td>{{ $account->account_no }}</td>
                                             <td>{{ $account->ifsc_swift }}</td>
@@ -86,7 +86,7 @@
                                                     <div class="dropdown-menu" x-placement="bottom-start"
                                                         style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
                                                         <a class="dropdown-item" href="{{route('admin.bankaccount.edit',['id'=>$account->id])}}">Edit</a>
-                                                        
+
                                                         <a class="dropdown-item text-danger"
                                                         href="javascript:void(0)" data-toggle="tooltip"
                                                         class="text-danger" title="Trash"
@@ -146,8 +146,8 @@
                          <div class="container">
                              <div class="row">
                                 @if ($bankAccount)
-                                    
-                               
+
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Company Name</label>
@@ -207,7 +207,7 @@
                                     <p class="text-center">No bank accounts found.</p>
                                 </div>
                                 @endif
-                            
+
                              </div>
                          </div>
                      </div>

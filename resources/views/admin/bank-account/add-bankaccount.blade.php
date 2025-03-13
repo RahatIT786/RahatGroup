@@ -29,11 +29,18 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Company Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" wire:model="company_name" maxlength="150">
-                                        @error('company_name') <span class="v-msg-500">{{ $message }}</span> @enderror
+                                        <select class="form-control" wire:model="company_name">
+                                            <option value="">Select Company</option>
+                                            @foreach ($companies as $company)
+                                                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('company_name')
+                                            <span class="v-msg-500">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Account Name <span class="text-danger">*</span></label>
@@ -41,7 +48,7 @@
                                         @error('account_name') <span class="v-msg-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Account No <span class="text-danger">*</span></label>
@@ -49,7 +56,7 @@
                                         @error('account_no') <span class="v-msg-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>IFSC/SWIFT <span class="text-danger">*</span></label>
@@ -57,7 +64,7 @@
                                         @error('ifsc_swift') <span class="v-msg-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Bank Name <span class="text-danger">*</span></label>
@@ -65,7 +72,7 @@
                                         @error('bank_name') <span class="v-msg-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Branch Name <span class="text-danger">*</span></label>
@@ -73,7 +80,7 @@
                                         @error('branch_name') <span class="v-msg-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>IBAN NO <span class="text-danger">*</span></label>
@@ -81,7 +88,7 @@
                                         @error('iban_no') <span class="v-msg-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>GST</label>
@@ -89,7 +96,7 @@
                                         @error('gst') <span class="v-msg-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
-                    
+
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label>PAN Card <span class="text-danger">*</span></label>
@@ -103,7 +110,7 @@
                             <button class="btn btn-primary">Submit</button>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </div>

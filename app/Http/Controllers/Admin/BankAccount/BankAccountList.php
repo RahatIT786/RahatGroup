@@ -27,15 +27,11 @@ use Illuminate\Support\Facades\Lang;
 class BankAccountList extends Component
 {
     use WithPagination, WithoutUrlPagination, LivewireAlert;
-   
+
     public $delId;
     public $allAccounts;
-
     public $bankAccount;
-
-
     protected $listeners = ['confirmed', 'confirmDelete', 'confirmApprove', 'confirmReject'];
-
     public $currentSegment, $search_booking_id, $search_mehram_name, $search_name, $perPage = 10;
     public $allBookings, $booking_id, $booking_modal_data = null, $payments_modal_data = null, $search_start_date, $search_end_date, $total_amount, $payment_amount, $payments_modal_status = [], $total_amount_int, $negotiated_request, $negotiated_amount;
     public $showConfirmation = false;
@@ -79,7 +75,6 @@ class BankAccountList extends Component
         ]);
         $agency_email = Agent::where('id', $this->negotiated_request->agency_id)->active()->value('email');
         if ($approved) {
-
 
             $adminSetting=AdminSetting::where('id', 1)->value('parameter_value');
             $adminwhatsapp=AdminSetting::where('id', 2)->value('parameter_value');
@@ -126,8 +121,7 @@ class BankAccountList extends Component
         $this->negotiated_request = $booking;
         $this->negotiated_amount = $booking->negotiated_cost;
         $this->changeNegotiateAmount = true;
-        //    dd( $this->negotiated_amount);
-
+        // dd( $this->negotiated_amount);
     }
     public function updateNegotiate()
     {
@@ -154,18 +148,14 @@ class BankAccountList extends Component
 
     //------------------------------------------
 
- 
-
     public function getAccounts()
     {
-        $query = BankAccount::query()
-             // Example condition
-            ->where('delete_status', '=', 1) // Example condition
-            ->orderByDesc('created_at'); // Ordering the results
+        $query = BankAccount::with('company')
+            ->where('delete_status', 1)
+            ->orderByDesc('created_at');
 
-        $this->allAccounts = $query->get(); // Fetch all records
-
-        return $query->paginate($this->perPage); // Return paginated data
+        $this->allAccounts = $query->get();
+        return $query->paginate($this->perPage);
     }
 
     public function getAgentContent(BankAccount $bankAccount)
@@ -195,7 +185,7 @@ class BankAccountList extends Component
     public function render()
     {
         return view('admin.bank-account.bankaccount-list', [
-           
+
             'accounts' => $this->getAccounts(),
         ]);
     }
