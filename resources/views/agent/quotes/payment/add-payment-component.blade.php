@@ -50,7 +50,10 @@
                                                             @foreach (Helper::depositeType() as $key => $val)
                                                                 <option value="{{ $key }}">
                                                                     {{ $val }}</option>
-                                                            @endforeach
+                            +
+
+
+                            @endforeach
                                                         </select>
                                                         @error('deposite_type')
                                                             <span class="text-danger v-msg-500">{{ $message }}</span>
