@@ -299,7 +299,6 @@ class QuotesCreateComponent extends Component
                 $user_cost = $this->tot_pkg_cost;
                 // $this->tot_cost = $this->tot_pkg_cost + $this->tot_ticket_cost + $this->tot_visa_price - $this->tot_pkg_commission;
                 $this->tot_cost = $this->tot_pkg_cost - $this->tot_pkg_commission;
-
                 // $this->cost_breakup = "Package Price = " . $this->adult_count . " (Adults) X " . number_format($this->pkg_adult_price,2) . " + " . $this->cwb_count . " (CWB) X " . number_format($this->pkg_child_with_bed_price,2) . " + " . $this->cwob_count . " (CNB) X " . number_format($this->pkg_child_no_bed_price,2) . " + " . $this->infant_count . " (Infant) X " . number_format($this->pkg_infant_price,2) . " = " . number_format($this->tot_pkg_cost,2) .
                 // "\nTicket Price = " . $this->adult_count . " (Adults) X " . number_format($this->tkt_adult_price,2) . " + " . $this->cwb_count + $this->cwob_count . " (Child) X " . number_format($this->tkt_childprice,2) . " + " . $this->infant_count . " (Infant) X " . number_format($this->tkt_infant_price,2) . " = " . number_format($this->tot_ticket_cost,2) .
                 // "\nVisa Price = " . $this->total_pax . " (Total Pax) X " . number_format($this->visa_rate,2) . " = " . number_format($this->tot_visa_price,2) .
