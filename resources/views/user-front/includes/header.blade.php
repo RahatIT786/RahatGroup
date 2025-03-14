@@ -29,6 +29,20 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900,1000"
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet">
+
+    {{-- styles added by karthi --}}
+
+    <!-- Bootstrap CSS -->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+    <!-- Font Awesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+    <!-- WOW.js Animation CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    {{-- styles added by karthi --}}
+
     @stack('extra_css')
     <style>
         :root {
@@ -617,45 +631,71 @@
                 <div class="container">
                     <!-- Logo Start -->
                     <a class="navbar-brand logo" href="{{ route('customer.homepage') }}" title="Rahat">
-                        <img src="{{ asset('assets/user/images/logo.png') }}" alt="logo">
+                        <img src="{{ asset('assets/user/images/logo1.png') }}" alt="logo">
                     </a>
                     <!-- /Logo End -->
 
                     <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                {{-- <img src="{{ asset('assets/user-front/images/navbar/majid_flight.png') }}" alt="Hajj Icon" style="width: 40px; height: 40px; margin-right: 0px;"> --}}
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/hajj.png') }}"
+                                     alt="Hajj Icon"
+                                     style="width: 40px; height: 40px; margin-left: 5px;">
                                 <a href="{{ route('customer.hajjPackage') }}">Hajj</a>
                             </li>
-                            <li class="nav-item">
-                                {{-- <img src="{{ asset('assets/user-front/images/navbar/majid_flight.png') }}" alt="Hajj Icon" style="width: 20px; height: 20px; margin-right: 5px;"> --}}
+
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/majid_flight.png') }}"
+                                     alt="Umrah Icon"
+                                     style="width: 40px; height: 40px; margin-left: 5px;">
                                 <a href="#">Umrah</a>
-                                <ul class="sub-menu">
+                                <ul class="sub-menu text-center">
                                     <li><a href="{{ route('customer.umrahPackage') }}">Fixed Group Departures</a></li>
-                                    <li><a href="{{ route('customer.umrahLandPackages') }}">Umrah Land Packages</a>
-                                    </li>
-                                    <li><a href="{{ route('customer.customizedUmrah') }}">Customised Packages </a></li>
+                                    <li><a href="{{ route('customer.umrahLandPackages') }}">Umrah Land Packages</a></li>
+                                    <li><a href="{{ route('customer.customizedUmrah') }}">Customised Packages</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
+
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/madina.png') }}"
+                                alt="Umrah Icon"
+                                style="width: 40px; height: 40px; margin-left: 0px;">
                                 <a href="{{ route('customer.ramzanPackages') }}">Ramzaan</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/moon_majid.png') }}"
+                                alt="Umrah Icon"
+                                style="width: 40px; height: 40px; margin-left: 0px;">
                                 <a href="{{ route('customer.ziyaratPackages') }}">Ziyarat</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="" href="{{ route('customer.hotels') }}">Hotels</a>
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/hotel.png') }}"
+                                alt="Umrah Icon"
+                                style="width: 40px; height: 40px; margin-left: 0px;">
+                                <a class="" href="{{ route('customer.hotels') }}">Our Hotels</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/Bus.png') }}"
+                                alt="Umrah Icon"
+                                style="width: 40px; height: 40px; margin-left: 0px;">
                                 <a class="" href="{{ Route('customer.transport') }}">Transport</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/Catering.png') }}"
+                                alt="Umrah Icon"
+                                style="width: 40px; height: 40px; margin-left: 0px;">
                                 <a class="" href="{{ Route('customer.foodMenu') }}">Catering</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="" href="{{ Route('customer.ticket') }}">Tickets</a>
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/id.png') }}"
+                                alt="Umrah Icon"
+                                style="width: 40px; height: 40px; margin-left: 0px;">
+                                <a class="" href="{{ Route('customer.ticket') }}">Group PNRs</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item d-flex flex-column align-items-center">
+                                <img src="{{ asset('assets/user-front/images/navbar/visa.png') }}"
+                                alt="Umrah Icon"
+                                style="width: 40px; height: 40px; margin-left: 0px;">
                                 <a class="" href="javascript:void(0);" data-toggle="modal"
                                     data-target="#applyVisaModal" title="Apply Visa">Visa</a>
                             </li>
@@ -669,6 +709,9 @@
                                 </ul>
                             </li> --}}
                             <li class="nav-item">
+                                <img src="{{ asset('assets/user-front/images/navbar/hand.png') }}"
+                                alt="Umrah Icon"
+                                style="width: 40px; height: 40px; margin-left: 15px;">
                                 <a href="#" class="drop-arrow">Services</a>
                                 <ul class="sub-menu">
                                     @foreach ($services as $service)

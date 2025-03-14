@@ -21,13 +21,16 @@ class AddPaymentComponent extends Component
     use LivewireAlert;
     public $quote, $advance, $companies, $agencies, $payment_amount = '';
     public $company_name, $banks, $bank_name,$accountDetails = '', $txn_id, $balance, $deposite_type, $txn_date, $personName, $comment, $allAccounts, $companyId;
-
+    public $payment_method = '';
+    
     public function mount($quote_id)
     {
 
         $this->payment_amount = session()->get('payment_amount');
         //dd($this->payment_amount);
         $this->quote = Booking::whereId($quote_id)->with('package','pnr.company')->first();
+        $this->company_name = $this->quote->pnr->company->company_name ?? '';
+
         // dd($this->quote->pnr->company->id);
         if ($this->quote->pnr && $this->quote->pnr->company) {
             $this->companyId = $this->quote->pnr->company->id;
@@ -89,6 +92,7 @@ class AddPaymentComponent extends Component
 
     public function save()
     {
+
         $validated = $this->validate([
 
             'deposite_type' => 'required',
@@ -97,7 +101,7 @@ class AddPaymentComponent extends Component
             'bank_name' => 'required',
             'txn_id' => 'required',
             'txn_date' => 'required',
-            'acountDetails' => 'required',
+            'accountDetails' => 'required',
 
         ], [
 
@@ -130,7 +134,7 @@ class AddPaymentComponent extends Component
             'bank_name' => $this->bank_name,
             'txn_id' => $this->txn_id,
             'txn_date' => $this->txn_date,
-            'bank_account_no' => $this->acountDetails,
+            'bank_account_no' => $this->accountDetails,
             'personal_name' => $this->personName,
             'comment' => $this->comment,
             'payment_status' => 0,

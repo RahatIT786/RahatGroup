@@ -1,7 +1,7 @@
 <div>
     @livewire('user-front.packages-filter-component')
 
-    <section class="section services-section">
+     {{-- <section class="section services-section">
         <div class="container">
             <div class="section-title text-center pb-0">
                 <h2 class="title">Our Services</h2>
@@ -47,8 +47,217 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
+    {{-- style added by karthi --}}
+    <style>
+.service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 250px;  /* Set fixed width */
+    height: 300px; /* Set fixed height */
+    border: 1px solid #ddd;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    background: white;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background: #FFA600;
+}
+
+.service-icon {
+    width: 80px;   /* Fixed size for the icon container */
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.service-icon i {
+    font-size: 40px; /* Icon size */
+    /* color: #007bff; */
+    color: #FFA600;
+}
+/* Change icon and heading color when hovering */
+.service-item:hover .service-icon i,
+.service-item:hover h5 {
+    color: white !important; /* Change color to white */
+}
+h5 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 14px;
+}
+
+    </style>
+    {{-- style added by karthi --}}
+
+    <section>
+        <div class="container-xxl py-5" id="service">
+                    <div class="container">
+                        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                            <!-- <h6 class="section-title text-center text-primary text-uppercase">Our Services</h6> -->
+                            <h2 class="title mb-5">Our Services</h2>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.6s">
+                                <a class="service-item rounded" href="{{ Route('customer.umrahPackage') }}">
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-mosque fa-2x  "></i>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="mb-3">Umrah</h5>
+                                    <p class="text-body mb-0">Specialized packages for Umrah pilgrims.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 my-3 wow fadeInUp" data-wow-delay="0.6s">
+                                <a class="service-item rounded" href="{{ Route('customer.hajjPackage') }}">
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-place-of-worship fa-2x  "></i>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="mb-3">Hajj</h5>
+                                    <p class="text-body mb-0">Comprehensive Hajj travel and accommodation solutions.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 my-3 wow fadeInUp" data-wow-delay="0.5s">
+                                <a class="service-item rounded" href="{{ Route('customer.ziyaratPackages') }}">
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-person-praying fa-2x"></i>
+                                        </div>
+
+                                    </div>
+                                    <h5 class="mb-3">Ziyarat</h5>
+                                    <p class="text-body mb-0">Organized visits to religious and historical sites. </p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 my-3 wow fadeInUp" data-wow-delay="0.1s">
+                                <a class="service-item rounded" href="{{ Route('customer.hotels') }}">
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa fa-hotel fa-2x "></i>
+                                        </div>
+                                    </div>
+                                    <h5 class="mb-3">Hotels & Rooms</h5>
+                                    <p class="text-body mb-0">Comfortable accommodations with various options</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.2s">
+                                <a class="service-item rounded" href="{{ Route('customer.foodMenu') }}">
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa fa-utensils fa-2x "></i>
+                                        </div>
+                                    </div>
+                                    <h5 class="mb-3">Food & Catering</h5>
+                                    <p class="text-body mb-0">Quality meals tailored to dietary needs.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.3s">
+                                <a class="service-item rounded" href="{{ Route('customer.transport') }}">
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-bus fa-2x"></i>
+
+                                        </div>
+                                    </div>
+                                    <h5 class="mb-3">Transportation</h5>
+                                    <p class="text-body mb-0">Reliable and convenient travel arrangements.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.4s">
+                                <a class="service-item rounded" >
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-file-shield fa-2x"></i>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="mb-3">Visa & Insurance </h5>
+                                    <p class="text-body mb-0"> Hassle-free visa processing and comprehensive insurance.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.5s">
+                                <a class="service-item rounded" >
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-tent-arrow-left-right fa-2x "></i>
+
+                                        </div>
+
+                                    </div>
+                                    <h5 class="mb-3">SightSeeing</h5>
+                                    <p class="text-body mb-0">Guided tours to explore key attractions. </p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.6s">
+                                <a class="service-item rounded" href="{{ Route('customer.laundry') }}">
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                            <i class="fa-solid fa-shirt fa-2x "></i>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="mb-3">Complimentary Laundary</h5>
+                                    <p class="text-body mb-0"> Free laundry services for convenience.</p>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.6s">
+                                <a class="service-item rounded" href="https://rahatitsolutions.com/" target="_blank">
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+
+                                            <i class="fa-solid fa-laptop-code fa-2x "></i>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="mb-3">Software</h5>
+                                    <p class="text-body mb-0">Advanced tools for seamless booking and management.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.6s">
+                                <a class="service-item rounded" >
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+
+                                            <i class="fa-solid fa-coins fa-2x "></i>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="mb-3">Forex</h5>
+                                    <p class="text-body mb-0">Currency exchange services for travelers.</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-4 wow my-3 fadeInUp" data-wow-delay="0.6s">
+                                <a class="service-item rounded" >
+                                    <div class="service-icon bg-transparent border rounded p-1">
+                                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+
+                                            <i class="fa-solid fa-handshake fa-2x "></i>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="mb-3">Partner with us</h5>
+                                    <p class="text-body mb-0">Collaboration opportunities for businesses.</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
     @livewire('user-front.components.popular-packages-component')
 
     <section class="section testimonial-section">
@@ -274,6 +483,22 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- script added by karthi --}}
+
+                <!-- jQuery (required for WOW.js) -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                <!-- Bootstrap JS -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+                <!-- WOW.js for animations -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+                <script>
+                 new WOW().init();
+                </script>
+                {{-- script added by karthi --}}
+
             </div>
         </div>
     </section>

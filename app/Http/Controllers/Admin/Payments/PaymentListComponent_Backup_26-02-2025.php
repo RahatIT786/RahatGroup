@@ -144,7 +144,7 @@ class PaymentListComponent extends Component
             ->where('payment_status', '1')
             ->sum('amount');
 
-       
+
 
          if ($paymentData->update(['payment_status' => 1, 'is_paid' => 1,])) {
             $bookingData->update(['booking_status' => 1]);
@@ -157,7 +157,7 @@ class PaymentListComponent extends Component
             $paid_amount = $count_paid_amount[0]->amount ?? 0;
             $is_full_payment = $paid_amount > 0.98 * $bookingData->tot_cost;
             $is_partial_payment = $paid_amount < 0.98 * $bookingData->tot_cost;
-           
+
             if ($is_full_payment) {
                 $payment_difference = $bookingData->tot_cost - $paymentData->amount;
 
@@ -168,9 +168,9 @@ class PaymentListComponent extends Component
                     'full_payment_discount' => $payment_difference
                 ]);
             }
-            
+
             if ($is_full_payment || $is_partial_payment) {
-               
+
                 if ((($bookingData->service_type == 2 && $bookingData->umrah_type == 1) || $bookingData->service_type == 20)) {
                     $seats = Pnr::whereId($bookingData->pnr_id)->first();
                     $avai_seats = $seats->avai_seats;
@@ -187,7 +187,7 @@ class PaymentListComponent extends Component
             ->where('is_paid', '1')
             ->where('payment_status', '1')
             ->sum('amount');
-            
+
             if (count($count_paid_amount) > 1 && $bookingData->tot_cost <= $tot_paid_amount) {
 
                 $bookingData->update(['is_paid' => 1, 'release_tkt' => 1, 'release_visa' => 1]);
