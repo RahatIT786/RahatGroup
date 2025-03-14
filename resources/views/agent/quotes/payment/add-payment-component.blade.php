@@ -66,8 +66,9 @@
 
                                                         <!-- Check if pnr and company exist -->
                                                         @if ($quote->pnr && $quote->pnr->company)
-                                                            <input type="text" name="txn_id" class="form-control" value="{{ $quote->pnr->company->company_name }}"
-                                                                maxlength="50" readonly>
+                                                        <input type="text" name="txn_id" class="form-control"
+                                                        maxlength="50" readonly wire:model="company_name">
+
                                                         @else
                                                             <!-- Show the dropdown if no company information is available -->
                                                             <select class="form-select" wire:model='company_name' wire:change='getBank'>
