@@ -47,11 +47,18 @@ class KitCategory extends Model
         return $this->hasMany(KitItem::class, 'id', 'kit_item_id');
     }
 
+    // public function getKitItemsNames()
+    // {
+    //     return KitItem::whereIn('id', $this->kit_item_id)
+    //         ->pluck('kit_name')
+    //         ->implode(', ');
+    // }
+
     public function getKitItemsNames()
     {
         return KitItem::whereIn('id', $this->kit_item_id)
-            ->pluck('kit_name')
-            ->implode(', ');
+             ->pluck('kit_name')
+             ->implode(', ');
     }
 
     public function serviceType(): BelongsTo

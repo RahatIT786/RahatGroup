@@ -14,7 +14,7 @@
             </div>
         </div>
         <form method="">
-            @if ($kit)
+            @foreach ($kits as $kit)
                 <div class="shop-pro-row" id="10">
                     <div class="white-bg-box">
                         <div class="row mx-0">
@@ -29,14 +29,14 @@
                             <div class="col-md-2 px-0 border-right">
                                 <div class="pad15">
                                     <h5 class="h5 pro-title mb-0"><strong>{{ $kit->name }}</strong></h5>
-                                    <div id="text-{{ $id }}">
+                                    <div id="text-{{ $kit->id }}">
                                         {!! \App\Helpers\Helper::limitTextReadMore($kit->description) !!}
                                     </div>
                                     <div style="margin-top: 10px; color: green;">
-                                        <a href="javascript:void(0)" id="read-more-{{ $id }}"
-                                            onclick="toggleText('{{ $id }}')">Read More</a>
-                                        <a href="javascript:void(0)" id="read-less-{{ $id }}"
-                                            style="display:none;" onclick="toggleText('{{ $id }}')">Read
+                                        <a href="javascript:void(0)" id="read-more-{{ $kit->id }}"
+                                            onclick="toggleText('{{ $kit->id }}')">Read More</a>
+                                        <a href="javascript:void(0)" id="read-less-{{ $kit->id }}"
+                                            style="display:none;" onclick="toggleText('{{ $kit->id }}')">Read
                                             Less</a>
                                     </div>
                                 </div>
@@ -47,11 +47,11 @@
                                     <h5 class="h5 pro-title mb-0"><strong>Include Items</strong></h5>
                                     <p class="pro-short-desc mb-2 mt-2">
                                         @if ($kit->kit_item_id)
-                                            {{ $kit_names }}
+                                            {{ $kit_names[$kit->id] }}
                                         @else
                                             No Kit Items
                                         @endif
-                                        <a href="avascript:void(0);" data-toggle="modal" data-target="#moreModal"
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#moreModal"
                                             title="More" class="more" font-size="smallest" class="gnRJtI">More</a>
                                     </p>
                                 </div>
@@ -60,7 +60,7 @@
                                 <div class="pad15">
                                     <p class="pro-price"><small class="font12"><strong>Price</strong></small><span
                                             class="d-block font-weight-bold">Rs.
-                                            {{ number_format($kit_price, 2) }}</span>
+                                            {{ number_format($kit->price, 2) }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -89,12 +89,10 @@
                                 <div class="pad15">
                                     <p class="pro-price text-right"><small class="font12"><strong>Total Price</strong></small><span
                                             class="d-block font-weight-bold text-success">₹  <span
-                                                id="inrShopPrice_10">{{ number_format($tot_price, 2) }}</span></span>
+                                                id="inrShopPrice_10">{{ number_format($kit->price * $kit_qty, 2) }}</span></span>
                                     </p>
                                 </div>
                                 <div class="text-right" id="book_btn">
-                                    {{-- <button type="submit" class="btn default-btn p-2 mb-2" name="btn_kit_submit">Book
-                                        Now</button> --}}
                                     <a class="btn secondary-btn"
                                         style="background-position: 300% 100% !important; margin-left: 10px;"
                                         href="{{ route('customer.hajjumrahKitEnquiry', ['slug' => $kit->slug]) }}">Enquiry
@@ -104,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endforeach
         </form>
     </div>
     @livewire('user-front.more-modal-component', ['id' => $kit->id])
