@@ -26,7 +26,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer(['agent.layouts.nav'], function ($view) {
             $agent = auth()->user();
-            
+
             $manager = Staff::whereId($agent->rm_staff_id)->first();
             $view->with([
                 'agent_profile_img' => $agent->profile_img,
@@ -37,7 +37,7 @@ class ViewServiceProvider extends ServiceProvider
                 'agency_name' => $agent->agency_name
 			]);
         });
-		
+
 		View::composer(['user-front.layouts.nav'], function ($view) {
             $customer = auth()->user();
             $manager = Staff::whereId($customer->rm_staff_id)->first();
@@ -50,14 +50,21 @@ class ViewServiceProvider extends ServiceProvider
                 // 'name' => $customer->name
             ]);
         });
- 
+
 		View::composer('user-front.includes.header', function ($view) {
             $services = Services::all();
             $view->with('services', $services);
         });
 
         View::composer('user-front.includes.header', function ($view) {
-            $kits = KitCategory::where('category_id', 1)->get();
+            $kits = KitCategory::whereIn('category_id', [1, 2])
+            ->whereIn('id', function ($query) {
+                $query->selectRaw('MIN(id)')
+                      ->from('aihut_kit_category')
+                      ->whereIn('category_id', [1, 2])
+                      ->groupBy('category_id');
+            })
+            ->get();
             $view->with('kits', $kits);
         });
     }

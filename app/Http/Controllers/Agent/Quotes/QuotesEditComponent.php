@@ -43,7 +43,7 @@ class QuotesEditComponent extends Component
     public $hajj_kits,$hajj_kit_id,$service_details,$services,$service_value;
     public function mount(Booking $quote_id)
     {
-       
+
         $this->request = $quote_id;
         $this->negotiate_amount = $this->request->negotiated_cost;
         $this->agencies = Agency::active()->orderBy('agency_name', 'ASC')->get();
@@ -60,7 +60,7 @@ class QuotesEditComponent extends Component
         $this->agent = auth()->user();
 
         $quote_id->load('agency', 'servicetype', 'pnr', 'city', 'packagetype', 'sharingtype', 'package');
-       
+
         $this->service_type_id = $quote_id->service_type;
         // $this->umrah_type_id = $quote_id->package->umrah_type;
         if($this->service_type_id == 2 )
@@ -68,7 +68,7 @@ class QuotesEditComponent extends Component
             $this->umrah_type_id = $quote_id->umrah_type;
             $this->pkg_days = $quote_id->days;
         }
-        
+
         if (($this->service_type_id == 2 && $this->umrah_type_id == 1) || ($this->service_type_id == 20)) {
             $this->city_id = $quote_id->city_id;
             $date = Carbon::parse($quote_id->travel_date);
@@ -96,7 +96,7 @@ class QuotesEditComponent extends Component
           }
           $this->tot_cost = $quote_id->tot_cost;
           $this->service_details = $quote_id->service_details;
-          
+
         }
          else {
 
@@ -133,7 +133,7 @@ class QuotesEditComponent extends Component
         }
         $this->text_class = $this->validity === 'Valid' ? 'text-success' : 'text-danger';
 
-       
+
     }
 
     public function packageDetialsChange()
@@ -268,11 +268,16 @@ class QuotesEditComponent extends Component
             $this->sharingType = SharingType::whereIn('id', $sharing_ids)->get();
         }
     }
+    public function updatedSharingTypeIdUmrah()
+    {
+        $this->getPackageRatesUmrah();
+    }
 
     public function getPackageRatesUmrah()
     {
+        // \Log::info('getPackageRatesUmrah method called');
+        // dump($this->sharing_type_id_umrah);
         if ($this->pkg_name_id_umrah && $this->pkg_type_id && $this->sharing_type_id_umrah) {
-
             if ($this->sharing_type_id_umrah == 1)
                 $sharing_rate = 'd_share';
             if ($this->sharing_type_id_umrah == 2)
@@ -470,7 +475,7 @@ class QuotesEditComponent extends Component
 
     public function update()
     {
-        
+
         $validated = $this->validate([
 
             'service_type_id' => 'required',
@@ -480,8 +485,8 @@ class QuotesEditComponent extends Component
         ]);
 
         if ($this->service_type_id == 12 || $this->service_type_id == 22 || $this->service_type_id == 23 || $this->service_type_id == 24 || $this->service_type_id == 25){
-           
-        
+
+
             $validated = $this->validate([
                 'service_type_id' => 'required',
                 'pax_name' => 'required',
@@ -501,10 +506,10 @@ class QuotesEditComponent extends Component
                 'contact.required' => 'Please enter a contact number',
                 'tot_cost.required' => 'Please enter total cost amount',
             ]);
-             
+
             $data = [
-                
-               
+
+
                 'agency_id' => $this->agent->id,
                 'service_type' => $validated['service_type_id'],
                 'mehram_name' => $validated['pax_name'],
@@ -516,9 +521,9 @@ class QuotesEditComponent extends Component
                 'contact' => $validated['contact'],
                 'tot_cost' => $validated['tot_cost'],
                 'service_details' => $this->service_details,
-               
+
             ];
-           
+
             $this->request->update($data);
             $this->alert('success', 'Request Updated Successfully');
             return redirect()->route('agent.quotes.index');
@@ -545,9 +550,9 @@ class QuotesEditComponent extends Component
                 'contact.required' => 'Please enter a contact number',
                 'tot_cost.required' => 'Please enter total cost amount',
             ]);
-             
+
             $data = [
-                
+
                 'agency_id' => $this->agent->id,
                 'service_type' => $validated['service_type_id'],
                 'hajj_kit_id' => $validated['hajj_kit_id'],
@@ -560,9 +565,9 @@ class QuotesEditComponent extends Component
                 'contact' => $validated['contact'],
                 'tot_cost' => $validated['tot_cost'],
                 'service_details' => $this->service_details,
-               
+
             ];
-           
+
             $this->request->update($data);
             $this->alert('success', 'Request Updated Successfully');
             return redirect()->route('agent.quotes.index');
@@ -589,10 +594,10 @@ class QuotesEditComponent extends Component
                 'contact.required' => 'Please enter a contact number',
                 'tot_cost.required' => 'Please enter total cost amount',
             ]);
-            
+
             $data = [
-                
-             
+
+
                 'agency_id' => $this->agent->id,
                 'service_type' => $validated['service_type_id'],
                 'service_value' => $validated['service_value'],
@@ -605,15 +610,15 @@ class QuotesEditComponent extends Component
                 'contact' => $validated['contact'],
                 'tot_cost' => $validated['tot_cost'],
                 'service_details' => $this->service_details,
-               
+
             ];
-           
+
             $this->request->update($data);
             $this->alert('success', 'Request Updated Successfully');
             return redirect()->route('agent.quotes.index');
         }
-       
-        
+
+
         if (($this->service_type_id == 2 && $this->umrah_type_id == 1) || ($this->service_type_id == 20)) {
             // dd($this->service_type_id,
             // $this->city_id,
@@ -661,7 +666,7 @@ class QuotesEditComponent extends Component
                 'tot_cost.required' => 'Please enter total cost amount',
                 'cost_breakup.required' => 'Please enter the cost breakup',
             ]);
-           
+
             $data = [
                 'service_type' => $validated['service_type_id'],
                 'city_id' => $validated['city_id'],
@@ -683,7 +688,7 @@ class QuotesEditComponent extends Component
                 'cost_breackup' => $validated['cost_breakup'],
                 'special_request' => $this->special_request ?? '',
             ];
-            
+
         }else if($this->service_type_id == 2 && $this->umrah_type_id == 2) {
             if ($this->umrah_type_id) {
                 $validate = $this->validate([
@@ -752,12 +757,12 @@ class QuotesEditComponent extends Component
                 'agent_cost_breackup' => $this->agent_cost_breakup,
                 'special_request' => $this->special_request ?? '',
             ];
-           
+
         } else {
             $validated = $this->validate([
 
                 'service_type_id'       => 'required',
-                
+
                 'pkg_name_id_hajj'      => 'required',
                 'pkg_type_id'           => 'required',
                 'travel_date'           => 'required',
@@ -812,7 +817,7 @@ class QuotesEditComponent extends Component
                 'special_request' => $this->special_request ?? '',
             ];
         }
-        
+
         $this->request->update($data);
         $this->alert('success', 'Request Updated Successfully');
         return redirect()->route('agent.quotes.index');

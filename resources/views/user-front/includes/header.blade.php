@@ -699,7 +699,7 @@
                                 <a class="" href="javascript:void(0);" data-toggle="modal"
                                     data-target="#applyVisaModal" title="Apply Visa">Visa</a>
                             </li>
-                            {{-- <li class="nav-item">
+                            {{--<li class="nav-item">
                                 <a href="#" class="drop-arrow">Hajj Kit</a>
                                 <ul class="sub-menu">
                                     @foreach ($kits as $kit)
@@ -707,7 +707,7 @@
                                                 title=" {{ $kit->name }}"> {{ $kit->name }}</a></li>
                                     @endforeach
                                 </ul>
-                            </li> --}}
+                            </li>--}}
                             <li class="nav-item">
                                 <img src="{{ asset('assets/user-front/images/navbar/hand.png') }}"
                                 alt="Umrah Icon"
@@ -719,8 +719,15 @@
                                                 title=" {{ $service->name }}"> {{ $service->name }}</a></li>
                                     @endforeach
                                     @foreach ($kits as $kit)
-                                        <li><a href="{{ route('customer.hajjKit', ['slug' => $kit->slug]) }}"
-                                                title=" {{ $kit->name }}"> {{ $kit->name }}</a></li>
+                                        {{-- <li><a href="{{ route('customer.hajjKit', ['slug' => $kit->slug]) }}"
+                                                title=" {{ $kit->name }}"> {{ $kit->name }}</a></li> --}}
+                                        <li>
+                                            <a href="{{ route('customer.hajjKit', ['slug' => $kit->category_id ]) }}"
+                                                title="{{ $kit->category_id == 1 ? 'Hajj Kid' : ($kit->category_id == 2 ? 'Umrah Kit' : 'Other') }}">
+                                                {{ $kit->category_id == 1 ? 'Hajj Kid' : ($kit->category_id == 2 ? 'Umrah Kit' : 'Other') }}
+                                            </a>
+                                        </li>
+
                                     @endforeach
 
                                     <li><a href="{{ route('customer.Shopping') }}">Shopping </a></li>
