@@ -165,7 +165,7 @@ class QuotesCreateComponent extends Component
             }
             $this->sharingType = SharingType::whereIn('id', $sharing_ids)->get();
         }
-        $this->getAllCounts();
+        $this->getPackageRatesUmrah();
     }
 
     public function getsharingTypeHajj()
