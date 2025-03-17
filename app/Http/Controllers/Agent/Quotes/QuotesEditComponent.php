@@ -234,6 +234,7 @@ class QuotesEditComponent extends Component
 
             $this->sharingType = SharingType::whereIn('id', $sharing_ids)->get();
         }
+        $this->getPackageRatesUmrah();
     }
 
     public function getsharingTypeHajj()
@@ -268,15 +269,9 @@ class QuotesEditComponent extends Component
             $this->sharingType = SharingType::whereIn('id', $sharing_ids)->get();
         }
     }
-    public function updatedSharingTypeIdUmrah()
-    {
-        $this->getPackageRatesUmrah();
-    }
 
     public function getPackageRatesUmrah()
     {
-        // \Log::info('getPackageRatesUmrah method called');
-        // dump($this->sharing_type_id_umrah);
         if ($this->pkg_name_id_umrah && $this->pkg_type_id && $this->sharing_type_id_umrah) {
             if ($this->sharing_type_id_umrah == 1)
                 $sharing_rate = 'd_share';
@@ -307,6 +302,7 @@ class QuotesEditComponent extends Component
             $visa_prices = VisaDetails::where('country_id', 3)->where('visa_id', 3)->first();
             $this->visa_rate = $visa_prices->visa_price;
         }
+        $this->getAllCounts();
     }
 
     public function getPackageRatesHajj()
@@ -392,8 +388,8 @@ class QuotesEditComponent extends Component
                     // "\nTicket Price = " . $this->adult_count . " (Adults) X " . number_format($this->tkt_adult_price,2) . " + " . $this->cwb_count + $this->cwob_count . " (Child) X " . number_format($this->tkt_childprice,2) . " + " . $this->infant_count . " (Infant) X " . number_format($this->tkt_infant_price,2) . " = " . number_format($this->tot_ticket_cost,2) .
                     // "\nVisa Price = " . $this->total_pax . " (Total Pax) X " . number_format($this->visa_rate,2) . " = " . number_format($this->tot_visa_price,2) .
                     "\nTotal Cost = " . number_format($user_cost, 2) . " \n\n";
-
                 // Agent Cost Calculation
+                $this->commissions = Membership::find($this->agent->membership);
                 $adult_commission = (int) $this->adult_count * $this->commissions->adult_commision;
                 $child_commission = (int) ($this->cwb_count + $this->cwob_count) * $this->commissions->chlid_commision;
                 $infant_commission = (int) $this->infant_count * $this->commissions->infant_commision;
@@ -439,7 +435,6 @@ class QuotesEditComponent extends Component
                     number_format($this->infant_count * $this->pkg_infant_price, 2) . " - " .
                     number_format($infant_commission, 2) . ") = " .
                     number_format($this->tot_pkg_cost - $this->tot_pkg_commission, 2);
-
 
                 $this->tot_cost = $this->tot_pkg_cost - $this->tot_pkg_commission;
             }
