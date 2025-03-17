@@ -68,7 +68,7 @@
                                                             <select class="form-select"
                                                                 wire:model="hajj_kit_id" name="hajj_kit_id">
                                                                 <option value="">Select Hajj Kits</option>
-                                                                @foreach ($hajj_kits as $hajj_kit) 
+                                                                @foreach ($hajj_kits as $hajj_kit)
                                                                 <option value="{{ $hajj_kit->name }}">
                                                                     {{ $hajj_kit->name }}
                                                                 </option>
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($service_type_id != 12 && $service_type_id != 22 && $service_type_id != 23 && $service_type_id != 24 && $service_type_id != 25 && $service_type_id != 26 && $service_type_id != 27  ) 
+                        @if ($service_type_id != 12 && $service_type_id != 22 && $service_type_id != 23 && $service_type_id != 24 && $service_type_id != 25 && $service_type_id != 26 && $service_type_id != 27  )
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card card-secondary">
@@ -530,7 +530,7 @@
                                                     <input type="text" class="form-control"
                                                         placeholder="Enter Number of child with bed"
                                                         wire:model='cwb_count'
-                                                        wire:keyup='getAllCounts'onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                        wire:keyup='getAllCounts' onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                                                         maxlength='3'>
                                                 </div>
                                             </div>
@@ -552,7 +552,7 @@
                                                         wire:model='infant_count' wire:keyup='getAllCounts'
                                                         onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                                                         maxlength='3'>
-                                                    @if ($service_type_id != 12 && $service_type_id != 22 && $service_type_id != 23 && $service_type_id != 24 && $service_type_id != 25 && $service_type_id != 26 && $service_type_id != 27  ) 
+                                                    @if ($service_type_id != 12 && $service_type_id != 22 && $service_type_id != 23 && $service_type_id != 24 && $service_type_id != 25 && $service_type_id != 26 && $service_type_id != 27  )
                                                         <span class="text-danger">NOTE : Infant Seat is Not Counted in
                                                             Airlines Bookings</span>
                                                     @endif
@@ -583,7 +583,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                         @if ($service_type_id == 12 || $service_type_id == 22 || $service_type_id == 23 || $service_type_id == 24 || $service_type_id == 25 || $service_type_id == 26 || $service_type_id == 27  ) 
+                                         @if ($service_type_id == 12 || $service_type_id == 22 || $service_type_id == 23 || $service_type_id == 24 || $service_type_id == 25 || $service_type_id == 26 || $service_type_id == 27  )
                                             <div class="col-12 mb-4">
                                                 <div class="form-group">
                                                     <label>Service Details</label>
@@ -630,7 +630,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($service_type_id != 12 && $service_type_id != 22 && $service_type_id != 23 && $service_type_id != 24 && $service_type_id != 25 && $service_type_id != 26 && $service_type_id != 27  ) 
+                        @if ($service_type_id != 12 && $service_type_id != 22 && $service_type_id != 23 && $service_type_id != 24 && $service_type_id != 25 && $service_type_id != 26 && $service_type_id != 27  )
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card card-secondary">

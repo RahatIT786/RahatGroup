@@ -52,7 +52,7 @@ class QuotesCreateComponent extends Component
         $this->cities = City::whereIn('id', Pnr::distinct()->pluck('dept_city_id'))->get();
 
         // $this->cities = City::active()->get();
-        
+
         $this->months = Helper::months();
         $this->sharingType = SharingType::active()->get();
         // $this->packageMaster = Packages::active()->get();
@@ -132,7 +132,6 @@ class QuotesCreateComponent extends Component
 
     public function getPkgTypeUmrah()
     {
-
         if ($this->pkg_name_id_umrah) {
             $this->packageType = PackageDetails::with('packageType', 'makkahotel', 'madinahotel', 'mealType', 'laundrytype')->where('pkg_id', $this->pkg_name_id_umrah)->get();
         }
@@ -142,7 +141,6 @@ class QuotesCreateComponent extends Component
     {
         // dd($this->pkg_type_id, $this->pnr_id);
         if ($this->pkg_name_id_umrah && $this->pkg_type_id_umrah) {
-
             $pkg_detail = PackageDetails::where('pkg_id', $this->pkg_name_id_umrah)->where('pkg_type_id', $this->pkg_type_id_umrah)->first();
 
             $sharing_ids = [];
@@ -167,7 +165,7 @@ class QuotesCreateComponent extends Component
             }
             $this->sharingType = SharingType::whereIn('id', $sharing_ids)->get();
         }
-
+        $this->getPackageRatesUmrah();
     }
 
     public function getsharingTypeHajj()
@@ -238,6 +236,7 @@ class QuotesCreateComponent extends Component
 
             $this->visa_rate = $visa_prices->visa_price;
         }
+        $this->getAllCounts();
     }
 
     public function getPackageRatesHajj()
