@@ -19,7 +19,8 @@ class CheckAgentWebsite
         // dd(1212112);
         $agentWebsite = $request->route('agent_website');
         // dd($agentWebsite);
-        $agent = Agent::where('id', $agentWebsite)->first();
+        $agent = Agent::where('website_name', $agentWebsite)->first();
+        // $agent = Agent::where('id', $agentWebsite)->first();
         // dd($agent);
         if ($agent) {
             // Agent website exists, proceed to the next middleware or controller

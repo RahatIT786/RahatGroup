@@ -19,7 +19,7 @@ class PaymentService
     public function __construct()
     {
         $this->httpClient = new Client();
-        $this->is_production = true; //ON OFF SWITCH
+        $this->is_production = false; //ON OFF SWITCH
 
 
         // Load appropriate configuration based on the environment
@@ -123,7 +123,7 @@ class PaymentService
         $decData = $this->decrypt($encresp, $data['decKey'], $data['decKey']);
         // dd( $decData );
         $res = json_decode($decData, true);
-
+        // dd($res);
         if ($res && $res['responseDetails']['txnStatusCode'] == 'OTS0000') {
             $atomTokenId = $res['atomTokenId'];
             
