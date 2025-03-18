@@ -34,12 +34,13 @@ class PaymentGateWayConfirmationComponent extends Component
         $return_url = route('agent.payment.response'); // Make sure you have this route defined
 
         $this->data = $paymentService->createPayData($amount, $user_email, $user_contact_number, $return_url, $request_id);
-        // d($this->data);
+        // dd($this->data);
         $this->atomTokenId = $paymentService->createTokenId($this->data);
         // dd($this->atomTokenId );
        
      
-       
+        // return redirect()->to("https://payment1.atomtech.in/ots/aipay/auth?tt={$this->atomTokenId}");
+
 
         // session()->forget('payment_amount');
     }
