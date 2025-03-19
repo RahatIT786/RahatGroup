@@ -144,7 +144,7 @@
                                             </div>
                                             <div class="col-4 mb-2">
                                                 <div class="form-group">
-                                                    <label>Photo<span class="text-danger">*</span></label>
+                                                    <label>Pan Card Image<span class="text-danger">*</span></label>
                                                     <div class="custom-file">
                                                         <input type="file" class="form-control"
                                                             id="photo_{{ $i }}"
