@@ -123,7 +123,6 @@ class BookingAddPaxComponent extends Component
                         $this->passengerDetails[$index]['dateOfBirth'] = $parsedDob;
                         $this->passengerDetails[$index]['passport_exp'] = $parsedExpiry;
                         $this->passengerDetails[$index]['gender'] = $extractedData['gender'] ?? '';
-
                         $this->ageValidation($index);
                     } else {
                         // Emit event if data extraction fails

@@ -14,6 +14,7 @@ class Payment extends Model
     use HasFactory, SoftDeletes, CommonScopes, SearchScopes;
 
     protected $fillable = [
+        'agent_id',
         'booking_id',
         'receipt_id',
         'deposite_type',
@@ -28,7 +29,7 @@ class Payment extends Model
         'payment_status',
         'is_paid',
     ];
-    
+
 
     protected $table = 'aihut_payments';
 
@@ -70,7 +71,7 @@ class Payment extends Model
             $qr->whereHas('booking.agency', function ($query) use ($value) {
                 $query->where('agency_name', 'LIKE', "%{$value}%");
             });
-        }); 
+        });
     }
 
     public function scopeSearchTransactionDate($q, $from, $to)
@@ -91,7 +92,7 @@ class Payment extends Model
         return $this->belongsTo(Booking::class, 'booking_id');
         //  return $this->belongsTo(Booking::class, 'id', 'booking_id');
     }
-    
+
     public function scopeSearchBookinId($q, $value)
     {
         return $q->when(!empty($value), function ($qr) use ($value) {

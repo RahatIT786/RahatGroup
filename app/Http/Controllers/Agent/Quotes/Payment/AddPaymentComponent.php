@@ -21,8 +21,8 @@ class AddPaymentComponent extends Component
     use LivewireAlert;
     public $quote, $advance, $companies, $agencies, $payment_amount = '';
     public $company_name, $banks, $bank_name,$accountDetails = '', $txn_id, $balance, $deposite_type, $txn_date, $personName, $comment, $allAccounts, $companyId;
-    public $payment_method = '';
-    
+    public $payment_method = '',$agentId;
+
     public function mount($quote_id)
     {
 
@@ -92,7 +92,7 @@ class AddPaymentComponent extends Component
 
     public function save()
     {
-
+        $this->agentId =  auth()->user()->id;
         $validated = $this->validate([
 
             'deposite_type' => 'required',
@@ -103,7 +103,7 @@ class AddPaymentComponent extends Component
             'txn_date' => 'required',
             'accountDetails' => 'required',
 
-        ], [
+        ],[
 
             'deposite_type.required' => 'Please select deposite type',
             // 'payment_amount.required' => 'Please select an amount',
@@ -125,7 +125,7 @@ class AddPaymentComponent extends Component
         // dd($validated,$booking_id,$receipt_id);
 
         $payment = Payment::create([
-
+            'agent_id' => $this->agentId,
             'booking_id' => $this->quote->id,
             'receipt_id' => $receipt_id,
             'deposite_type' => $this->deposite_type,
