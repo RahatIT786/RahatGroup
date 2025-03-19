@@ -19,7 +19,6 @@ class PendingPaymentList extends Component
     public $tot_paid, $tot_cost, $balance,$search_start_date, $search_end_date;
     public function getPendingPayment()
     {
-
         // $agentId =  auth()->user()->id;
         // $all_bookings = Booking::where('agency_id',$agentId)->get();
 
@@ -33,19 +32,19 @@ class PendingPaymentList extends Component
         // ->searchLike('booking_id', $this->booking_id)
         // ->searchTransactionDate($this->search_start_date, $this->search_end_date);
         // $this->payment = $query->get();
-
+        // dd($this->payment);
         // return $query->paginate($this->perPage);
-        $query = Payment::with('booking')
+
+
+         $query = Payment::with('booking')
         ->pending()
         ->SearchBookinId($this->booking_id)
         ->orderByDesc('id');
 
-    $results = $query->paginate($this->perPage);
-    // dd($results); // Dump the result to check if it's not null
+        $results = $query->paginate($this->perPage);
+        // dd($results); // Dump the result to check if it's not null
 
-    return $results;
-
-
+       return $results;
     }
 
     public function filterPayments()
@@ -68,13 +67,11 @@ class PendingPaymentList extends Component
             $this->tot_cost = Booking::where('id', $booking_id->id)->value('tot_cost');
             $this->balance = $this->tot_cost - $this->tot_paid;
         }
-
-        
     }
 
     public function getBookingContent($booking_id)
     {
-        
+
         // $booking = Booking::where('booking_id', $booking_id)->first();
         $booking = Booking::whereId($booking_id)->first();
 

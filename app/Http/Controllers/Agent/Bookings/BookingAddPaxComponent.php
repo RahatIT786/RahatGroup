@@ -228,7 +228,7 @@ class BookingAddPaxComponent extends Component
             'passengerDetails.*.dateOfBirth' => 'required|date',
             'passengerDetails.*.passport_exp' => 'required|date',
             'passengerDetails.*.gender' => 'required|string|max:10',
-            'passengerDetails.*.photo' => 'required',
+
             'passengerDetails.*.passport_front' => 'required',
             'passengerDetails.*.passport_back' => 'required',
         ]);
@@ -275,7 +275,7 @@ class BookingAddPaxComponent extends Component
                     'age' => $age,
                     'date_of_expiry' => $detail['passport_exp'],
                     'gender' => $detail['gender'],
-                    'photo' => $photo_name,
+                    'photo' => $photo_name ?? "",
                     'passport_scan_front' => $passport_front,
                     'passport_scan_back' => $passport_back,
                 ]);
@@ -290,7 +290,7 @@ class BookingAddPaxComponent extends Component
                     'age' => $age,
                     'date_of_expiry' => $detail['passport_exp'],
                     'gender' => $detail['gender'],
-                    'photo' => $photo_name,
+                    'photo' => $photo_name ?? "",
                     'passport_scan_front' => $passport_front,
                     'passport_scan_back' => $passport_back,
                 ]);
