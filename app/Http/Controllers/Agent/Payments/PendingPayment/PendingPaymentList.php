@@ -19,7 +19,7 @@ class PendingPaymentList extends Component
     public $tot_paid, $tot_cost, $balance,$search_start_date, $search_end_date;
     public function getPendingPayment()
     {
-        // $agentId =  auth()->user()->id;
+         $agentId =  auth()->user()->id;
         // $all_bookings = Booking::where('agency_id',$agentId)->get();
 
         // foreach($all_bookings as $booking){
@@ -36,7 +36,7 @@ class PendingPaymentList extends Component
         // return $query->paginate($this->perPage);
 
 
-         $query = Payment::with('booking')
+         $query = Payment::with('booking')->where('agent_id', $agentId)
         ->pending()
         ->SearchBookinId($this->booking_id)
         ->orderByDesc('id');
