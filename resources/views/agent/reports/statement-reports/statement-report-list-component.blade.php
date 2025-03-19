@@ -93,63 +93,82 @@
                                                     @php
                                                         $total_debit = 0;
                                                         $total_credit = 0;
+                                                        $balance_cal = 0;
+                                                        $diff = 0;
+                                                        $threshold = 0;
+                                                        $one_percent = 0;
                                                     @endphp
+
                                                     @forelse ($agentBookings as $bookings)
                                                         <tr>
-                                                            <td>{{ Helper::formatCarbonDate($bookings->created_at) }}
-                                                            </td>
-                                                            <td>{{ $bookings->booking_id }}
-                                                            </td>
+                                                            <td>{{ Helper::formatCarbonDate($bookings->created_at) }}</td>
+                                                            <td>{{ $bookings->booking_id }}</td>
                                                             <td>
                                                                 {{ $bookings->agency->agency_name }}
                                                                 {{ $bookings->agency->city }}
                                                                 {{ $bookings->agency->mobile }}
                                                             </td>
                                                             <td></td>
-                                                            <td>
-                                                                {{ number_format($bookings->tot_cost, 2) }}</td>
+                                                            <td>{{ number_format($bookings->tot_cost, 2) }}</td>
                                                             <td></td>
                                                         </tr>
+
+                                                        @php
+                                                            $balance_cal_tot = $bookings->tot_cost;
+                                                            //dump($balance_cal_tot);
+                                                        @endphp
+
                                                         @foreach ($bookings->payment as $payment)
                                                             <tr>
-                                                                <td>{{ Helper::formatCarbonDate($payment->txn_date) }}
-                                                                </td>
+                                                                <td>{{ Helper::formatCarbonDate($payment->txn_date) }}</td>
                                                                 <td>{{ $bookings->booking_id }}</td>
                                                                 <td>{{ $payment->receipt_id }}</td>
                                                                 <td>{{ $payment->deposite_type }}</td>
                                                                 <td></td>
                                                                 <td>{{ number_format($payment->amount, 2) }}</td>
                                                             </tr>
+
                                                             @php
-                                                                $total_credit += $payment->amount;
+                                                                $diff = $balance_cal_tot - $payment->amount;
+                                                                //dump( $diff);
+                                                                $threshold = $balance_cal_tot * 0.01;
+                                                                  //  dump( abs($diff - $threshold));
+                                                                if (round($diff - $threshold) == 0) {
+                                                                    $total_credit += $payment->amount ;
+                                                                    $one_percent = $balance_cal_tot * 0.01;
+                                                                }else{
+                                                                    $total_credit += $payment->amount;
+                                                                }
                                                             @endphp
                                                         @endforeach
+
                                                         @php
                                                             $total_debit += $bookings->tot_cost;
                                                         @endphp
+
                                                         <tr>
-                                                            <td colspan="6"
-                                                                style="background-color: #dee2e6: height:50%;">
-                                                            </td>
+                                                            <td colspan="6" style="background-color: #dee2e6; height: 50%;"></td>
                                                         </tr>
                                                     @empty
                                                         <tr>
-                                                            <td colspan="6" align="center" class="text-danger"><span
-                                                                    class="v-msg">No
-                                                                    Records
-                                                                    Found</span> </td>
+                                                            <td colspan="6" align="center" class="text-danger">
+                                                                <span class="v-msg">No Records Found</span>
+                                                            </td>
                                                         </tr>
                                                     @endforelse
+
                                                     <tr>
                                                         <td colspan="4" align="right">Total : </td>
-                                                        <td> {{ number_format($total_debit, 2) }}</td>
-                                                        <td>{{ number_format($tot_cost, 2) }}</td>
+                                                        <td>{{ number_format($total_debit, 2) }}</td>
+                                                        <td>{{ number_format($total_credit, 2) }}</td>
                                                     </tr>
+
                                                     <tr>
                                                         <td colspan="4"></td>
                                                         <td>Balance</td>
-                                                        <td class="text-white" style="background-color: red; ">
-                                                            {{ number_format($total_debit - $total_credit, 2) }}</td>
+                                                        <td class="text-white" style="background-color: red;">
+                                                                {{ number_format( round($total_debit - ($total_credit + $one_percent)), 2 ) }}
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>

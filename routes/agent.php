@@ -4,7 +4,6 @@ use App\Http\Controllers\Agent\Auth\AuthController;
 use App\Http\Controllers\Agent\Bookings\BookingCreateComponent;
 use App\Http\Controllers\Agent\DashboardComponent;
 
-
 use App\Http\Controllers\Agent\Downloads\PrintReceiptListComponent;
 use App\Http\Controllers\Agent\PaymentController;
 use App\Http\Controllers\Agent\PaymentResponseComponent;
@@ -199,7 +198,7 @@ Route::group(['middleware' => ['auth:agent'], 'as' => 'agent.'], function () {
       Route::get('/flyer', PackageFlyerComponent::class)->name('flyer.index');
     Route::get('/flyer/create', PackageFlyerCreateComponent::class)->name('flyer.create');
     Route::get('/flyer/edit/{flyer}', PackageFlyerEditComponent::class)->name('flyer.edit');
-    
+
     Route::get('/banner', BannerListComponent::class)->name('banner.index');
     Route::get('/banner/create', BannerCreateComponent::class)->name('banner.create');
     Route::get('/banner/edit{manageBanner}', BannerEditComponent::class)->name('banner.edit');
