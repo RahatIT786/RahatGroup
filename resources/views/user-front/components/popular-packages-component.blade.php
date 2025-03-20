@@ -23,7 +23,8 @@
                         </div>
                         <div class="package-text">
                             <h4 class="package-name">
-                                <a href="javascript:void(0);" wire:click="viewPackageDetails({{ $package->id }})">
+                                {{-- href="javascript:void(0);" wire:click="viewPackageDetails({{ $package->id }})" --}}
+                                <a>
                                     {{ $package->name }}
                                 </a>
                             </h4>
