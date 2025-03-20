@@ -19,7 +19,7 @@ class PaymentService
     public function __construct()
     {
         $this->httpClient = new Client();
-        $this->is_production = false; //ON OFF SWITCH
+        $this->is_production = true; //ON OFF SWITCH
 
 
         // Load appropriate configuration based on the environment
