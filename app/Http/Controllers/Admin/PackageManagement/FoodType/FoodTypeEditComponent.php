@@ -24,7 +24,7 @@ class FoodTypeEditComponent extends Component
     use LivewireAlert, WithFileUploads;
 
     public function mount(FoodMaster $foodMaster)
-    {   
+    {
         $this->id = $foodMaster->id;
         $this->food_type = $foodMaster->food_type;
         $this->price = $foodMaster->price;
@@ -32,7 +32,7 @@ class FoodTypeEditComponent extends Component
         $this->lunch = $foodMaster->lunch;
         $this->dinner = $foodMaster->dinner;
         $this->f_pdf = $foodMaster->food_pdf;
-        
+
         // Fetch images and group by food type
         $this->oldimage = FoodImage::where('food_id', $this->id)->get();
         //  dd($this->oldimage);
@@ -70,7 +70,7 @@ class FoodTypeEditComponent extends Component
 
     public function update()
     {
-        
+
         // Validate the inputs
         $validated = $this->validate();
 
@@ -82,15 +82,33 @@ class FoodTypeEditComponent extends Component
             return;
         }
 
-        if($this->f_pdf){
+        // if($this->f_pdf){
+        //     $uuid = Str::uuid();
+        //     $fileExtension = $this->f_pdf->getClientOriginalExtension();
+        //     $fileName = $uuid . '.' . $fileExtension;
+        //     $this->f_pdf->storeAs('public/food_pdf', $fileName);
+        // }else{
+        //     $fileName = '';
+        // }
+
+        // Handle PDF file upload
+        $fileName = $food->food_pdf;
+
+        if ($this->f_pdf && $this->f_pdf instanceof \Illuminate\Http\UploadedFile) {
+            // Generate a unique name for the PDF file
             $uuid = Str::uuid();
             $fileExtension = $this->f_pdf->getClientOriginalExtension();
             $fileName = $uuid . '.' . $fileExtension;
+
+            // Store the PDF file
             $this->f_pdf->storeAs('public/food_pdf', $fileName);
-        }else{
-            $fileName = '';    
+
+            // Optionally, delete the old PDF file if it exists
+            if ($food->food_pdf && Storage::exists('public/food_pdf/' . $food->food_pdf)) {
+                Storage::delete('public/food_pdf/' . $food->food_pdf);
+            }
         }
-        
+
 
         // Update the food item (excluding images)
         $food->update([
@@ -99,27 +117,49 @@ class FoodTypeEditComponent extends Component
             'description' => $validated['description'],
             'lunch' => $validated['lunch'],
             'dinner' => $validated['dinner'],
-            'food_pdf' => $fileName 
+            'food_pdf' => $fileName
         ]);
 
         // Function to handle multiple image uploads and replacements
          $uploadImages = function ($images, $type) use ($food) {
-            
+
             foreach ($images as $image) {
-                
-                if ($image) {
+
+                // if ($image) {
+                //     // Generate a unique name for the image
+                //     $uuid = Str::uuid();
+                //     $imageExtension = $image->getClientOriginalExtension();
+                //     $imageName = $uuid . '.' . $imageExtension;
+
+                //     // Store the image
+                //     Storage::putFileAs('public/food_image', $image, $imageName);
+
+                //     // Remove any existing image of the same type (delete old image)
+                //     // FoodImage::where('food_id', $food->id)
+                //     //     ->where('food_type', $type)
+                //     //     ->delete(); // This will delete the old images before storing the new ones
+
+                //     // Save the new images in the FoodImage model
+                //     FoodImage::create([
+                //         'food_id' => $food->id,
+                //         'food_type' => $type,
+                //         'image' => $imageName,
+                //     ]);
+                // }
+
+                if ($image instanceof \Illuminate\Http\UploadedFile) {
                     // Generate a unique name for the image
                     $uuid = Str::uuid();
                     $imageExtension = $image->getClientOriginalExtension();
                     $imageName = $uuid . '.' . $imageExtension;
-                   
+
                     // Store the image
                     Storage::putFileAs('public/food_image', $image, $imageName);
 
                     // Remove any existing image of the same type (delete old image)
-                    // FoodImage::where('food_id', $food->id)
-                    //     ->where('food_type', $type)
-                    //     ->delete(); // This will delete the old images before storing the new ones
+                    FoodImage::where('food_id', $food->id)
+                        ->where('food_type', $type)
+                        ->delete(); // This will delete the old images before storing the new ones
 
                     // Save the new images in the FoodImage model
                     FoodImage::create([
@@ -129,19 +169,32 @@ class FoodTypeEditComponent extends Component
                     ]);
                 }
             }
-            
+
         };
 
         // Upload images for each type if present
-        if (count($this->images)) {
+        // if (count($this->images)) {
+        //     $uploadImages($this->images, 1); // Type 1 for regular food images
+        // }
+
+        // if (count($this->l_images)) {
+        //     $uploadImages($this->l_images, 2); // Type 2 for lunch images
+        // }
+
+        // if (count($this->d_images)) {
+        //     $uploadImages($this->d_images, 3); // Type 3 for dinner images
+        // }
+
+        // Upload images for each type if present
+        if (!empty($this->images)) {
             $uploadImages($this->images, 1); // Type 1 for regular food images
         }
 
-        if (count($this->l_images)) {
+        if (!empty($this->l_images)) {
             $uploadImages($this->l_images, 2); // Type 2 for lunch images
         }
 
-        if (count($this->d_images)) {
+        if (!empty($this->d_images)) {
             $uploadImages($this->d_images, 3); // Type 3 for dinner images
         }
 
@@ -160,7 +213,7 @@ class FoodTypeEditComponent extends Component
             $this->lunchImage = $this->oldimage->where('food_type', 2); // Type 2 = Lunch image
             $this->dinnerImage = $this->oldimage->where('food_type', 3);
             $this->alert('success', Lang::get('messages.image_deleted'));
-           
+
         } else {
             // If the image doesn't exist, alert the user
             // $this->alert('error', 'Image not found.');

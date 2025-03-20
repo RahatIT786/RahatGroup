@@ -120,7 +120,6 @@ class UserHomePageComponent extends Component
             'hotels' => $this->hotels,
             'packages' => $this->packages,
             'departureCities' => $this->departureCities,
-
         ]);
     }
 }

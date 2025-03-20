@@ -65,7 +65,7 @@ class HajjPackageView extends Component
     {
         // Access session variables
         $this->packageId = $id;
-        
+
         $this->city = City::pluck('city_name', 'id');
         $this->flight = FlightMaster::pluck('flight_name', 'id');
         $this->selectedPackageFlavourId = $type;
@@ -82,7 +82,7 @@ class HajjPackageView extends Component
         } else {
             $this->packageType = collect();
         }
-       
+
         $this->selectedPackageFlavourId = $type;
         $this->allIncludes = Helper::packageIncludesOptions();
         $firstFlavour = $this->packages->pkgDetails->where('pkg_type_id', $this->selectedPackageFlavourId)->first()->package_includes;
@@ -195,7 +195,7 @@ class HajjPackageView extends Component
             'package_details' => $packageDetails,
             'packageData' => $packageData,
         ];
-        
+
         // Generate the PDF
         $pdf = Pdf::loadView('user-front.pages.pdf.hajj-packages-pdf-component', $data);
 

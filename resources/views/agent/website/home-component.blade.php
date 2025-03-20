@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Agent Website</title>
+        <title>{{$agent->agency_name}} Agency</title>
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,8 +24,6 @@
         @livewireStyles
         @stack('extra_css')
         @vite([])
-
-
     </head>
 
     <body>
@@ -45,11 +43,11 @@
                         <div class="col-lg-7 text-start">
                             <div class="h-100 d-inline-flex align-items-center me-4">
                                 <span class="fa fa-phone-alt me-2 text-dark"></span>
-                                <a href="#" class="text-secondary"><span>+012 345 6789</span></a>
+                                <a href="#" class="text-secondary"><span>{{ $agent->mobile }}</span></a>
                             </div>
                             <div class="h-100 d-inline-flex align-items-center">
                                 <span class="far fa-envelope me-2 text-dark"></span>
-                                <a href="#" class="text-secondary"><span>info@example.com</span></a>
+                                <a href="#" class="text-secondary"><span>{{ $agent->email }}</span></a>
                             </div>
                         </div>
                         <div class="col-lg-5 text-end">
@@ -59,7 +57,7 @@
                                 <a class="text-dark px-2" href=""><i class="fab fa-twitter"></i></a>
                                 <a class="text-dark px-2" href=""><i class="fab fa-linkedin-in"></i></a>
                                 <a class="text-dark px-2" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="text-body ps-4" href=""><i class="fa fa-lock text-dark me-1"></i> Signup/login</a>
+                                {{-- <a class="text-body ps-4" href=""><i class="fa fa-lock text-dark me-1"></i> Signup/login</a> --}}
                             </div>
                         </div>
                     </div>
@@ -68,19 +66,19 @@
             <div class="container">
                 <nav class="navbar navbar-light navbar-expand-lg py-3">
                     <a href="index.html" class="navbar-brand">
-                        <h1 class="mb-0">THE<span class="text-primary">Mosque</span> </h1>
+                        <h1 class="mb-0">{{$agent->agency_name}}<span class="text-primary"></span> </h1>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav ms-lg-auto mx-xl-auto">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="activity.html" class="nav-item nav-link">Activities</a>
-                            <a href="event.html" class="nav-item nav-link">Events</a>
-                            <a href="sermon.html" class="nav-item nav-link">Sermons</a>
-                            <div class="nav-item dropdown">
+                            <a href="#home" class="nav-item nav-link active">Home</a>
+                            <a href="#about" class="nav-item nav-link">About</a>
+                            <a href="#services" class="nav-item nav-link">Services</a>
+                            <a href="#events" class="nav-item nav-link">Events</a>
+                            <a href="#sermon" class="nav-item nav-link">Sermons</a>
+                            {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 rounded-0">
                                     <a href="blog.html" class="dropdown-item">Latest Blog</a>
@@ -88,10 +86,10 @@
                                     <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                                     <a href="404.html" class="dropdown-item">404 Page</a>
                                 </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            </div> --}}
+                            <a href="#team" class="nav-item nav-link">Contact</a>
                         </div>
-                        <a href="" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block">Donate</a>
+                        {{-- <a href="" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block">Donate</a> --}}
                     </div>
                 </nav>
             </div>
@@ -100,14 +98,14 @@
 
 
         <!-- Hero Start -->
-        <div class="container-fluid hero-header">
+        <div class="container-fluid hero-header" id="home">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="hero-header-inner animated zoomIn">
-                            <p class="fs-4 text-dark">WELCOME TO THEMosque</p>
+                            <p class="fs-4 text-dark">WELCOME TO {{ strtoupper($agent->agency_name) }}</p>
                             <h1 class="display-1 mb-5 text-dark">Purity Comes From Faith</h1>
-                            <a href="" class="btn btn-primary py-3 px-5">Read More</a>
+                            {{-- <a href="" class="btn btn-primary py-3 px-5">Read More</a> --}}
                         </div>
                     </div>
                 </div>
@@ -117,7 +115,7 @@
 
 
         <!-- About Satrt -->
-        <div class="container-fluid about py-5">
+        <div class="container-fluid about py-5" id="about">
             <div class="container py-5">
                 <div class="row g-5 mb-5">
                     <div class="col-xl-6">
@@ -132,16 +130,19 @@
                         </div>
                     </div>
                     <div class="col-xl-6 wow fadeIn" data-wow-delay="0.5s">
-                        <p class="fs-5 text-uppercase text-primary">About THEMosque</p>
-                        <h1 class="display-5 pb-4 m-0">Allah Help Those Who Help Themselves</h1>
-                        <p class="pb-4">Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam. Etiam quis mauris justo. Vivamus purus nulla, rutrum ac risus in.</p>
+                        <p class="fs-5 text-uppercase text-primary">About Us</p>
+                        <h1 class="display-5 pb-4 m-0">Welcome to {{$agent->agency_name}}</h1>
+                        <p class="pb-4">Your trusted partner in organizing unforgettable Umrah pilgrimages. With a deep commitment to serving the spiritual needs of Muslims worldwide, we strive to make your journey to the holy cities of Mecca and Medina seamless and spiritually enriching.</p>
                         <div class="row g-4 mb-4">
                             <div class="col-md-6">
                                 <div class="ps-3 d-flex align-items-center justify-content-start">
                                     <span class="bg-primary btn-md-square rounded-circle mt-4 me-2"><i class="fa fa-eye text-dark fa-4x mb-5 pb-2"></i></span>
                                     <div class="ms-4">
                                         <h5>Our Vision</h5>
-                                        <p>Lorem ipsum dolor sit amet tetur nod elit sed</p>
+                                        <ul>
+                                            <li>To become the most trusted and respected Umrah agency globally.</li>
+                                            <li>To be recognized for our commitment to excellence in every service we provide.</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -150,12 +151,15 @@
                                     <span class="bg-primary btn-md-square rounded-circle mt-4 me-2"><i class="fa fa-flag text-dark fa-4x mb-5 pb-2"></i></span>
                                     <div class="ms-4">
                                         <h5>Our Mission</h5>
-                                        <p>Lorem ipsum dolor sit amet tetur nod elit sed</p>
+                                        <ul>
+                                            <li>To provide reliable, affordable, and spiritually uplifting Umrah experiences.</li>
+                                            <li>To ensure every pilgrim’s journey is seamless, comfortable, and deeply meaningful.</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-light p-3 mb-4">
+                        {{-- <div class="bg-light p-3 mb-4">
                             <div class="row align-items-center justify-content-center">
                                 <div class="col-3">
                                     <img src="{{asset('agent-website/img/about-child.jpg')}}" class="img-fluid rounded-circle" alt="">
@@ -168,8 +172,8 @@
                                         <h5 class="mb-0 text-center">Raised</h5>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row g-2">
+                        </div> --}}
+                        {{-- <div class="row g-2">
                             <div class="col-md-6">
                                 <p class="mb-2"><i class="fa fa-check text-primary me-3"></i>Charity & Donation</p>
                                 <p class="mb-0"><i class="fa fa-check text-primary me-3"></i>Parent Education</p>
@@ -178,7 +182,7 @@
                                 <p class="mb-2"><i class="fa fa-check text-primary me-3"></i>Hadith & Sunnah</p>
                                 <p class="mb-0"><i class="fa fa-check text-primary me-3"></i>Mosque Development</p>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="container text-center bg-primary py-5 wow fadeIn" data-wow-delay="0.1s">
@@ -200,70 +204,70 @@
 
 
         <!-- Activities Start -->
-        <div class="container-fluid activities py-5">
+        <div class="container-fluid activities py-5" id="services">
             <div class="container py-5">
                 <div class="mx-auto text-center mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-                    <p class="fs-5 text-uppercase text-primary">Activities</p>
-                    <h1 class="display-3">Here Are Our Activities</h1>
+                    {{-- <p class="fs-5 text-uppercase text-primary">Services</p> --}}
+                    <h1 class="display-3">Services</h1>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-6 col-xl-4">
                         <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.1s">
                             <i class="fa fa-mosque fa-4x text-dark"></i>
                             <div class="ms-4">
-                                <h4>Mosque Development</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.</p>
-                                <a href="" class="btn btn-primary px-3">Read More</a>
+                                <h4>Umrah</h4>
+                                <p class="mb-4">Exclusive Umrah pilgrim packages tailored for a seamless spiritual journey.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xl-4">
                         <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.3s">
-                            <i class="fa fa-donate fa-4x text-dark"></i>
+                            <i class="fas fa-kaaba fa-4x text-dark"></i>
                             <div class="ms-4">
-                                <h4>Charity & Donation</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.</p>
-                                <a href="" class="btn btn-primary px-3">Read More</a>
+                                <h4>Hajj</h4>
+                                <p class="mb-4">Complete Hajj travel and accommodation solutions for a seamless pilgrimage experience.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xl-4">
                         <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.5s">
-                            <i class="fa fa-quran fa-4x text-dark"></i>
+                            <i class="fas fa-pray fa-4x text-dark"></i>
                             <div class="ms-4">
-                                <h4>Quran Learning</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.</p>
-                                <a href="" class="btn btn-primary px-3">Read More</a>
+                                <h4>Ziyarat</h4>
+                                <p class="mb-4">Efficiently organized visits to religious and historical sites for a seamless experience.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xl-4">
                         <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.1s">
-                            <i class="fa fa-book fa-4x text-dark"></i>
+                            <i class="fas fa-hotel fa-4x text-dark"></i>
                             <div class="ms-4">
-                                <h4>Hadith & Sunnah</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.</p>
-                                <a href="" class="btn btn-primary px-3">Read More</a>
+                                <h4>Hotels</h4>
+                                <p class="mb-4">Comfortable accommodations with a variety of options for a relaxing stay.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xl-4">
                         <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.3s">
-                            <i class="fa fa-book-open fa-4x text-dark"></i>
+                            <i class="fas fa-utensils fa-4x text-dark"></i>
                             <div class="ms-4">
-                                <h4>Parent Education</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.</p>
-                                <a href="" class="btn btn-primary px-3">Read More</a>
+                                <h4>Food & Catering</h4>
+                                <p class="mb-4">Quality meals expertly crafted to meet your dietary preferences and needs.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xl-4">
                         <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.5s">
-                            <i class="fa fa-hands fa-4x text-dark"></i>
+                            <i class="fas fa-bus fa-4x text-dark"></i>
                             <div class="ms-4">
-                                <h4>Help Orphans</h4>
-                                <p class="mb-4">Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.</p>
-                                <a href="" class="btn btn-primary px-3">Read More</a>
+                                <h4>Transport</h4>
+                                <p class="mb-4">Reliable and convenient travel arrangements for a stress-free journey.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
                             </div>
                         </div>
                     </div>
@@ -274,7 +278,7 @@
 
 
         <!-- Events Start -->
-        <div class="container-fluid event py-5">
+        <div class="container-fluid event py-5" id="events">
             <div class="container py-5">
                 <h1 class="display-3 mb-5 wow fadeIn" data-wow-delay="0.1s">Upcoming <span class="text-primary">Events</span></h1>
                 <div class="row g-4 event-item wow fadeIn" data-wow-delay="0.1s">
@@ -346,7 +350,7 @@
 
 
         <!-- Sermon Start -->
-        <div class="container-fluid sermon py-5">
+        <div class="container-fluid sermon py-5" id="sermon">
             <div class="container py-5">
                 <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
                     <p class="fs-5 text-uppercase text-primary">Sermons</p>
@@ -432,7 +436,7 @@
 
 
         <!-- Blog Start -->
-        <div class="container-fluid py-5">
+        <div class="container-fluid py-5" id="blog">
             <div class="container py-5">
                 <h1 class="display-3 mb-5 wow fadeIn" data-wow-delay="0.1s">Latest From <span class="text-primary">Our Blog</span></h1>
                 <div class="row g-4 justify-content-center">
@@ -512,7 +516,7 @@
 
 
         <!-- Team Start -->
-        <div class="container-fluid team py-5">
+        <div class="container-fluid team py-5" id="team">
             <div class="container py-5">
                 <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
                     <p class="fs-5 text-uppercase text-primary">Our Team</p>
@@ -598,7 +602,7 @@
 
 
         <!-- Testiminial Start -->
-        <div class="container-fluid testimonial py-5">
+        <div class="container-fluid testimonial py-5" >
             <div class="container py-5">
                 <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
                     <p class="fs-5 text-uppercase text-primary">Testimonial</p>
