@@ -9,6 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 
 class IDCardsComponent extends Component
 {
@@ -58,18 +59,27 @@ class IDCardsComponent extends Component
                 'agency_name' => $agent->agency_name ?? '',
                 // 'agency_logo' => 'storage/company_logo/' . $agent->company_logo,
                 'agency_logo' => $agencyLogoUrl,
-                'booking_id' => $booking_data->booking_id
+                'booking_id' => $booking_data->booking_id,
+                'bg_img'=>'img/ID_BACKGROUND.png',
+                'ppic'=>'assets/img/icard/ppic.jpeg',
             ];
         })->toArray(); // Convert collection to an array
 
         //  dd($datas);
         // Generate the PDF with the Blade template
-        $pdf = Pdf::loadView('agent.downloads.i-cards.i-d-cards-pdf-component', ['datas' => $datas])
-            ->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('agent.downloads.i-cards.i-d-cards-pdf-component-v2', ['datas' => $datas])
+            ->setPaper('a4', 'portrait');
+
+        // $pdf=SnappyPdf::loadView('agent.downloads.i-cards.i-d-cards-pdf-component-v2', ['datas' => $datas])
+        // ->setPaper('a4', 'landscape');
         $docName = "ID_CARD_" . time() . ".pdf";
+
+
         return response()->streamDownload(function () use ($pdf) {
           echo $pdf->stream();
         }, $docName);
+
+        // return $pdf->download($docName);
     }
 
     public function filterBookings()

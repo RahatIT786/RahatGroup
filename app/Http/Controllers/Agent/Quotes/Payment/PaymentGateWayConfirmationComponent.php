@@ -10,6 +10,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 use App\Models\Booking;
 use App\Models\Agency;
+use Illuminate\Support\Facades\Log;
 
 class PaymentGateWayConfirmationComponent extends Component
 {
@@ -33,13 +34,25 @@ class PaymentGateWayConfirmationComponent extends Component
         $request_id = $this->request->request_id;
         $return_url = route('agent.payment.response'); // Make sure you have this route defined
 
-        $this->data = $paymentService->createPayData($amount, $user_email, $user_contact_number, $return_url, $request_id);
-        // dd($this->data);
-        $this->atomTokenId = $paymentService->createTokenId($this->data);
-        // dd($this->atomTokenId );
+        // $this->data = $paymentService->createPayData($amount, $user_email, $user_contact_number, $return_url, $request_id);
+        // // dd($this->data);
+        // $this->atomTokenId = $paymentService->createTokenId($this->data);
+        // // dd($this->atomTokenId );
        
      
         // return redirect()->to("https://payment1.atomtech.in/ots/aipay/auth?tt={$this->atomTokenId}");
+
+        try {
+            $this->data = $paymentService->createPayData($amount, $user_email, $user_contact_number, $return_url, $request_id);
+            Log::info('Payment Data:', $this->data);
+        
+            $this->atomTokenId = $paymentService->createTokenId($this->data);
+            Log::info('Atom Token ID: ' . $this->atomTokenId);
+        
+        } catch (\Exception $e) {
+            Log::error('Error occurred: ' . $e->getMessage());
+            return response()->json(['error' => 'Something went wrong. Please try again later.'], 500);
+        }
 
 
         // session()->forget('payment_amount');

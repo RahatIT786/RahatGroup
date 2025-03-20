@@ -2,6 +2,7 @@
 use App\Http\Controllers\AlterController;
 use App\Http\Controllers\Agent\Website\Admin\DashboardComponent;
 use App\Http\Controllers\Agent\Website\HomeComponent;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HomePageComponent;
@@ -356,6 +357,12 @@ Route::get('cache-clear',function() {
     Artisan::call('cache:clear');
     Artisan::call('view:clear');
 });
+
+
+
+Route::get('/api-data', [Controller::class, 'getApiData']);
+
+
 
 include "website.php";
 
