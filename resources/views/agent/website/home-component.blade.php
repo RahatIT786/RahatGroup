@@ -75,9 +75,10 @@
                         <div class="navbar-nav ms-lg-auto mx-xl-auto">
                             <a href="#home" class="nav-item nav-link active">Home</a>
                             <a href="#about" class="nav-item nav-link">About</a>
+                            <a href="#sermon" class="nav-item nav-link">Packages</a>
                             <a href="#services" class="nav-item nav-link">Services</a>
                             <a href="#events" class="nav-item nav-link">Events</a>
-                            <a href="#sermon" class="nav-item nav-link">Sermons</a>
+
                             {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 rounded-0">
@@ -794,13 +795,13 @@
                 <div class="border-top border-secondary pb-4"></div>
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+                        &copy; <a class="border-bottom" href="#">{{$agent->agency_name}}</a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        Designed By <a class="border-bottom" href="https://rahatitsolutions.com/">Rahat IT Solutions</a>
                     </div>
                 </div>
             </div>
