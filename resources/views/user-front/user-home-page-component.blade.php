@@ -460,7 +460,7 @@ p {
                                     @foreach ($packages as $package)
                                         <div>
                                             <a
-                                                href="{{ route('customer.umrahPackageView', ['id' => $package->id]) }}">{{ $package->name }}</a>
+                                                href="{{ route('customer.umrahPackageView', ['id' => $package->id , 'type' => 29]) }}">{{ $package->name }}</a>
                                         </div>
                                     @endforeach
                                 @endif
