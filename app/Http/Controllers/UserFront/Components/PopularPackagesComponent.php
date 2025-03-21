@@ -57,7 +57,7 @@ class PopularPackagesComponent extends Component
     public function render()
     {
         return view('user-front.components.popular-packages-component', [
-            'popular_packages' => $this->getPopularPackages(),k
+            'popular_packages' => $this->getPopularPackages(),
         ]);
     }
 }
