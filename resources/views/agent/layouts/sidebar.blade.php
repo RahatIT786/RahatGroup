@@ -72,7 +72,7 @@
 
                 <li
                     class="nav-item accordion-item {{ Request::is('agent/client-report*') || Request::is('agent/statement-report*') ? 'active' : '' }}">
-                    <a href="javascript:void(0);"
+                    <a  href="javascript:void(0);"
                         class="nav-link accordion-button {{ Request::is('agent/client-report*') || Request::is('agent/statement-report*') ? '' : 'collapsed' }}"
                         data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
                         aria-controls="collapseThree">
@@ -202,7 +202,6 @@
                     <a href="{{ route('agent.resource.index') }}">Resource
                     </a>
                 </li>
-
 
                 <li
                     class="nav-item accordion-item {{ Request::is('agent/content*') || Request::is('agent/image-gallery*') || Request::is('agent/video-gallery*') || Request::is('agent/contact*') || Request::is('agent/faq*') || Request::is('agent/setting*') || Request::is('agent/banner*') || Request::is('agent/subscribers*') || Request::is('agent/sub-agent*') ? 'active' : '' }}">
