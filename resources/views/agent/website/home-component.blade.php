@@ -367,30 +367,23 @@
                                             $imageName = !empty($package->pkgImages[0]) ? $package->pkgImages[0]->pkg_img : '';
                                             $imagePath = !empty($imageName)
                                                 ? 'package_image/' . $imageName
-                                                : 'storage/NoImageFound.png';
+                                                : 'storage/dummy.jpg';
 
                                             $imageExists = !empty($imageName) && Helper::fileExists($imagePath);
                                         @endphp
                                         <img class="img-fluid" alt="Package Image"
-                                            src="{{ $imageExists ? asset('storage/' . $imagePath) : asset('storage/NoImageFound.png') }}" style="width: 380px; height: 280px;object-fit: cover;" />
+                                            src="{{ $imageExists ? asset('storage/' . $imagePath) : asset('storage/dummy.jpg') }}" style="width: 380px; height: 280px;object-fit: cover;" />
                                     </a>
                                 </div>
                                 <div class="p-4">
-                                    {{-- <div class="sermon-meta d-flex justify-content-between pb-2">
-                                        <div class="">
-                                            <small><i class="fa fa-calendar me-2 text-muted"></i><a href="" class="text-muted me-2">13 Nov 2023</small></a>
-                                            <small><i class="fas fa-user me-2 text-muted"></i><a href="" class="text-muted">Admin</small></a>
-                                        </div>
-                                        <div class="">
-                                            <a href="" class="me-1"><i class="fas fa-video text-muted"></i></a>
-                                            <a href="" class="me-1"><i class="fas fa-headphones text-muted"></i></a>
-                                            <a href="" class="me-1"><i class="fas fa-file-alt text-muted"></i></a>
-                                            <a href="" class=""><i class="fas fa-image text-muted"></i></a>
-                                        </div>
-                                    </div> --}}
                                     <a href="" class="d-inline-block h4 lh-sm mb-3">{{$package->name }}</a>
                                     <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                     aliquip ex ea commodo consequat.</p>
+                                </div>
+                                 <!-- Add Two Buttons Here -->
+                                 <div class="d-flex justify-content-around align-items-center gap-2 mb-2">
+                                    <a href="tel:{{$agent->mobile}}" class="btn btn-primary">Contact here</a>
+                                    <a href="#" class="btn btn-secondary">View More</a>
                                 </div>
                             </div>
                         </div>
