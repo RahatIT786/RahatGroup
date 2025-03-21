@@ -77,8 +77,6 @@
                             <a href="#about" class="nav-item nav-link">About</a>
                             <a href="#sermon" class="nav-item nav-link">Packages</a>
                             <a href="#services" class="nav-item nav-link">Services</a>
-                            <a href="#events" class="nav-item nav-link">Events</a>
-
                             {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 rounded-0">
@@ -88,7 +86,7 @@
                                     <a href="404.html" class="dropdown-item">404 Page</a>
                                 </div>
                             </div> --}}
-                            <a href="#team" class="nav-item nav-link">Contact</a>
+                            <a href="#contact" class="nav-item nav-link">Contact</a>
                         </div>
                         {{-- <a href="" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block">Donate</a> --}}
                     </div>
@@ -160,30 +158,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="bg-light p-3 mb-4">
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-3">
-                                    <img src="{{asset('agent-website/img/about-child.jpg')}}" class="img-fluid rounded-circle" alt="">
-                                </div>
-                                <div class="col-6">
-                                    <p class="mb-0">Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam. Etiam quis mauris justo.</p>
-                                </div>
-                                <div class="col-3">
-                                        <h2 class="mb-0 text-primary text-center">$20,46</h2>
-                                        <h5 class="mb-0 text-center">Raised</h5>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="row g-2">
-                            <div class="col-md-6">
-                                <p class="mb-2"><i class="fa fa-check text-primary me-3"></i>Charity & Donation</p>
-                                <p class="mb-0"><i class="fa fa-check text-primary me-3"></i>Parent Education</p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="mb-2"><i class="fa fa-check text-primary me-3"></i>Hadith & Sunnah</p>
-                                <p class="mb-0"><i class="fa fa-check text-primary me-3"></i>Mosque Development</p>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
                 <div class="container text-center bg-primary py-5 wow fadeIn" data-wow-delay="0.1s">
@@ -276,78 +250,6 @@
             </div>
         </div>
         <!-- Activities Start -->
-
-
-        <!-- Events Start -->
-        <div class="container-fluid event py-5" id="events">
-            <div class="container py-5">
-                <h1 class="display-3 mb-5 wow fadeIn" data-wow-delay="0.1s">Upcoming <span class="text-primary">Events</span></h1>
-                <div class="row g-4 event-item wow fadeIn" data-wow-delay="0.1s">
-                    <div class="col-3 col-lg-2 pe-0">
-                        <div class="text-center border-bottom border-dark py-3 px-2">
-                            <h6>01 Jan 2045</h6>
-                            <p class="mb-0">Fri 06:55</p>
-                        </div>
-                    </div>
-                    <div class="col-9 col-lg-6 border-start border-dark pb-5">
-                        <div class="ms-3">
-                            <h4 class="mb-3">Milad Un Nabi</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
-                            <a href="#" class="btn btn-primary px-3">Join Now</a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <div class="overflow-hidden mb-5">
-                            <img src="{{asset('agent-website/img/events-1.jpg')}}" class="img-fluid w-100" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-4 event-item wow fadeIn" data-wow-delay="0.3s">
-                    <div class="col-3 col-lg-2 pe-0">
-                        <div class="text-center border-bottom border-dark py-3 px-2">
-                            <h6>01 Jan 2045</h6>
-                            <p class="mb-0">Wed 11:30</p>
-                        </div>
-                    </div>
-                    <div class="col-9 col-lg-6 border-start border-dark pb-5">
-                        <div class="ms-3">
-                            <h4 class="mb-3">Eid Ul Fitr</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
-                            <a href="#" class="btn btn-primary px-3">Join Now</a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <div class="overflow-hidden mb-5">
-                            <img src="{{asset('agent-website/img/events-2.jpg')}}" class="img-fluid w-100" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="row g-4 event-item wow fadeIn" data-wow-delay="0.5s">
-                    <div class="col-3 col-lg-2 pe-0">
-                        <div class="text-center border-bottom border-dark py-3 px-2">
-                            <h6>01 Jan 2045</h6>
-                            <p class="mb-0">Thu 11:30</p>
-                        </div>
-                    </div>
-                    <div class="col-9 col-lg-6 border-start border-dark pb-5">
-                        <div class="ms-3">
-                            <h4 class="mb-3">Eud Ul Azha</h4>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
-                            <a href="#" class="btn btn-primary px-3">Join Now</a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <div class="overflow-hidden mb-5">
-                            <img src="{{asset('agent-website/img/events-3.jpg')}}" class="img-fluid w-100" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Events End -->
 
 
         <!-- Sermon Start -->
@@ -475,7 +377,7 @@
 
 
         <!-- Team Start -->
-        <div class="container-fluid team py-5" id="team">
+        {{-- <div class="container-fluid team py-5" id="team">
             <div class="container py-5">
                 <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
                     <p class="fs-5 text-uppercase text-primary">Our Team</p>
@@ -550,6 +452,80 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+        <div class="container-fluid contact py-5" id="contact">
+            <div class="container py-5">
+                <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
+                    <p class="fs-5 text-uppercase text-primary">Contact Us</p>
+                    <h1 class="display-3">Get In Touch</h1>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="bg-light p-5 h-100">
+                            <h2 class="mb-4">Send Us a Message</h2>
+                            <form >
+                                @csrf
+                                <div class="mb-4">
+                                    <input type="text" name="name" class="form-control p-3" placeholder="Your Name" required>
+                                </div>
+                                <div class="mb-4">
+                                    <input type="email" name="email" class="form-control p-3" placeholder="Your Email" required>
+                                </div>
+                                <div class="mb-4">
+                                    <input type="text" name="subject" class="form-control p-3" placeholder="Subject" required>
+                                </div>
+                                <div class="mb-4">
+                                    <textarea name="message" class="form-control p-3" rows="6" placeholder="Your Message" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary py-3 px-5">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="bg-light p-5 h-100">
+                            <h2 class="mb-4">Contact Information</h2>
+                            <p class="mb-4">Feel free to reach out to us for any inquiries or assistance. We're here to help!</p>
+                            <div class="d-flex mb-4">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Address</h5>
+                                    <p class="text-dark">{{$agent->city}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fas fa-phone-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Phone</h5>
+                                    <p class="text-dark">{{$agent->mobile}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Email</h5>
+                                    <p class="text-dark">{{$agent->email}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fas fa-globe text-white"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Website</h5>
+                                    <p class="text-dark">rahatgroup.in/{{$agent->website_name}}</p>
                                 </div>
                             </div>
                         </div>

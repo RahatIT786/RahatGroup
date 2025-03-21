@@ -32,7 +32,7 @@ class DashboardComponent extends Component
             ->orderBy('id', 'ASC')
             ->paid()
             ->get();
-         
+
         foreach ($bookings as $booking) {
             $givenDate = Carbon::parse($booking->travel_date); // Replace with your date
             if ($givenDate->greaterThan($today) && $booking->admin_active == false) {
@@ -179,6 +179,6 @@ class DashboardComponent extends Component
     #[Layout('agent.layouts.app')]
     public function render()
     {
-        return view('agent.dashboard-component');
+        return view('agent.dashkboard-component');
     }
 }
