@@ -24,6 +24,38 @@
         @livewireStyles
         @stack('extra_css')
         @vite([])
+
+        <style>
+            @keyframes jump {
+                    0%, 100% {
+                        transform: translateY(0);
+                    }
+                    50% {
+                        transform: translateY(-10px); /* Moves the icon up by 10px */
+                    }
+                }
+
+            #whatsapp{
+                height: clamp(25px,30vw,5rem);
+                z-index: 4;
+                position: fixed;
+                right: 10px;
+                bottom:6rem;
+                cursor: pointer;
+                animation: jump 1.5s infinite ease-in-out;
+
+            }
+            #call{
+
+                height: clamp(15px,8vw,3rem);
+                z-index: 4;
+                position: fixed;
+                left: 1rem;
+                bottom:7rem;
+                cursor: pointer;
+                animation: jump 1.5s infinite ease-in-out;
+            }
+        </style>
     </head>
 
     <body>
@@ -34,6 +66,18 @@
         </div>
         <!-- Spinner End -->
 
+        <div id="whatsapp">
+            {{-- <a href="https://wa.me/+971567866713"> --}}
+            <a href="https://api.whatsapp.com/send/?phone=%2B{{$agent->mobile}}&text={{urlencode('Hello, I want some details about package')}}&type=phone_number&app_absent=0">
+                <img src="{{asset('agent-website/img/whatsapp.png')}}" alt="whats_app" style="height: 100%;">
+            </a>
+        </div>
+
+        <div id="call">
+            <a href="tel:{{$agent->mobile}}">
+                <img src="{{asset('agent-website/img/call_logo.png')}}" alt="call_logo" style="height: 100%;">
+            </a>
+        </div>
 
         <!-- Topbar start -->
         <div class="container-fluid fixed-top">
@@ -43,11 +87,11 @@
                         <div class="col-lg-7 text-start">
                             <div class="h-100 d-inline-flex align-items-center me-4">
                                 <span class="fa fa-phone-alt me-2 text-dark"></span>
-                                <a href="#" class="text-secondary"><span>{{ $agent->mobile }}</span></a>
+                                <a href="tel:{{ $agent->mobile }}" class="text-secondary"><span>{{ $agent->mobile }}</span></a>
                             </div>
                             <div class="h-100 d-inline-flex align-items-center">
                                 <span class="far fa-envelope me-2 text-dark"></span>
-                                <a href="#" class="text-secondary"><span>{{ $agent->email }}</span></a>
+                                <a href="mailto:{{ $agent->email }}" class="text-secondary"><span>{{ $agent->email }}</span></a>
                             </div>
                         </div>
                         <div class="col-lg-5 text-end">
@@ -75,7 +119,7 @@
                         <div class="navbar-nav ms-lg-auto mx-xl-auto">
                             <a href="#home" class="nav-item nav-link active">Home</a>
                             <a href="#about" class="nav-item nav-link">About</a>
-                            <a href="#sermon" class="nav-item nav-link">Packages</a>
+                            <a href="#package" class="nav-item nav-link">Packages</a>
                             <a href="#services" class="nav-item nav-link">Services</a>
                             {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -299,7 +343,7 @@
 
 
         <!-- Blog Start -->
-        <div class="container-fluid py-5" id="blog">
+        {{-- <div class="container-fluid py-5" id="blog">
             <div class="container py-5">
                 <h1 class="display-3 mb-5 wow fadeIn" data-wow-delay="0.1s">Latest From <span class="text-primary">Our Blog</span></h1>
                 <div class="row g-4 justify-content-center">
@@ -374,7 +418,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Blog End -->
 
 
@@ -543,7 +587,7 @@
             <div class="container py-5">
                 <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
                     <p class="fs-5 text-uppercase text-primary">Testimonial</p>
-                    <h1 class="display-3">What People Say About Islam</h1>
+                    <h1 class="display-3">What People Say</h1>
                 </div>
                 <div class="owl-carousel testimonial-carousel wow fadeIn" data-wow-delay="0.1s">
                     <div class="testimonial-item">
@@ -555,8 +599,8 @@
                                 </div>
                             </div>
                             <div class="ps-3 my-auto ">
-                                <h5 class="mb-0">Full Name</h5>
-                                <p class="m-0">Profession</p>
+                                <h5 class="mb-0">Mohammed Iqbal</h5>
+                                <p class="m-0">Saudi Arabia</p>
                             </div>
                         </div>
                         <div class="testimonial-content">
@@ -567,7 +611,7 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
                             </div>
-                            <p class="fs-5 m-0 pt-3">Lorem ipsum dolor sit amet elit, sed do tempor ut labore et dolore magna aliqua. Ut enim ad minim quis.</p>
+                            <p class="fs-5 m-0 pt-3">{{$agent->agency_name}} Tour and Travels made my Hajj pilgrimage smooth and fulfilling with great guidance, comfortable accommodations, and seamless travel arrangements.</p>
                         </div>
                     </div>
                     <div class="testimonial-item">
@@ -579,8 +623,8 @@
                                 </div>
                             </div>
                             <div class="ps-3 my-auto ">
-                                <h5 class="mb-0">Full Name</h5>
-                                <p class="m-0">Profession</p>
+                                <h5 class="mb-0">Farah Khan</h5>
+                                <p class="m-0">Mumbai</p>
                             </div>
                         </div>
                         <div class="testimonial-content">
@@ -591,7 +635,7 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
                             </div>
-                            <p class="fs-5 m-0 pt-3">Lorem ipsum dolor sit amet elit, sed do tempor ut labore et dolore magna aliqua. Ut enim ad minim quis.</p>
+                            <p class="fs-5 m-0 pt-3">{{$agent->agency_name}} Tour and Travels made my Umrah memorable with attentive staff, smooth arrangements, and a focus on worship. Highly recommended!</p>
                         </div>
                     </div>
                     <div class="testimonial-item">
@@ -603,8 +647,8 @@
                                 </div>
                             </div>
                             <div class="ps-3 my-auto ">
-                                <h5 class="mb-0">Full Name</h5>
-                                <p class="m-0">Profession</p>
+                                <h5 class="mb-0">Akhtar</h5>
+                                <p class="m-0">Mumbai</p>
                             </div>
                         </div>
                         <div class="testimonial-content">
@@ -615,7 +659,7 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
                             </div>
-                            <p class="fs-5 m-0 pt-3">Lorem ipsum dolor sit amet elit, sed do tempor ut labore et dolore magna aliqua. Ut enim ad minim quis.</p>
+                            <p class="fs-5 m-0 pt-3">{{$agent->agency_name}} Tour and Travels ensured a smooth Umrah experience with attentive, helpful staff, allowing me to focus on my worship.</p>
                         </div>
                     </div>
                     <div class="testimonial-item">
@@ -627,8 +671,8 @@
                                 </div>
                             </div>
                             <div class="ps-3 my-auto ">
-                                <h5 class="mb-0">Full Name</h5>
-                                <p class="m-0">Profession</p>
+                                <h5 class="mb-0">Bhilal</h5>
+                                <p class="m-0">Mumbai</p>
                             </div>
                         </div>
                         <div class="testimonial-content">
@@ -639,7 +683,7 @@
                                 <i class="fas fa-star text-primary"></i>
                                 <i class="fas fa-star text-primary"></i>
                             </div>
-                            <p class="fs-5 m-0 pt-3">Lorem ipsum dolor sit amet elit, sed do tempor ut labore et dolore magna aliqua. Ut enim ad minim quis.</p>
+                            <p class="fs-5 m-0 pt-3">{{$agent->agency_name}} Tour and Travels made our Hajj experience memorable with great guidance, genuine care, and a focus on our comfort and safety.</p>
                         </div>
                     </div>
                 </div>
@@ -651,7 +695,7 @@
         <!-- Footer Start -->
         <div class="container-fluid footer pt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
-                <div class="row py-5">
+                {{-- <div class="row py-5">
                     <div class="col-lg-7">
                         <h1 class="text-light mb-0">Subscribe our newsletter</h1>
                         <p class="text-secondary">Get the latest news and other tips</p>
@@ -665,28 +709,30 @@
                     <div class="col-12">
                         <div class="border-top border-secondary"></div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row g-4 footer-inner">
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item mt-5">
-                            <h4 class="text-light mb-4">THE<span class="text-primary">Mosque</span></h4>
-                            <p class="mb-4 text-secondary">Nostrud exertation ullamco labor nisi aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
-                            <a href="" class="btn btn-primary py-2 px-4">Donate Now</a>
+                            <h4 class="text-light mb-4"><span class="text-primary">{{ $agent->agency_name }}</span></h4>
+                            <p class="mb-4 text-secondary">
+                                Welcome to {{$agent->agency_name }} Agency! We offer tailored travel experiences, from pilgrimages to vacations, ensuring seamless journeys and unforgettable memories.
+                            </p>
+                            {{-- <a href="" class="btn btn-primary py-2 px-4">Donate Now</a> --}}
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item mt-5">
-                            <h4 class="text-light mb-4">Our Mosque</h4>
+                            {{-- <h4 class="text-light mb-4">Our Mosque</h4> --}}
                             <div class="d-flex flex-column">
                                 <h6 class="text-secondary mb-0">Our Address</h6>
                                 <div class="d-flex align-items-center border-bottom py-4">
                                     <span class="flex-shrink-0 btn-square bg-primary me-3 p-4"><i class="fa fa-map-marker-alt text-dark"></i></span>
-                                    <a href="" class="text-body">123 Street, New York, USA</a>
+                                    <a href="" class="text-body">{{ $agent->city }}</a>
                                 </div>
                                 <h6 class="text-secondary mt-4 mb-0">Our Mobile</h6>
                                 <div class="d-flex align-items-center py-4">
                                     <span class="flex-shrink-0 btn-square bg-primary me-3 p-4"><i class="fa fa-phone-alt text-dark"></i></span>
-                                    <a href="" class="text-body">+012 345 67890</a>
+                                    <a href="" class="text-body">{{ $agent->mobile }}</a>
                                 </div>
                             </div>
                         </div>
@@ -695,14 +741,14 @@
                         <div class="footer-item mt-5">
                             <h4 class="text-light mb-4">Explore Link</h4>
                             <div class="d-flex flex-column align-items-start">
-                                <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Home</a>
-                                <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>About Us</a>
-                                <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Our Features</a>
-                                <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Contact us</a>
-                                <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Our Blog</a>
-                                <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Our Events</a>
+                                <a class="text-body mb-2" href="#home"><i class="fa fa-check text-primary me-2"></i>Home</a>
+                                <a class="text-body mb-2" href="#about"><i class="fa fa-check text-primary me-2"></i>About Us</a>
+                                <a class="text-body mb-2" href="#services"><i class="fa fa-check text-primary me-2"></i>Our Services</a>
+                                <a class="text-body mb-2" href="#package"><i class="fa fa-check text-primary me-2"></i>Our Packages</a>
+                                <a class="text-body mb-2" href="#contact"><i class="fa fa-check text-primary me-2"></i>Our Contact</a>
+                                {{-- <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Our Events</a>
                                 <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Donations</a>
-                                <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Sermons</a>
+                                <a class="text-body mb-2" href=""><i class="fa fa-check text-primary me-2"></i>Sermons</a> --}}
                             </div>
                         </div>
                     </div>

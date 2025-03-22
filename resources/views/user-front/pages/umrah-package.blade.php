@@ -266,9 +266,9 @@
                                 </div>
                             </div>
                         @endforeach
-                    @else
-                        <p class="text-red">No packages available.</p>
-                    @endif
+                        @else
+                            <p class="text-red">No packages available.</p>
+                        @endif
                 </div>
                 @if (count($packages) < $totalPackages)
                     <div class="text-center my-4">

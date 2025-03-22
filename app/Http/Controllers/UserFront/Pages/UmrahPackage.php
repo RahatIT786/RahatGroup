@@ -30,7 +30,7 @@ class UmrahPackage extends Component
     public $maxPrice = 500000;
     public $minNights = 3;
     public $maxNights = 30;
-    
+
 
     public function mount()
     {
@@ -102,7 +102,6 @@ class UmrahPackage extends Component
 
     public function changeflavour($value, $index)
     {
-
         // $this->putInCache($value);
         foreach ($this->flavour[$index] as $flavour_single) {
             if ($flavour_single['pkg_type_id'] == $value) {
@@ -110,7 +109,6 @@ class UmrahPackage extends Component
                 $this->selectedFlavourPrice[$index] = $flavour_single['price'];
             }
         }
-
         $this->flavour_changed = true;
     }
 
@@ -126,7 +124,7 @@ class UmrahPackage extends Component
 
     public function updated($propertyName)
     {
-        
+
         if ($propertyName === 'minPrice' && $this->minPrice > $this->maxPrice) {
             $this->maxPrice = $this->minPrice;
         }
@@ -225,9 +223,8 @@ class UmrahPackage extends Component
                 });
             });
             // dd($this->minPrice,$this->maxPrice);
-        // Step 2: Get the total count of matching records
+            // Step 2: Get the total count of matching records
         $this->totalPackages = $baseQuery->count();
-
         // Step 3: Fetch the limited number of records
         $this->packages = $baseQuery
             ->with(['pkgDetails', 'pkgDetails.packageType', 'pkgImages'])
@@ -255,12 +252,10 @@ class UmrahPackage extends Component
 
         if ($this->flavour_changed == false) {
             foreach ($this->packages as $packageKey => $package) {
-
                 $this->initializePackageFlavours($package, $packageKey);
             }
         }
-
-        // dd($this->packages);
+        //  dd($this->packages);
     }
 
 
