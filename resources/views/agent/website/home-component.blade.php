@@ -279,8 +279,10 @@
                                 </div>
                                 <div class="p-4">
                                     <a href="" class="d-inline-block h4 lh-sm mb-3">{{$package->name }}</a>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    aliquip ex ea commodo consequat.</p>
+                                    <p class="mb-0">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Ut enim ad minim veniam,aliquip ex ea commodo consequat.
+                                    </p>
                                 </div>
                                  <!-- Add Two Buttons Here -->
                                  <div class="d-flex justify-content-around align-items-center gap-2 mb-2">
@@ -595,7 +597,7 @@
                     <div class="testimonial-item">
                         <div class="d-flex mb-3">
                             <div class="position-relative">
-                                <img src="{{asset('agent-website/img/testimonial-3.jpg')}}" class="img-fluid" alt="">
+                                <img src="{{asset('agent-website/img/test1.jpg')}}" class="img-fluid" alt="">
                                 <div class="btn-md-square bg-primary rounded-circle position-absolute" style="top: 25px; left: -25px;">
                                     <i class="fa fa-quote-left text-dark"></i>
                                 </div>
@@ -619,7 +621,7 @@
                     <div class="testimonial-item">
                         <div class="d-flex mb-3">
                             <div class="position-relative">
-                                <img src="{{asset('agent-website/img/testimonial-4.jpg')}}" class="img-fluid" alt="">
+                                <img src="{{asset('agent-website/img/test2.jpg')}}" class="img-fluid" alt="">
                                 <div class="btn-md-square bg-primary rounded-circle position-absolute" style="top: 25px; left: -25px;">
                                     <i class="fa fa-quote-left text-dark"></i>
                                 </div>
