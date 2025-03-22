@@ -179,6 +179,6 @@ class DashboardComponent extends Component
     #[Layout('agent.layouts.app')]
     public function render()
     {
-        return view('agent.dashkboard-component');
+        return view('agent.dashboard-component');
     }
 }
