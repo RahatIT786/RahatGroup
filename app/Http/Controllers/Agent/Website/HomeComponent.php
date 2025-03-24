@@ -58,7 +58,9 @@ class HomeComponent extends Component
                                             $subQuery->whereIn('id', $this->selectedPackageTypes);
                                         });
                                     })
-                                    ->with('pkgDetails')
+                                    ->with(['pkgDetails' => function($query) {
+                                        $query->with(['makkahotel', 'madinahotel']);
+                                    }])
                                     ->get();
 
         //dd( $this->packages );
