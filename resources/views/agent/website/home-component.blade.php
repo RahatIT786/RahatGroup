@@ -318,104 +318,539 @@
 
         <!-- Sermon Start -->
         <div class="container-fluid sermon py-5" id="package">
-            <div class="container py-5">
-                <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-                    {{-- <p class="fs-5 text-uppercase text-primary">Sermons</p> --}}
-                    <h1 class="display-3">Our Packages</h1>
-                </div>
-                <div class="row g-4 justify-content-center">
-                    @foreach ($packages as $package)
-                        <div class="col-lg-6 col-xl-4">
-                            <div class="sermon-item wow fadeIn" data-wow-delay="0.1s">
-                                <div class="overflow-hidden p-4 pb-0">
-                                    <a class="img-thumb" href="javascript:void(0);">
-                                        @php
-                                            $imageName = !empty($package->pkgImages[0]) ? $package->pkgImages[0]->pkg_img : '';
-                                            $imagePath = !empty($imageName)
-                                                ? 'package_image/' . $imageName
-                                                : 'storage/dummy.jpg';
+            @foreach ($packages as $i => $package)
+            <div class="container-fluid p-4" style=" max-width: 75% !important">
+                <div class="outer_box col-lg-12 p-4 col-md-12  shadow-lg rounded bg-white">
+                    <h5 class="text-start text-primary fw-bold mb-0">
+                        {{$package->name }}
+                    </h5>
 
-                                            $imageExists = !empty($imageName) && Helper::fileExists($imagePath);
-                                        @endphp
-                                        <img class="img-fluid" alt="Package Image"
-                                            src="{{ $imageExists ? asset('storage/' . $imagePath) : asset('storage/dummy.jpg') }}" style="width: 380px; height: 280px;object-fit: cover;" />
-                                    </a>
+                    <div class="row d-flex justify-content-center  mt-4 outer_box">
+                        <!-- Image Section -->
+                        <div class="d-flex flex-column align-items-center justify-content-center col-lg-3 col-md-3  p-0 outer_box">
+                            <div>
+                                @php
+                                    $imageName = !empty($package->pkgImages[0]) ? $package->pkgImages[0]->pkg_img : '';
+                                    $imagePath = !empty($imageName)
+                                        ? 'package_image/' . $imageName
+                                        : 'storage/dummy.jpg';
+
+                                    $imageExists = !empty($imageName) && Helper::fileExists($imagePath);
+                                @endphp
+                                <img src="{{ $imageExists ? asset('storage/' . $imagePath) : asset('storage/dummy.jpg') }}"
+                                    class="img-fluid rounded shadow-sm"
+                                    style="height: 100%; width: 100%; object-fit: cover; border-radius: 25px !important;">
+                            </div>
+                            {{-- <p style="" class="p-4">Package ID : 78935</p> --}}
+                            {{-- <div class="text-center">
+                                <a href="#" class="btn btn-dark w-100 fw-semibold">View Detailed Itinerary</a>
+                            </div> --}}
+                        </div>
+
+                        <div class="col-lg-6 col-md-7 p-0 outer_box">
+                            <div class="package-card p-0 border rounded shadow-sm bg-light">
+
+                                <div>
+                                    <ul class="nav nav-tabs d-flex justify-content-evenly" id="packageTabs{{ $i }}" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link active" id="price-tab-{{ $i }}" data-bs-toggle="tab" href="#price-{{ $i }}" role="tab" aria-controls="price-{{ $i }}" aria-selected="true">Price</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="hotels-tab-{{ $i }}" data-bs-toggle="tab" href="#hotels-{{ $i }}" role="tab" aria-controls="hotels-{{ $i }}" aria-selected="false">Hotels</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="flights-tab-{{ $i }}" data-bs-toggle="tab" href="#flights-{{ $i }}" role="tab" aria-controls="flights-{{ $i }}" aria-selected="false">Flights</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="sightseeing-tab-{{ $i }}" data-bs-toggle="tab" href="#sightseeing-{{ $i }}" role="tab" aria-controls="sightseeing-{{ $i }}" aria-selected="false">Sightseeing</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="inclusion-tab-{{ $i }}" data-bs-toggle="tab" href="#inclusion-{{ $i }}" role="tab" aria-controls="inclusion-{{ $i }}" aria-selected="false">Inclusion</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="exclusion-tab-{{ $i }}" data-bs-toggle="tab" href="#exclusion-{{ $i }}" role="tab" aria-controls="exclusion-{{ $i }}" aria-selected="false">Exclusion</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="dates-tab-{{ $i }}" data-bs-toggle="tab" href="#dates-{{ $i }}" role="tab" aria-controls="dates-{{ $i }}" aria-selected="false">Dates</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="p-4">
-                                    <a href="" class="d-inline-block h4 lh-sm mb-3">{{$package->name }}</a>
-                                    <div class="price-list row text-center">
-                                        <table class="table table-bordered table-hover text-center table-striped shadow-sm mt-3" style="border-color: #343a40;">
-                                            <thead class="bg-dark text-white">
-                                                <tr>
-                                                    <th>Package Type</th>
-                                                    <th> Price</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{-- Check if pkgDetails exists --}}
-                                                @if($package->pkgDetails)
-                                                    @foreach($package->pkgDetails as $pkgDetail)
-                                                        <tr class="align-middle">
-                                                            {{-- Package Type Display with Icons and Colors --}}
-                                                            <td>
-                                                                @switch($pkgDetail->pkg_type_id)
-                                                                    @case(29)
-                                                                        <span class="badge bg-primary px-3 py-2 rounded-pill">Super Saver</span>
-                                                                        @break
-                                                                    @case(6)
-                                                                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Gold</span>
-                                                                        @break
-                                                                    @case(8)
-                                                                        <span class="badge bg-secondary px-3 py-2 rounded-pill">Silver</span>
-                                                                        @break
-                                                                    @case(9)
-                                                                        <span class="badge bg-success px-3 py-2 rounded-pill">Executive</span>
-                                                                        @break
-                                                                    @case(24)
-                                                                        <span class="badge bg-info text-dark px-3 py-2 rounded-pill">Esteem</span>
-                                                                        @break
-                                                                    @case(12)
-                                                                        <span class="badge bg-danger px-3 py-2 rounded-pill">Elite</span>
-                                                                        @break
-                                                                    @case(27)
-                                                                        <span class="badge bg-dark px-3 py-2 rounded-pill">Bronze</span>
-                                                                        @break
-                                                                    @case(38)
-                                                                        <span class="badge bg-light text-dark px-3 py-2 rounded-pill">Royal</span>
-                                                                        @break
-                                                                    @case(39)
-                                                                        <span class="badge bg-dark text-white px-3 py-2 rounded-pill">Classic</span>
-                                                                        @break
-                                                                    @default
-                                                                        <span class="badge bg-secondary px-3 py-2 rounded-pill">Standard</span>
-                                                                @endswitch
-                                                            </td>
 
-                                                            {{-- G Share Price with Icons --}}
-                                                            <td class="text-success fw-bold">
-                                                                <i class="fa-solid fa-indian-rupee-sign me-1"></i>{{ number_format($pkgDetail->g_share) }}
-                                                            </td>
-                                                        </tr>
+                                <!-- Tab Content -->
+                                <div class="tab-content mt-3" id="packageTabsContent">
+
+                                    <div class="tab-pane fade show active" id="price-{{$i}}" role="tabpanel" aria-labelledby="price-tab-{{ $i }}">
+                                            <div class="mt-3">
+                                                <!-- Navigation Tabs for Package Types -->
+                                                <ul class="nav nav-pills d-flex justify-content-start mb-3" id="packageFilterTabs" role="tablist">
+                                                    @foreach ($package->pkgDetails as $index => $pkgDetail)
+                                                        <li class="nav-item" role="presentation">
+                                                            @switch($pkgDetail->pkg_type_id)
+                                                                @case(29)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="super-saver-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="super-saver" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Super Saver
+                                                                    </button>
+                                                                    @break
+                                                                @case(6)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="gold-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="gold" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Gold
+                                                                    </button>
+                                                                    @break
+                                                                @case(8)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="silver-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="silver" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Silver
+                                                                    </button>
+                                                                    @break
+                                                                @case(9)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="executive-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="executive" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Executive
+                                                                    </button>
+                                                                    @break
+                                                                @case(24)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="esteem-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="esteem" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Esteem
+                                                                    </button>
+                                                                    @break
+                                                                @case(12)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="elite-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="elite" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Elite
+                                                                    </button>
+                                                                    @break
+                                                                @case(27)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="bronze-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="bronze" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Bronze
+                                                                    </button>
+                                                                    @break
+                                                                @case(38)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="royal-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="royal" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Royal
+                                                                    </button>
+                                                                    @break
+                                                                @case(39)
+                                                                    <button class="nav-link {{ $index === 0 ? 'active' : '' }}" id="classic-tab" data-bs-toggle="tab"
+                                                                        data-bs-target="#package-{{ $pkgDetail->id }}" type="button" role="tab"
+                                                                        aria-controls="classic" aria-selected="{{ $index === 0 ? 'true' : 'false' }}">
+                                                                        Classic
+                                                                    </button>
+                                                                    @break
+                                                                @default
+                                                                    <span class="badge bg-secondary px-3 py-2 rounded-pill">Standard</span>
+                                                            @endswitch
+                                                        </li>
                                                     @endforeach
-                                                @endif
-                                            </tbody>
-                                        </table>
+                                                </ul>
 
+                                                <!-- Tab Content for Packages -->
+                                                <div class="tab-content" id="packageFilterTabsContent">
+                                                    @foreach ($package->pkgDetails as $index => $pkgDetail)
+                                                        <div class="tab-pane fade {{ $index === 0 ? 'show active' : '' }}" id="package-{{ $pkgDetail->id }}"
+                                                            role="tabpanel" aria-labelledby="{{ strtolower($pkgDetail->pkgType->name ?? 'standard') }}-tab">
+
+                                                            {{-- <h6 class="text-success fw-semibold my-3 mx-3">
+                                                                @switch($pkgDetail->pkg_type_id)
+                                                                    @case(29) Super Saver @break
+                                                                    @case(6) Gold @break
+                                                                    @case(8) Silver @break
+                                                                    @case(9) Executive @break
+                                                                    @case(24) Esteem @break
+                                                                    @case(12) Elite @break
+                                                                    @case(27) Bronze @break
+                                                                    @case(38) Royal @break
+                                                                    @case(39) Classic @break
+                                                                    @default Standard
+                                                                @endswitch
+                                                            </h6> --}}
+
+                                                            <table class="table table-bordered shadow-sm text-center">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Group Share</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->g_share) }}</h5>
+                                                                        </td>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Quad Share</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->qt_share) }}</h5>
+                                                                        </td>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Triple Share</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->t_share) }}</h5>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Double Share</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->d_share) }}</h5>
+                                                                        </td>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Single Share</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->single) }}</h5>
+                                                                        </td>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Child with Bed</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->child_with_bed) }}</h5>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Child No Bed</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->chlid_no_bed) }}</h5>
+                                                                        </td>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Infant</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->infant) }}</h5>
+                                                                        </td>
+                                                                        <td class="bg-light p-0">
+                                                                            <p class="mb-1 fw-bold text-primary">Senior Citizen</p>
+                                                                            <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->senior_citizen ?? 0) }}</h5>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <!-- Inclusions Section -->
+                                            <div class="inclusions-section mt-4 d-flex justify-content-start align-items-center ">
+                                                <h6 class="text-success fw-semibold mx-2">Inclusions</h4>
+                                                <ul class="list-unstyled d-flex">
+                                                    <li class="me-4">
+                                                        <i class="bi bi-airplane-engines" style="font-size: 24px;"></i>
+                                                        <span>Flight</span>
+                                                    </li>
+                                                    <li class="me-4">
+                                                        <i class="bi bi-house-door" style="font-size: 24px;"></i>
+                                                        <span>Hotel</span>
+                                                    </li>
+                                                    <li class="me-4">
+                                                        <i class="bi bi-egg" style="font-size: 24px;"></i>
+                                                        <span>All Meals</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                     </div>
-                                </div>
-                                 <!-- Add Two Buttons Here -->
-                                 <div class="d-flex justify-content-around align-items-center gap-2 mb-2">
-                                    <a href="tel:{{$agent->mobile}}" class="btn btn-primary">Contact here</a>
-                                    <a href="#" class="btn btn-secondary">View More</a>
+
+                                    <!-- Hotels Tab -->
+
+                                    <div class="tab-pane fade " id="hotels-{{ $i }}" role="tabpanel" aria-labelledby="hotels-tab-{{ $i }}">
+
+                                        <div class="mt-3">
+                                            <!-- Navigation Tabs for Package Types -->
+                                            <ul class="nav nav-pills d-flex justify-content-start mb-3" id="packageFilterTabs" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link active" id="super-saver-tab" data-bs-toggle="tab" href="#super-saver" role="tab" aria-controls="super-saver" aria-selected="true">Super Saver</a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="royal-tab" data-bs-toggle="tab" href="#royal" role="tab" aria-controls="royal" aria-selected="false">Royal</a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="classic-tab" data-bs-toggle="tab" href="#classic" role="tab" aria-controls="classic" aria-selected="false">Classic</a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="bronze-tab" data-bs-toggle="tab" href="#bronze" role="tab" aria-controls="bronze" aria-selected="false">Bronze</a>
+                                                </li>
+                                            </ul>
+
+                                            <!-- Tab Content for Hotels -->
+                                            <div class="tab-content" id="packageFilterTabsContent">
+                                                <!-- Super Saver Hotels -->
+                                                <div class="tab-pane fade show active" id="super-saver" role="tabpanel" aria-labelledby="super-saver-tab">
+                                                    <h6 class="text-success fw-semibold my-3">Super Saver Hotels</h6>
+                                                    <table class="table table-bordered table-striped shadow-sm">
+                                                        <thead class="table-dark">
+                                                            <tr>
+                                                                <th>Location</th>
+                                                                <th>Hotel Name</th>
+                                                                <th>Nights</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Makkah</td>
+                                                                <td>Jouhara Mouassar</td>
+                                                                <td>9 Nights</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Madinah</td>
+                                                                <td>Jood al Marjaan</td>
+                                                                <td>3 Nights</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <!-- Royal Hotels -->
+                                                <div class="tab-pane fade" id="royal" role="tabpanel" aria-labelledby="royal-tab">
+                                                    <h6 class="text-success fw-semibold my-3">Royal Hotels</h6>
+                                                    <table class="table table-bordered table-striped shadow-sm">
+                                                        <thead class="table-dark">
+                                                            <tr>
+                                                                <th>Location</th>
+                                                                <th>Hotel Name</th>
+                                                                <th>Nights</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Makkah</td>
+                                                                <td>Royal Palace Hotel</td>
+                                                                <td>7 Nights</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Madinah</td>
+                                                                <td>Al Haram Suites</td>
+                                                                <td>3 Nights</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <!-- Classic Hotels -->
+                                                <div class="tab-pane fade" id="classic" role="tabpanel" aria-labelledby="classic-tab">
+                                                    <h6 class="text-success fw-semibold my-3">Classic Hotels</h6>
+                                                    <table class="table table-bordered table-striped shadow-sm">
+                                                        <thead class="table-dark">
+                                                            <tr>
+                                                                <th>Location</th>
+                                                                <th>Hotel Name</th>
+                                                                <th>Nights</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Makkah</td>
+                                                                <td>Classic Inn Makkah</td>
+                                                                <td>8 Nights</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Madinah</td>
+                                                                <td>Classic Suite Madinah</td>
+                                                                <td>4 Nights</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <!-- Bronze Hotels -->
+                                                <div class="tab-pane fade" id="bronze" role="tabpanel" aria-labelledby="bronze-tab">
+                                                    <h6 class="text-success fw-semibold my-3">Bronze Hotels</h6>
+                                                    <table class="table table-bordered table-striped shadow-sm">
+                                                        <thead class="table-dark">
+                                                            <tr>
+                                                                <th>Location</th>
+                                                                <th>Hotel Name</th>
+                                                                <th>Nights</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Makkah</td>
+                                                                <td>Bronze Stay Makkah</td>
+                                                                <td>6 Nights</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Madinah</td>
+                                                                <td>Bronze Plaza Madinah</td>
+                                                                <td>4 Nights</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Inclusions Section -->
+                                        <div class="inclusions-section mt-4 d-flex justify-content-start align-items-center ">
+                                            <h6 class="text-success fw-semibold mx-2">Inclusions</h4>
+                                            <ul class="list-unstyled d-flex">
+                                                <li class="me-4">
+                                                    <i class="bi bi-airplane-engines" style="font-size: 24px;"></i>
+                                                    <span>Flight</span>
+                                                </li>
+                                                <li class="me-4">
+                                                    <i class="bi bi-house-door" style="font-size: 24px;"></i>
+                                                    <span>Hotel</span>
+                                                </li>
+                                                <li class="me-4">
+                                                    <i class="bi bi-egg" style="font-size: 24px;"></i>
+                                                    <span>All Meals</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Flights Tab -->
+                                    <div class="tab-pane fade" id="flights-{{ $i }}" role="tabpanel" aria-labelledby="flights-tab-{{ $i }}">
+                                        <div class="flights-section mb-3">
+                                           <h6>Onward Flight included in the package</h6>
+                                           <table class="table  table-sm" align="center">
+                                            <tr>
+                                                <!-- Airline Logo and Data Section -->
+                                                <td rowspan="2" width="10%"  class="text-center align-middle">
+                                                    <img src="{{ asset('./asserts/user/img/jabl-e-rehmat.jpg') }}" style="height:50px;width:50px"  alt="Airline Logo" class="img-fluid rounded-circle" style="max-width: 100px;">
+                                                </td>
+
+                                                <!-- Airline Name -->
+                                                <td width="20%" class="font-weight-bold text-center">Saudi Arabian Airlines</td>
+
+                                                <!-- Departure Code -->
+                                                <td width="20%"></td>
+
+                                                <!-- Flight Duration -->
+                                                <td width="20%" class="text-center" style="vertical-align: middle; position: relative;">
+                                                    5 Hours
+                                                    <span class="arrow"></span>
+                                                </td>
+
+                                                <!-- Arrival Airport -->
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <!-- Airline Code -->
+                                                <td width="20%" class="text-center">SV-759</td>
+
+                                                <!-- Departure Time -->
+                                                <td width="20%" class="text-center">20:05:00</td>
+
+                                                <!-- Flight Inventory Length -->
+                                                <td width="20%"></td>
+
+                                                <!-- Arrival Time -->
+                                                <td width="20%">23:05:00</td>
+                                            </tr>
+                                           </table>
+
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Sightseeing Tab -->
+                                    <div class="tab-pane fade" id="sightseeing-{{ $i }}" role="tabpanel" aria-labelledby="sightseeing-tab-{{ $i }}">
+                                        <div class="sightseeing-section mb-3">
+                                            <div class="activities">
+                                                <p class="title">Activities / Sightseeing</p>
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <td width="20%" class="day text-center align-middle">Day 1</td>
+                                                        <td class="locations text-start">
+                                                            Arafat, Jabl E Rehmat, Jabl E Sour, Jable E Noor, Jamaraat, Jannat Ul Muallah, Masjid Al-Jinn, Masjid Al-Khaif, Masjid al-Mashar al-Haram, Masjid Fatah, Masjid Jurana, Masjid Nimrah, Masjid Shajarah, Mina, Muzdalifa, Ghazwa-e-Khandaq (Masjid E Sabaa ), Jabl E Uhud, Jannatul Baqi, Masijd Ali, Masjid Al-Ghamamah, Masjid E Jumma, Masjid E Qiblatain, Masjid E Quba, Masjid E Umar, Masjid E Usman, Masjid Ijaaba, Shuhada Uhud
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Inclusion Tab -->
+                                    <div class="tab-pane fade" id="inclusion-{{ $i }}" role="tabpanel" aria-labelledby="inclusion-tab-{{ $i }}">
+                                        <div class="inclusion-section mb-3">
+                                            <div class="inclusions" style="max-height: 300px; overflow-y: auto;">
+                                                <h4>Inclusions</h4>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="bi bi-check-circle text-success"></i> Return Air Tickets.</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Umrah Visa with Insurance.</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Hotel Stay in Makkah & Madinah.</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Food: Indian Set Menu (3 Meals).</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Ziarats in Makkah & Madinah.</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Round Trip Transfers.</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Complimentary items provided by the Tour operator (Not for bookings without bed).</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Saudi Simcard.</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Laundry (2 times in Makkah and 2 times in Madinah).</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Zamzam.</li>
+                                                    <li><i class="bi bi-check-circle text-success"></i> Internal Transportation by bus in Groups.</li>
+                                                </ul>
+                                                <p><strong>Note:</strong> Travel Bags, Laundry, Sim Cards, Zamzam are Complimentary items given as Free Gifts by the Tour operator. Laundry (2 times in Makkah and 2 times in Madinah) will be provided Complimentary by the Tour Operator.</p>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Exclusion Tab -->
+                                    <div class="tab-pane fade" id="exclusion-{{ $i }}" role="tabpanel" aria-labelledby="exclusion-tab-{{ $i }}">
+                                        <div class="exclusion-section mb-3">
+                                            <div class="exclusions">
+                                                <h4>Exclusions</h4>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="bi bi-x-circle text-danger"></i> GST & TCS.</li>
+                                                    <li><i class="bi bi-x-circle text-danger"></i> Private & Personal Transfers.</li>
+                                                    <li><i class="bi bi-x-circle text-danger"></i> Room Service.</li>
+                                                    <li><i class="bi bi-x-circle text-danger"></i> Anything not Mentioned in Inclusions.</li>
+                                                    <li><i class="bi bi-x-circle text-danger"></i> Bucket and Tubs will not be available in hotels.</li>
+                                                    <li><i class="bi bi-x-circle text-danger"></i> No Fans are available in Rooms, only AC.</li>
+                                                    <li><i class="bi bi-x-circle text-danger"></i> Indian Toilets are not available, only English Toilets.</li>
+                                                    <li><i class="bi bi-x-circle text-danger"></i> Water is available only on Buffet, not in Rooms.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Dates Tab -->
+                                    <div class="tab-pane fade" id="dates-{{ $i }}" role="tabpanel" aria-labelledby="dates-tab-{{ $i }}">
+                                        <div class="dates-section mb-3">
+                                            <h4 class="text-success fw-semibold">Departure Dates</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+
+
+                        <div class="col-lg-3 ">
+                            <div class="py-1">
+                                <label for="stateSelect" class="form-label">Departure City:</label>
+                                <select id="stateSelect" class="form-select">
+                                    <option value="" selected disabled>Choose a Departure City</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="maharashtra">Maharashtra</option>
+                                    <option value="uttar-pradesh">Uttar Pradesh</option>
+                                </select>
+                            </div>
+                            <div class="py-1">
+                                <label for="packageSelect" class="form-label">Select Package:</label>
+                                <select id="packageSelect" class="form-select">
+                                    <option value="" selected disabled>Choose a package</option>
+                                    <option value="super-saver">Super Saver</option>
+                                    <option value="gold">Gold</option>
+                                    <option value="bronze">Bronze</option>
+                                </select>
+                            </div>
+                            <div class="text-center py-3">
+                                <h6>Starting From</h6>
+                                <h4>INR 29,146</h4>
+                                {{-- <p>Hexa Sharing</p> --}}
+                            </div>
+                            <div class="text-center mt-3">
+                                <a href="#" class="btn btn-dark w-100 fw-semibold">Get Quote</a>
+                            </div>
+                            <div class="text-center mt-3">
+                                <a href="#" class="btn btn-dark w-100 fw-semibold">Enquire</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
         <!-- Sermon End -->
-
 
         <div class="container-fluid contact py-5" id="contact">
             <div class="container py-5">
