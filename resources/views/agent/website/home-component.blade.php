@@ -295,9 +295,29 @@
         </div>
         <!-- Activities Start -->
 
+        <style>
+            .table-sm td {
+                padding: 2px !important;  /* Reduce cell padding */
+                vertical-align: middle;  /* Align content properly */
+            }
+
+            /* Reduce space between price name and value */
+            .price-label {
+                margin-bottom: 1px; /* Less space below text */
+                font-size: 13px;  /* Smaller text */
+                font-weight: 600;
+            }
+
+            .price-value {
+                margin-top: 0; /* Reduce space above price */
+                font-size: 15px;
+                font-weight: 700;
+
+            }
+        </style>
 
         <!-- Sermon Start -->
-        <div class="container-fluid sermon py-5" id="sermon">
+        <div class="container-fluid sermon py-5" id="package">
             <div class="container py-5">
                 <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
                     {{-- <p class="fs-5 text-uppercase text-primary">Sermons</p> --}}
@@ -323,10 +343,65 @@
                                 </div>
                                 <div class="p-4">
                                     <a href="" class="d-inline-block h4 lh-sm mb-3">{{$package->name }}</a>
-                                    <p class="mb-0">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam,aliquip ex ea commodo consequat.
-                                    </p>
+                                    <div class="price-list row text-center">
+                                        <table class="table table-bordered table-hover text-center table-striped shadow-sm mt-3" style="border-color: #343a40;">
+                                            <thead class="bg-dark text-white">
+                                                <tr>
+                                                    <th>Package Type</th>
+                                                    <th> Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{-- Check if pkgDetails exists --}}
+                                                @if($package->pkgDetails)
+                                                    @foreach($package->pkgDetails as $pkgDetail)
+                                                        <tr class="align-middle">
+                                                            {{-- Package Type Display with Icons and Colors --}}
+                                                            <td>
+                                                                @switch($pkgDetail->pkg_type_id)
+                                                                    @case(29)
+                                                                        <span class="badge bg-primary px-3 py-2 rounded-pill">Super Saver</span>
+                                                                        @break
+                                                                    @case(6)
+                                                                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Gold</span>
+                                                                        @break
+                                                                    @case(8)
+                                                                        <span class="badge bg-secondary px-3 py-2 rounded-pill">Silver</span>
+                                                                        @break
+                                                                    @case(9)
+                                                                        <span class="badge bg-success px-3 py-2 rounded-pill">Executive</span>
+                                                                        @break
+                                                                    @case(24)
+                                                                        <span class="badge bg-info text-dark px-3 py-2 rounded-pill">Esteem</span>
+                                                                        @break
+                                                                    @case(12)
+                                                                        <span class="badge bg-danger px-3 py-2 rounded-pill">Elite</span>
+                                                                        @break
+                                                                    @case(27)
+                                                                        <span class="badge bg-dark px-3 py-2 rounded-pill">Bronze</span>
+                                                                        @break
+                                                                    @case(38)
+                                                                        <span class="badge bg-light text-dark px-3 py-2 rounded-pill">Royal</span>
+                                                                        @break
+                                                                    @case(39)
+                                                                        <span class="badge bg-dark text-white px-3 py-2 rounded-pill">Classic</span>
+                                                                        @break
+                                                                    @default
+                                                                        <span class="badge bg-secondary px-3 py-2 rounded-pill">Standard</span>
+                                                                @endswitch
+                                                            </td>
+
+                                                            {{-- G Share Price with Icons --}}
+                                                            <td class="text-success fw-bold">
+                                                                <i class="fa-solid fa-indian-rupee-sign me-1"></i>{{ number_format($pkgDetail->g_share) }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+
+                                    </div>
                                 </div>
                                  <!-- Add Two Buttons Here -->
                                  <div class="d-flex justify-content-around align-items-center gap-2 mb-2">
@@ -341,170 +416,6 @@
         </div>
         <!-- Sermon End -->
 
-
-        <!-- Blog Start -->
-        {{-- <div class="container-fluid py-5" id="blog">
-            <div class="container py-5">
-                <h1 class="display-3 mb-5 wow fadeIn" data-wow-delay="0.1s">Latest From <span class="text-primary">Our Blog</span></h1>
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-6 col-xl-4">
-                        <div class="blog-item wow fadeIn" data-wow-delay="0.1s">
-                            <div class="blog-img position-relative overflow-hidden">
-                                <img src="{{asset('agent-website/img/blog-1.jpg')}}" class="img-fluid w-100" alt="">
-                                <div class="bg-primary d-inline px-3 py-2 text-center text-white position-absolute top-0 end-0">01 Jan 2045</div>
-                            </div>
-                            <div class="p-4">
-                                <div class="blog-meta d-flex justify-content-between pb-2">
-                                    <div class="">
-                                        <small><i class="fas fa-user me-2 text-muted"></i><a href="" class="text-muted me-2">By Admin</small></a>
-                                        <small><i class="fa fa-comment-alt me-2 text-muted"></i><a href="" class="text-muted me-2">12 Comments</small></a>
-                                    </div>
-                                    <div class="">
-                                        <a href=""><i class="fas fa-bookmark text-muted"></i></a>
-                                    </div>
-                                </div>
-                                <a href="" class="d-inline-block h4 lh-sm mb-3">Importance of “Piller” of Islam</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                aliquip ex ea commodo consequat.</p>
-                                <a href="#" class="btn btn-primary px-3">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                        <div class="blog-item wow fadeIn" data-wow-delay="0.3s">
-                            <div class="blog-img position-relative overflow-hidden">
-                                <img src="{{asset('agent-website/img/blog-2.jpg')}}" class="img-fluid w-100" alt="">
-                                <div class="bg-primary d-inline px-3 py-2 text-center text-white position-absolute top-0 end-0">01 Jan 2045</div>
-                            </div>
-                            <div class="p-4">
-                                <div class="blog-meta d-flex justify-content-between pb-2">
-                                    <div class="">
-                                        <small><i class="fas fa-user me-2 text-muted"></i><a href="" class="text-muted me-2">By Admin</small></a>
-                                        <small><i class="fa fa-comment-alt me-2 text-muted"></i><a href="" class="text-muted me-2">12 Comments</small></a>
-                                    </div>
-                                    <div class="">
-                                        <a href=""><i class="fas fa-bookmark text-muted"></i></a>
-                                    </div>
-                                </div>
-                                <a href="" class="d-inline-block h4 lh-sm mb-3">How to get closer to Allah</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                aliquip ex ea commodo consequat.</p>
-                                <a href="#" class="btn btn-primary px-3">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                   <div class="col-lg-6 col-xl-4">
-                        <div class="blog-item wow fadeIn" data-wow-delay="0.5s">
-                            <div class="blog-img position-relative overflow-hidden">
-                                <img src="{{asset('agent-website/img/blog-3.jpg')}}" class="img-fluid w-100" alt="">
-                                <div class="bg-primary d-inline px-3 py-2 text-center text-white position-absolute top-0 end-0">01 Jan 2045</div>
-                            </div>
-                            <div class="p-4">
-                                <div class="blog-meta d-flex justify-content-between pb-2">
-                                    <div class="">
-                                        <small><i class="fas fa-user me-2 text-muted"></i><a href="" class="text-muted me-2">By Admin</small></a>
-                                        <small><i class="fa fa-comment-alt me-2 text-muted"></i><a href="" class="text-muted me-2">12 Comments</small></a>
-                                    </div>
-                                    <div class="">
-                                        <a href=""><i class="fas fa-bookmark text-muted"></i></a>
-                                    </div>
-                                </div>
-                                <a href="" class="d-inline-block h4 lh-sm mb-3">Importance of Hajj in Islam</a>
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                aliquip ex ea commodo consequat.</p>
-                                <a href="#" class="btn btn-primary px-3">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Blog End -->
-
-
-        <!-- Team Start -->
-        {{-- <div class="container-fluid team py-5" id="team">
-            <div class="container py-5">
-                <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-                    <p class="fs-5 text-uppercase text-primary">Our Team</p>
-                    <h1 class="display-3">Meet Our Organizer</h1>
-                </div>
-                <div class="row g-5">
-                    <div class="col-lg-4 col-xl-5">
-                        <div class="team-img wow zoomIn" data-wow-delay="0.1s">
-                            <img src="{{asset('agent-website/img/team-1.jpg')}}" class="img-fluid" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-xl-7">
-                        <div class="team-item wow fadeIn" data-wow-delay="0.1s">
-                            <h1>Anamul Hasan</h1>
-                            <h5 class="fw-normal fst-italic text-primary mb-4">President</h5>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. aliquip ex ea commodo consequat.</p>
-                            <div class="team-icon d-flex pb-4 mb-4 border-bottom border-primary">
-                                <a class="btn btn-primary btn-lg-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-primary btn-lg-square me-2" href=""><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="btn btn-primary btn-lg-square me-2"><i class="fab fa-instagram"></i></a>
-                                <a href="#" class="btn btn-primary btn-lg-square"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                        <div class="row g-4">
-                            <div class="col-md-4">
-                                <div class="team-item wow zoomIn" data-wow-delay="0.2s">
-                                    <img src="{{asset('agent-website/img/team-2.jpg')}}" class="img-fluid w-100" alt="">
-                                    <div class="team-content text-dark text-center py-3">
-                                        <div class="team-content-inner">
-                                            <h5 class="mb-0">Mustafa Kamal</h5>
-                                            <p class="text-dark">Imam</p>
-                                            <div class="team-icon d-flex align-items-center justify-content-center">
-                                                <a class="btn btn-primary btn-sm-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                                                <a class="btn btn-primary btn-sm-square me-2" href=""><i class="fab fa-twitter"></i></a>
-                                                <a href="#" class="btn btn-primary btn-sm-square me-2"><i class="fab fa-instagram"></i></a>
-                                                <a href="#" class="btn btn-primary btn-sm-square"><i class="fab fa-linkedin-in"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="team-item wow zoomIn" data-wow-delay="0.4s">
-                                    <img src="{{asset('agent-website/img/team-3.jpg')}}" class="img-fluid w-100" alt="">
-                                    <div class="team-content text-dark text-center py-3">
-                                        <div class="team-content-inner">
-                                            <h5 class="mb-0">Nahiyan Momen</h5>
-                                            <p class="text-dark">Teacher</p>
-                                            <div class="team-icon d-flex align-items-center justify-content-center">
-                                                <a class="btn btn-primary btn-sm-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                                                <a class="btn btn-primary btn-sm-square me-2" href=""><i class="fab fa-twitter"></i></a>
-                                                <a href="#" class="btn btn-primary btn-sm-square me-2"><i class="fab fa-instagram"></i></a>
-                                                <a href="#" class="btn btn-primary btn-sm-square"><i class="fab fa-linkedin-in"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="team-item wow zoomIn" data-wow-delay="0.6s">
-                                    <img src="{{asset('agent-website/img/team-4.jpg')}}" class="img-fluid w-100" alt="">
-                                    <div class="team-content text-dark text-center py-3">
-                                        <div class="team-content-inner">
-                                            <h5 class="mb-0">Asfaque Ali</h5>
-                                            <p class="text-dark">Volunteer</p>
-                                            <div class="team-icon d-flex align-items-center justify-content-center">
-                                                <a class="btn btn-primary btn-sm-square me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                                                <a class="btn btn-primary btn-sm-square me-2" href=""><i class="fab fa-twitter"></i></a>
-                                                <a href="#" class="btn btn-primary btn-sm-square me-2"><i class="fab fa-instagram"></i></a>
-                                                <a href="#" class="btn btn-primary btn-sm-square"><i class="fab fa-linkedin-in"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
 
         <div class="container-fluid contact py-5" id="contact">
             <div class="container py-5">
@@ -695,21 +606,6 @@
         <!-- Footer Start -->
         <div class="container-fluid footer pt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
-                {{-- <div class="row py-5">
-                    <div class="col-lg-7">
-                        <h1 class="text-light mb-0">Subscribe our newsletter</h1>
-                        <p class="text-secondary">Get the latest news and other tips</p>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="position-relative mx-auto">
-                            <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subcribe</button>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="border-top border-secondary"></div>
-                    </div>
-                </div> --}}
                 <div class="row g-4 footer-inner">
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item mt-5">
@@ -752,7 +648,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
+                    {{-- <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item mt-5">
                             <h4 class="text-light mb-4">Latest Post</h4>
                             <div class="d-flex border-bottom border-secondary py-4">
@@ -770,7 +666,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="container py-4">
