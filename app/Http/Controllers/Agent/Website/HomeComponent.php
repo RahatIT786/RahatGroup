@@ -58,7 +58,10 @@ class HomeComponent extends Component
                                             $subQuery->whereIn('id', $this->selectedPackageTypes);
                                         });
                                     })
+                                    ->with('pkgDetails')
                                     ->get();
+
+        //dd( $this->packages );
         return view('agent.website.home-component', [
             'agent' => $agent,
             'packages' => $this->packages,
