@@ -1062,9 +1062,9 @@
                             {{-- <div class="text-center mt-3">
                                 <a href="#" class="btn btn-dark w-100 fw-semibold">Enquire</a>
                             </div> --}}
-                            <div class="text-center mt-3">
+                            {{-- <div class="text-center mt-3">
                                 <a href="#" class="btn btn-dark w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#enquiryModal">Enquire</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
