@@ -14,27 +14,18 @@ use App\Models\City;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request; // Correct import
+
+
 
 class HomeComponent extends Component
 {
 
     use WithPagination, WithoutUrlPagination;
-    // public $packages = [], $allIncludes, $cities, $months;
-    // public $flavour = [], $flavourPrice = [], $packageId = [], $packageType;
-    // public $selectedFlavour = [], $selectedFlavourPrice = [];
-    // public $package_id, $packagetype;
-    // public $selectedPackageTypes = [], $selectedMonth = [], $selectedCity = [], $perPage = 10;
-    // public $search_package = '';
-    // public $package, $cityId, $monthParam, $ummonth, $monthPkg, $flavour_changed = false;
-    // public $packagesPerPage = 10, $totalPackages = 0;
-    // public $minPrice = 5000;
-    // public $maxPrice = 500000;
-    // public $minNights = 3;
-    // public $maxNights = 30;
 
-    public $email, $password;
+    // public $email, $password;
     public $packages,$pack_ids;
+    public $name, $email, $mobile, $message;
 
     public function fetchPackages(){
         $pnrEntries = Pnr::all();
@@ -49,25 +40,57 @@ class HomeComponent extends Component
     {
         $this->pack_ids = $this->fetchPackages();
         $agent = request()->agent;  // Get the agent from the request
-        $this->packages  = Packages::where('is_active', 1)
-                                    ->where('service_id', 2)
-                                    ->where('umrah_type', 1)
-                                    ->whereIn('id', $this->pack_ids)
-                                    ->when(!empty($this->selectedPackageTypes), function ($query) {
-                                        $query->whereHas('pkgDetails.packageType', function ($subQuery) {
-                                            $subQuery->whereIn('id', $this->selectedPackageTypes);
-                                        });
-                                    })
-                                    ->with(['pkgDetails' => function($query) {
-                                        $query->with(['makkahotel', 'madinahotel']);
-                                    }])
-                                    ->get();
 
-        //dd( $this->packages );
+
+        $this->packages = Packages::where('is_active', 1)
+                            ->where('service_id', 2)
+                            ->where('umrah_type', 1)
+                            ->whereIn('id', $this->pack_ids)
+                            ->when(!empty($this->selectedPackageTypes), function ($query) {
+                                $query->whereHas('pkgDetails.packageType', function ($subQuery) {
+                                    $subQuery->whereIn('id', $this->selectedPackageTypes);
+                                });
+                            })
+                            ->with(['pkgDetails' => function($query) {
+                                $query->with(['makkahotel', 'madinahotel','packageType']);
+                            }])
+                            ->get();
+
+
+        // dd( $this->packages );
+        // dd($this->packages->map(function($package) {
+        //     return [
+        //         'package_id' => $package->id,
+        //         'hotels' => $package->pkgDetails->map(function($detail) {
+        //             return [
+        //                 'detail_id' => $detail->id,
+        //                 'makka_hotel' => $detail->makkahotel->toArray(), // Convert to array
+        //                 'madina_hotel' => $detail->madinahotel->toArray(),
+        //             ];
+        //         })
+        //     ];
+        // }));
+
         return view('agent.website.home-component', [
             'agent' => $agent,
             'packages' => $this->packages,
         ]);
+    }
+
+    public function submitEnquiry(Request $request)
+    {
+        // Validation
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'mobile' => 'required|numeric|digits:10',
+            'message' => 'required|string|max:500',
+        ]);
+
+        // Debugging - Display the submitted form data
+        // dd($request->all());
+
+        return redirect()->back()->with('success', 'Your enquiry has been submitted successfully!');
     }
 
     public function loginPost()

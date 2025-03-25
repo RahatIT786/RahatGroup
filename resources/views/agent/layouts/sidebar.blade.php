@@ -203,6 +203,11 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('agent.user.enquiry') }}">User Enquiry
+                    </a>
+                </li>
+
                 <li
                     class="nav-item accordion-item {{ Request::is('agent/content*') || Request::is('agent/image-gallery*') || Request::is('agent/video-gallery*') || Request::is('agent/contact*') || Request::is('agent/faq*') || Request::is('agent/setting*') || Request::is('agent/banner*') || Request::is('agent/subscribers*') || Request::is('agent/sub-agent*') ? 'active' : '' }}">
                     <a href="javascript:void(0);"
