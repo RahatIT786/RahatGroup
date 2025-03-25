@@ -107,6 +107,10 @@ use App\Http\Controllers\Agent\Downloads\Flyer\PackageFlyerComponent;
 use App\Http\Controllers\Agent\Downloads\Flyer\PackageFlyerCreateComponent;
 use App\Http\Controllers\Agent\Downloads\Flyer\PackageFlyerEditComponent;
 
+// user
+use App\Http\Controllers\Agent\User\UserEnquiryComponent;
+use App\Http\Controllers\Agent\Website\HomeComponent;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes for Agents
@@ -250,6 +254,9 @@ Route::group(['middleware' => ['auth:agent'], 'as' => 'agent.'], function () {
     //Resources
     Route::get('/resources', ResourceListComponent::class)->name('resource.index');
 
+    //User Enquiry
+    Route::get('/user-enquiry',UserEnquiryComponent::class)->name('user.enquiry');
+
     //Travel Calendar
     Route::get('/travel-calendar', TravelCalendarComponent::class)->name('travel-calendar.index');
 
@@ -258,6 +265,10 @@ Route::group(['middleware' => ['auth:agent'], 'as' => 'agent.'], function () {
     Route::get('/add-feedback', AddFeedbackListComponent::class)->name('addFeedback.index');
     Route::get('/package-details', PackageDetailsListComponent::class)->name('packageDetails.index');
     Route::get('/package-description/{pkgid}', PackageDescriptionListComponent::class)->name('packageDescription');
+
+    //user
+    Route::post('/submit-enquiry', [HomeComponent::class, 'submitEnquiry'])->name('submit.enquiry');
+
 
     // Coming soon
     Route::get('/coming-soon', function () {
