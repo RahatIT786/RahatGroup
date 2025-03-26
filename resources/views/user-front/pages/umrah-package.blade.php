@@ -251,7 +251,7 @@
                                                         </div>
                                                         <div class="mt-2">
 
-                                                            <a id="estinamtebtnid" data-toggle="modal"
+                                                                <a id="estinamtebtnid" data-toggle="modal"
                                                                 class="default-btn btn btn-block py-2 px-2"
                                                                 data-title="Deluxe Long Shifting Hajj 40 Days"
                                                                 data-id="28" data-target="#BookingModal"

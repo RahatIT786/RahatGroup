@@ -137,6 +137,10 @@ use App\Http\Controllers\User\Pages\UzbekistanComponent;
 use App\Http\Controllers\User\Pages\SyriaJordanIraqComponent;
 
 use App\Http\Controllers\TaskSchedulerController;
+// use App\Http\Controllers\Agent\Website\HomeComponent;
+
+
+Route::post('/submit-enquiry', [HomeComponent::class, 'submitEnquiry'])->name('submit.enquiry');
 
 Route::get('/', UserHomePageComponent::class)->name('customer.homepage');
 Route::get('/agents', HomePageComponent::class)->name('userHome');
@@ -298,11 +302,11 @@ Route::get('/alterthetable/{query}',  [AlterController::class, 'index'])->name('
 
 Route::get('/opt', function () {
     Artisan::call('optimize');
-   
+
 });
 
 Route::get('/migrate', function () {
-    
+
     try {
         // Capture the output from the Artisan command
         Artisan::call('migrate', ['--force' => true]); // '--force' to run without confirmation in production
@@ -317,7 +321,7 @@ Route::get('/migrate', function () {
         // Catch any errors and return them
        return $e->getMessage();
         // return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
-    
+
 }
 });
 Route::get('/link', function () {

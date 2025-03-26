@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '{agent_website}', 'as' => 'website.', 'middleware' => ['checkAgentWebsite']], function () {
     Route::get('/', [HomeComponent::class, 'index'])->name('agent');
+    // Route::post('/submit-enquiry', [HomeComponent::class, 'submitEnquiry'])->name('submit.enquiry');
 });
