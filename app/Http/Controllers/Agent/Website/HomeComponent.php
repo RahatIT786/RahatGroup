@@ -11,6 +11,7 @@ use Livewire\WithoutUrlPagination;
 use App\Models\PackageType;
 use App\Models\Pnr;
 use App\Models\City;
+use App\Models\UserEnquiryForAgent;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -25,7 +26,8 @@ class HomeComponent extends Component
 
     // public $email, $password;
     public $packages,$pack_ids;
-    public $name, $email, $mobile, $message;
+    public $name, $email, $mobile, $message, $agent;
+    public $agent_id, $agent_name;
 
     public function fetchPackages(){
         $pnrEntries = Pnr::all();
@@ -39,9 +41,8 @@ class HomeComponent extends Component
     public function index()
     {
         $this->pack_ids = $this->fetchPackages();
-        $agent = request()->agent;  // Get the agent from the request
-
-
+        $this->agent = request()->agent;  // Get the agent from the request
+        //dd($this->agent);
         $this->packages = Packages::where('is_active', 1)
                             ->where('service_id', 2)
                             ->where('umrah_type', 1)
@@ -72,7 +73,7 @@ class HomeComponent extends Component
         // }));
 
         return view('agent.website.home-component', [
-            'agent' => $agent,
+            'agent' => $this->agent,
             'packages' => $this->packages,
         ]);
     }
@@ -89,6 +90,16 @@ class HomeComponent extends Component
 
         // Debugging - Display the submitted form data
         // dd($request->all());
+        // dd( $this->agent_name );
+        // Save to the database
+        UserEnquiryForAgent::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'message' => $request->message,
+            'agent_id' => $request->agent_id,
+            'agent_name' => $request->agent_name,
+        ]);
 
         return redirect()->back()->with('success', 'Your enquiry has been submitted successfully!');
     }

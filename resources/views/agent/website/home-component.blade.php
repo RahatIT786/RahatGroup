@@ -49,11 +49,9 @@
             bottom: 6rem;
             cursor: pointer;
             animation: jump 1.5s infinite ease-in-out;
-
         }
 
         #call {
-
             height: clamp(15px, 8vw, 3rem);
             z-index: 4;
             position: fixed;
@@ -61,7 +59,7 @@
             bottom: 7rem;
             cursor: pointer;
             animation: jump 1.5s infinite ease-in-out;
-        }
+          }
     </style>
 </head>
 
@@ -350,7 +348,16 @@
     </style>
 
     <!-- Sermon Start -->
-    <div class="container-fluid sermon py-5" id="package">
+    <div class="container-fluid sermon py-5" id="package" >
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible mt-3 text-center mx-auto" style="width: fit-content;">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                {{ session('success') }}
+            </div>
+        @endif
+
+
         @foreach ($packages as $i => $package)
             <div class="container-fluid p-4" style=" max-width: 75% !important">
                 <div class="outer_box col-lg-12 p-4 col-md-12  shadow-lg rounded bg-white">
@@ -1062,9 +1069,9 @@
                             {{-- <div class="text-center mt-3">
                                 <a href="#" class="btn btn-dark w-100 fw-semibold">Enquire</a>
                             </div> --}}
-                            {{-- <div class="text-center mt-3">
+                            <div class="text-center mt-3">
                                 <a href="#" class="btn btn-dark w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#enquiryModal">Enquire</a>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1075,12 +1082,6 @@
 
 
     <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
-            @if (session('success'))
-                <div class="alert alert-success mt-3">
-                    {{ session('success') }}
-                </div>
-            @endif
-
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1089,7 +1090,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Standard Laravel Form -->
-                    <form action="{{ route('agent.submit.enquiry') }}" method="POST">
+                    <form action="{{ route('submit.enquiry') }}" method="POST">
                         @csrf
                         <!-- Name Field -->
                         <div class="mb-3">
@@ -1118,6 +1119,9 @@
                             <textarea class="form-control" id="message" name="message" rows="4" placeholder="Enter your message" required></textarea>
                             @error('message') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+
+                        <input type="hidden" name="agent_id" value="{{ $agent->id }}">
+                        <input type="hidden" name="agent_name" value="{{ $agent->owner_name }}">
 
                         <!-- Submit Button -->
                         <button type="submit" class="btn btn-primary">Submit</button>
