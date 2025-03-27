@@ -555,13 +555,13 @@
                                                                             ₹{{ number_format($pkgDetail->infant) }}
                                                                         </h5>
                                                                     </td>
-                                                                    <td class="bg-light p-0">
+                                                                    {{-- <td class="bg-light p-0">
                                                                         <p class="mb-1 fw-bold text-primary">Senior
                                                                             Citizen</p>
                                                                         <h5 class="mb-0 text-success">
                                                                             ₹{{ number_format($pkgDetail->senior_citizen ?? 0) }}
                                                                         </h5>
-                                                                    </td>
+                                                                    </td> --}}
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -982,14 +982,11 @@
                             </div>
                             <div class="text-center py-3">
                                 <h6>Starting From</h6>
-                                <h4>INR 29,146</h4>
+                                <h4>₹ 68,786</h4>
                                 {{-- <p>Hexa Sharing</p> --}}
                             </div>
                             {{-- <div class="text-center mt-3">
                                 <a href="#" class="btn btn-dark w-100 fw-semibold">Get Quote</a>
-                            </div> --}}
-                            {{-- <div class="text-center mt-3">
-                                <a href="#" class="btn btn-dark w-100 fw-semibold">Enquire</a>
                             </div> --}}
                             <div class="text-center mt-3">
                                 <a href="#" class="btn btn-dark w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#enquiryModal">Enquire</a>
@@ -1081,7 +1078,7 @@
         </div>
         <!-- Activities Start -->
 
-    <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1129,8 +1126,112 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
+    <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" style="background: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-calendar-check"></i> Submit Your Enquiry</h5>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    {{-- <form action="{{ route('submit.enquiry') }}" method="POST" class="p-3">
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-user"></i> Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                                @error('name') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                                @error('email') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-phone"></i> Mobile Number</label>
+                                <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Enter your mobile number" pattern="[0-9]{10}" required>
+                                @error('mobile') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-comment"></i> Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="1" placeholder="Enter your message" required></textarea>
+                                @error('message') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="agent_id" value="{{ $agent->id }}">
+                        <input type="hidden" name="agent_name" value="{{ $agent->owner_name }}">
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary px-4 py-2">
+                                <i class="fas fa-paper-plane"></i> Submit
+                            </button>
+                        </div>
+                    </form> --}}
+
+                    <form action="{{ route('submit.enquiry') }}" method="POST" class="p-3">
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-user"></i> Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                                @error('name') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                                @error('email') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-phone"></i> Mobile Number</label>
+                                <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Enter your mobile number" pattern="[0-9]{10}" required>
+                                @error('mobile') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-comment"></i> Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="1" placeholder="Enter your message" required></textarea>
+                                @error('message') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- New Fields -->
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-child"></i> Number of Children</label>
+                                <input type="number" class="form-control" id="num_children" name="num_children" placeholder="Enter number of children" min="0" required>
+                                @error('num_children') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-user-friends"></i> Number of Adults</label>
+                                <input type="number" class="form-control" id="num_adults" name="num_adults" placeholder="Enter number of adults" min="1" required>
+                                @error('num_adults') <span class="text-danger small">{{ $message }}</span> @enderror
+                            </div>
+                            <!-- End New Fields -->
+
+                        </div>
+
+                        <input type="hidden" name="agent_id" value="{{ $agent->id }}">
+                        <input type="hidden" name="agent_name" value="{{ $agent->owner_name }}">
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary px-4 py-2">
+                                <i class="fas fa-paper-plane"></i> Submit
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

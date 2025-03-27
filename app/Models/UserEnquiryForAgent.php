@@ -9,5 +9,15 @@ class UserEnquiryForAgent extends Model
 {
     use HasFactory;
     protected $table = 'user_enquiry_for_agents';
-    protected $fillable = ['name', 'email', 'mobile', 'message', 'agent_id', 'agent_name','delete_status'];
+    protected $fillable = [
+        'name',
+        'email',
+        'mobile',
+        'message',
+        'num_children',
+        'num_adults',
+        'agent_id',
+        'agent_name',
+        'delete_status',
+    ];
 }
