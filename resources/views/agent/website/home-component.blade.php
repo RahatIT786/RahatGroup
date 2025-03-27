@@ -118,7 +118,7 @@
         </div>
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-lg py-3">
-                <a href="index.html" class="navbar-brand">
+                <a  class="navbar-brand">
                     <h1 class="mb-0">{{ $agent->agency_name }}<span class="text-primary"></span> </h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -241,86 +241,6 @@
     </div>
     <!-- About End -->
 
-
-    <!-- Activities Start -->
-    <div class="container-fluid activities py-5" id="services">
-        <div class="container py-5">
-            <div class="mx-auto text-center mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
-                {{-- <p class="fs-5 text-uppercase text-primary">Services</p> --}}
-                <h1 class="display-3">Services</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-6 col-xl-4">
-                    <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.1s">
-                        <i class="fa fa-mosque fa-4x text-dark"></i>
-                        <div class="ms-4">
-                            <h4>Umrah</h4>
-                            <p class="mb-4">Exclusive Umrah pilgrim packages tailored for a seamless spiritual
-                                journey.</p>
-                            {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-4">
-                    <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.3s">
-                        <i class="fas fa-kaaba fa-4x text-dark"></i>
-                        <div class="ms-4">
-                            <h4>Hajj</h4>
-                            <p class="mb-4">Complete Hajj travel and accommodation solutions for a seamless
-                                pilgrimage experience.</p>
-                            {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-4">
-                    <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.5s">
-                        <i class="fas fa-pray fa-4x text-dark"></i>
-                        <div class="ms-4">
-                            <h4>Ziyarat</h4>
-                            <p class="mb-4">Efficiently organized visits to religious and historical sites for a
-                                seamless experience.</p>
-                            {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-4">
-                    <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.1s">
-                        <i class="fas fa-hotel fa-4x text-dark"></i>
-                        <div class="ms-4">
-                            <h4>Hotels</h4>
-                            <p class="mb-4">Comfortable accommodations with a variety of options for a relaxing stay.
-                            </p>
-                            {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-4">
-                    <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.3s">
-                        <i class="fas fa-utensils fa-4x text-dark"></i>
-                        <div class="ms-4">
-                            <h4>Food & Catering</h4>
-                            <p class="mb-4">Quality meals expertly crafted to meet your dietary preferences and
-                                needs.</p>
-                            {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-4">
-                    <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.5s">
-                        <i class="fas fa-bus fa-4x text-dark"></i>
-                        <div class="ms-4">
-                            <h4>Transport</h4>
-                            <p class="mb-4">Reliable and convenient travel arrangements for a stress-free journey.
-                            </p>
-                            {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Activities Start -->
-
     <style>
         .table-sm td {
             padding: 2px !important;
@@ -349,6 +269,8 @@
 
     <!-- Sermon Start -->
     <div class="container-fluid sermon py-5" id="package" >
+
+        <h1 class="display-3 text-center">Our Packages</h1>
 
         @if (session('success'))
             <div class="alert alert-success alert-dismissible mt-3 text-center mx-auto" style="width: fit-content;">
@@ -648,7 +570,7 @@
                                             </div>
                                         </div>
                                         <!-- Inclusions Section -->
-                                        <div
+                                        {{-- <div
                                             class="inclusions-section mt-4 d-flex justify-content-start align-items-center ">
                                             <h6 class="text-success fw-semibold mx-2">Inclusions</h4>
                                                 <ul class="list-unstyled d-flex">
@@ -666,7 +588,7 @@
                                                         <span>All Meals</span>
                                                     </li>
                                                 </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     <div class="tab-pane fade" id="hotels-{{ $i }}" role="tabpanel" aria-labelledby="hotels-tab-{{ $i }}">
@@ -1080,6 +1002,84 @@
     </div>
     <!-- Sermon End -->
 
+        <!-- Activities Start -->
+        <div class="container-fluid activities py-5" id="services">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
+                    {{-- <p class="fs-5 text-uppercase text-primary">Services</p> --}}
+                    <h1 class="display-3">Services</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.1s">
+                            <i class="fa fa-mosque fa-4x text-dark"></i>
+                            <div class="ms-4">
+                                <h4>Umrah</h4>
+                                <p class="mb-4">Exclusive Umrah pilgrim packages tailored for a seamless spiritual
+                                    journey.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.3s">
+                            <i class="fas fa-kaaba fa-4x text-dark"></i>
+                            <div class="ms-4">
+                                <h4>Hajj</h4>
+                                <p class="mb-4">Complete Hajj travel and accommodation solutions for a seamless
+                                    pilgrimage experience.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.5s">
+                            <i class="fas fa-pray fa-4x text-dark"></i>
+                            <div class="ms-4">
+                                <h4>Ziyarat</h4>
+                                <p class="mb-4">Efficiently organized visits to religious and historical sites for a
+                                    seamless experience.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.1s">
+                            <i class="fas fa-hotel fa-4x text-dark"></i>
+                            <div class="ms-4">
+                                <h4>Hotels</h4>
+                                <p class="mb-4">Comfortable accommodations with a variety of options for a relaxing stay.
+                                </p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.3s">
+                            <i class="fas fa-utensils fa-4x text-dark"></i>
+                            <div class="ms-4">
+                                <h4>Food & Catering</h4>
+                                <p class="mb-4">Quality meals expertly crafted to meet your dietary preferences and
+                                    needs.</p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="activities-item p-4 wow fadeIn" data-wow-delay="0.5s">
+                            <i class="fas fa-bus fa-4x text-dark"></i>
+                            <div class="ms-4">
+                                <h4>Transport</h4>
+                                <p class="mb-4">Reliable and convenient travel arrangements for a stress-free journey.
+                                </p>
+                                {{-- <a href="" class="btn btn-primary px-3">Read More</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Activities Start -->
 
     <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -1363,7 +1363,7 @@
                             <div class="d-flex align-items-center py-4">
                                 <span class="flex-shrink-0 btn-square bg-primary me-3 p-4"><i
                                         class="fa fa-phone-alt text-dark"></i></span>
-                                <a href="" class="text-body">{{ $agent->mobile }}</a>
+                                <a href="tel:{{ $agent->mobile }}" class="text-body">{{ $agent->mobile }}</a>
                             </div>
                         </div>
                     </div>
