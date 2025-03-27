@@ -26,7 +26,7 @@ class HomeComponent extends Component
 
     // public $email, $password;
     public $packages,$pack_ids;
-    public $name, $email, $mobile, $message, $agent;
+    public $name, $email, $mobile, $message, $agent, $num_children ,$num_adults;
     public $agent_id, $agent_name;
 
     public function fetchPackages(){
@@ -86,6 +86,8 @@ class HomeComponent extends Component
             'email' => 'required|email',
             'mobile' => 'required|numeric|digits:10',
             'message' => 'required|string|max:500',
+            'num_children' => 'required|integer|min:0',
+            'num_adults' => 'required|integer|min:1',
         ]);
 
         // Debugging - Display the submitted form data
@@ -99,28 +101,13 @@ class HomeComponent extends Component
             'message' => $request->message,
             'agent_id' => $request->agent_id,
             'agent_name' => $request->agent_name,
+            'num_children' => $request->num_children,
+            'num_adults' => $request->num_adults,
         ]);
 
         return redirect()->back()->with('success', 'Your enquiry has been submitted successfully!');
     }
 
-    public function generateCaptcha()
-    {
-        $text = Str::random(6);
-        $image = imagecreatetruecolor(120, 40);
-        $background_color = imagecolorallocate($image, 255, 255, 255);
-        $text_color = imagecolorallocate($image, 0, 0, 0);
-        imagefilledrectangle($image, 0, 0, 120, 40, $background_color);
-        for ($i = 0; $i < 5; $i++) {
-            imageline($image, rand(0, 120), rand(0, 40), rand(0, 120), rand(0, 40), $text_color);
-        }
-        imagettftext($image, 20, 0, 10, 30, $text_color, public_path('css/fonts/nunito-v9-latin-600.ttf'), $text);
-        ob_start();
-        imagepng($image);
-        $this->captchaImage = base64_encode(ob_get_clean());
-        imagedestroy($image);
-        session(['captcha_code' => $text]);
-    }
 
     public function loginPost()
     {
