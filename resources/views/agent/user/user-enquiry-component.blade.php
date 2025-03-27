@@ -69,6 +69,8 @@
                                                         <th>Name</th>
                                                         <th>Email</th>
                                                         <th>Number</th>
+                                                        <th>No of Child</th>
+                                                        <th>No of Adult</th>
                                                         <th>Date</th>
                                                     </tr>
                                                 </thead>
@@ -85,6 +87,12 @@
                                                                 </td>
                                                                 <td>
                                                                     {{ $enquiry->mobile ?? '' }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ $enquiry->num_children ?? '' }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ $enquiry->num_adults ?? '' }}
                                                                 </td>
                                                                 <td>
                                                                     {{ $enquiry->created_at ?? '' }}
