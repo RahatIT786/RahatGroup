@@ -75,7 +75,7 @@
     <div id="whatsapp">
         {{-- <a href="https://wa.me/+971567866713"> --}}
         <a
-            href="https://api.whatsapp.com/send/?phone=%2B{{ $agent->mobile }}&text={{ urlencode('Hello, I want some details about package') }}&type=phone_number&app_absent=0">
+            target="_blank" href="https://api.whatsapp.com/send/?phone=%2B{{ $agent->mobile }}&text={{ urlencode('Hello, I want some details about package') }}&type=phone_number&app_absent=0">
             <img src="{{ asset('agent-website/img/whatsapp.png') }}" alt="whats_app" style="height: 100%;">
         </a>
     </div>
@@ -478,7 +478,7 @@
                                                         id="package-{{ $pkgDetail->id }}" role="tabpanel"
                                                         aria-labelledby="{{ strtolower($pkgDetail->pkgType->name ?? 'standard') }}-tab">
 
-                                                        {{-- <h6 class="text-success fw-semibold my-3 mx-3">
+                                                        {{--<h6 class="text-success fw-semibold my-3 mx-3">
                                                                 @switch($pkgDetail->pkg_type_id)
                                                                     @case(29) Super Saver @break
                                                                     @case(6) Gold @break
@@ -491,11 +491,11 @@
                                                                     @case(39) Classic @break
                                                                     @default Standard
                                                                 @endswitch
-                                                            </h6> --}}
+                                                            </h6>--}}
 
                                                         <table class="table table-bordered shadow-sm text-center">
                                                             <tbody>
-                                                                <tr>
+                                                                {{-- <tr>
                                                                     <td class="bg-light p-0">
                                                                         <p class="mb-1 fw-bold text-primary">Group
                                                                             Share</p>
@@ -517,8 +517,30 @@
                                                                             ₹{{ number_format($pkgDetail->t_share) }}
                                                                         </h5>
                                                                     </td>
-                                                                </tr>
+                                                                </tr> --}}
                                                                 <tr>
+                                                                    @if($pkgDetail->g_share != 0)
+                                                                    <td class="bg-light p-0">
+                                                                        <p class="mb-1 fw-bold text-primary">Group Share</p>
+                                                                        <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->g_share) }}</h5>
+                                                                    </td>
+                                                                    @endif
+
+                                                                    @if($pkgDetail->qt_share != 0)
+                                                                    <td class="bg-light p-0">
+                                                                        <p class="mb-1 fw-bold text-primary">Quad Share</p>
+                                                                        <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->qt_share) }}</h5>
+                                                                    </td>
+                                                                    @endif
+
+                                                                    @if($pkgDetail->t_share != 0)
+                                                                    <td class="bg-light p-0">
+                                                                        <p class="mb-1 fw-bold text-primary">Triple Share</p>
+                                                                        <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->t_share) }}</h5>
+                                                                    </td>
+                                                                    @endif
+                                                                </tr>
+                                                                {{-- <tr>
                                                                     <td class="bg-light p-0">
                                                                         <p class="mb-1 fw-bold text-primary">Double
                                                                             Share</p>
@@ -540,8 +562,30 @@
                                                                             ₹{{ number_format($pkgDetail->child_with_bed) }}
                                                                         </h5>
                                                                     </td>
-                                                                </tr>
+                                                                </tr> --}}
                                                                 <tr>
+                                                                    @if($pkgDetail->d_share != 0)
+                                                                    <td class="bg-light p-0">
+                                                                        <p class="mb-1 fw-bold text-primary">Double Share</p>
+                                                                        <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->d_share) }}</h5>
+                                                                    </td>
+                                                                    @endif
+
+                                                                    @if($pkgDetail->single != 0)
+                                                                    <td class="bg-light p-0">
+                                                                        <p class="mb-1 fw-bold text-primary">Single Share</p>
+                                                                        <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->single) }}</h5>
+                                                                    </td>
+                                                                    @endif
+
+                                                                    @if($pkgDetail->child_with_bed != 0)
+                                                                    <td class="bg-light p-0">
+                                                                        <p class="mb-1 fw-bold text-primary">Child with Bed</p>
+                                                                        <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->child_with_bed) }}</h5>
+                                                                    </td>
+                                                                    @endif
+                                                                </tr>
+                                                                {{-- <tr>
                                                                     <td class="bg-light p-0">
                                                                         <p class="mb-1 fw-bold text-primary">Child No
                                                                             Bed</p>
@@ -555,13 +599,21 @@
                                                                             ₹{{ number_format($pkgDetail->infant) }}
                                                                         </h5>
                                                                     </td>
-                                                                    {{-- <td class="bg-light p-0">
-                                                                        <p class="mb-1 fw-bold text-primary">Senior
-                                                                            Citizen</p>
-                                                                        <h5 class="mb-0 text-success">
-                                                                            ₹{{ number_format($pkgDetail->senior_citizen ?? 0) }}
-                                                                        </h5>
-                                                                    </td> --}}
+                                                                </tr> --}}
+                                                                <tr>
+                                                                    @if($pkgDetail->chlid_no_bed != 0)
+                                                                    <td class="bg-light p-0">
+                                                                        <p class="mb-1 fw-bold text-primary">Child No Bed</p>
+                                                                        <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->chlid_no_bed) }}</h5>
+                                                                    </td>
+                                                                    @endif
+
+                                                                    @if($pkgDetail->infant != 0)
+                                                                    <td class="bg-light p-0">
+                                                                        <p class="mb-1 fw-bold text-primary">Infant</p>
+                                                                        <h5 class="mb-0 text-success">₹{{ number_format($pkgDetail->infant) }}</h5>
+                                                                    </td>
+                                                                    @endif
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -961,8 +1013,8 @@
                         </div>
 
 
-                        <div class="col-lg-3 ">
-                            <div class="py-1">
+                        <div class="col-lg-3 d-flex align-items-center justify-content-center ">
+                            {{-- <div class="py-1">
                                 <label for="stateSelect" class="form-label">Departure City:</label>
                                 <select id="stateSelect" class="form-select">
                                     <option value="" selected disabled>Choose a Departure City</option>
@@ -970,8 +1022,8 @@
                                     <option value="maharashtra">Maharashtra</option>
                                     <option value="uttar-pradesh">Uttar Pradesh</option>
                                 </select>
-                            </div>
-                            <div class="py-1">
+                            </div> --}}
+                            {{-- <div class="py-1">
                                 <label for="packageSelect" class="form-label">Select Package:</label>
                                 <select id="packageSelect" class="form-select">
                                     <option value="" selected disabled>Choose a package</option>
@@ -979,16 +1031,16 @@
                                     <option value="gold">Gold</option>
                                     <option value="bronze">Bronze</option>
                                 </select>
-                            </div>
-                            <div class="text-center py-3">
+                            </div> --}}
+                            {{-- <div class="text-center py-3">
                                 <h6>Starting From</h6>
                                 <h4>₹ 68,786</h4>
-                                {{-- <p>Hexa Sharing</p> --}}
-                            </div>
+
+                            </div> --}}
                             {{-- <div class="text-center mt-3">
                                 <a href="#" class="btn btn-dark w-100 fw-semibold">Get Quote</a>
                             </div> --}}
-                            <div class="text-center mt-3">
+                            <div class="text-center mt-3" style="height:50px;width:300px">
                                 <a href="#" class="btn btn-dark w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#enquiryModal">Enquire</a>
                             </div>
                         </div>
@@ -1245,7 +1297,7 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="bg-light p-5 h-100">
                         <h2 class="mb-4">Send Us a Message</h2>
-                        <form>
+                        <form action="{{ route('submit.enquiry') }}" method="POST" >
                             @csrf
                             <div class="mb-4">
                                 <input type="text" name="name" class="form-control p-3"
@@ -1256,12 +1308,27 @@
                                     placeholder="Your Email" required>
                             </div>
                             <div class="mb-4">
-                                <input type="text" name="subject" class="form-control p-3" placeholder="Subject"
-                                    required>
+                                <input type="tel" class="form-control  p-3" id="mobile" name="mobile"
+                                        placeholder="Enter your mobile number" pattern="[0-9]{10}" required>
+                            </div>
+                            <div class="mb-4 d-flex justify-content-between">
+                                <div>
+                                    <input type="number" class="form-control p-3" id="num_adults" name="num_adults"
+                                        placeholder="Enter number of adults" min="1" required>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control p-3" id="num_children" name="num_children"
+                                         placeholder="Enter number of children" min="0" required>
+                                </div>
+
                             </div>
                             <div class="mb-4">
                                 <textarea name="message" class="form-control p-3" rows="6" placeholder="Your Message" required></textarea>
                             </div>
+
+                            <input type="hidden" name="agent_id" value="{{ $agent->id }}">
+                            <input type="hidden" name="agent_name" value="{{ $agent->owner_name }}">
+
                             <button type="submit" class="btn btn-primary py-3 px-5">Send Message</button>
                         </form>
                     </div>
