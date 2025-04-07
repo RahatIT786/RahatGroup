@@ -19,15 +19,18 @@
                         <div class="col-12">
                             <div class="card card-secondary">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="container my-5">
-                                            <h3 class="">Merchant Shop</h3>
-                                            <p>Transaction Id: {{ $data['txnId'] }}</p>
-                                            <p>Atom Token Id: {{ $atomTokenId }}</p>
-                                            <p>Pay Rs. {{ $data['amount'] }}</p>
-                                            <a name="" id="" class="btn btn-primary"
-                                                href="javascript:openPay()" role="button">Pay Now</a>
-                                        </div>
+                                    <div class="container my-5">
+                                        <h3>Merchant Shop</h3>
+                                        <p>Order ID: {{ $razorpayOrderId }}</p>
+                                        <p>Pay Rs. {{ $payment_amount }}</p>
+                                        <button id="pay-btn" class="btn btn-primary">Pay Now</button>
+
+                                        <form id="razorpay-form" action="{{ route('agent.payment.response') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+                                            <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+                                            <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -38,25 +41,37 @@
         </div>
     </div>
 </div>
+
 @push('extra_js')
-    {{-- <script src="https://pgtest.atomtech.in/staticdata/ots/js/atomcheckout.js"></script> --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    {{-- <script src="https://pgtest.atomtech.in/staticdata/ots/js/atomcheckout.js"></script> --}}
-    <script src="https://psa.atomtech.in/staticdata/ots/js/atomcheckout.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
-        function openPay() {
-            //console.log('hi');
-            const options = {
-                "atomTokenId": "{{ $atomTokenId }}",
-                "merchId": "{{ $data['login'] }}",
-                "custEmail": "{{ $data['email'] }}",
-                "custMobile": "{{ $data['mobile'] }}",
-                "returnUrl": "{{ $data['return_url'] }}",
-            }
-            // let atom = new AtomPaynetz(options, 'uat'); //test env
-            let atom = new AtomPaynetz(options); //prod env
+        document.getElementById('pay-btn').onclick = function(e) {
+            e.preventDefault();
+
+            var options = {
+                "key": "{{ $razorpayKey }}",
+                "amount": "{{ $amountInPaise }}",
+                "currency": "INR",
+                "name": "Merchant Shop",
+                "description": "Booking Payment",
+                "order_id": "{{ $razorpayOrderId }}",
+                "handler": function (response){
+                    document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+                    document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+                    document.getElementById('razorpay_signature').value = response.razorpay_signature;
+                    document.getElementById('razorpay-form').submit();
+                },
+                "prefill": {
+                    "name": "{{ $agent->name }}",
+                    "email": "{{ $agent->email }}",
+                    "contact": "{{ $agent->mobile }}"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
         }
     </script>
 @endpush
