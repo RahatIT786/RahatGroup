@@ -27,7 +27,7 @@ class HajjKitComponent extends Component
     {
         // Fetch all KitCategory items with the given category_id
         $this->kits = KitCategory::where('category_id', $slug)->get();
-
+       // dd($this->kits);
         // Initialize an array to hold kit names for each kit
         $this->kit_names = [];
 
@@ -40,18 +40,25 @@ class HajjKitComponent extends Component
         // dump($this->kits);
         // dump($this->kit_names);
     }
-    public function qtyAdd()
+    public function qtyAdd($kitId)
     {
         $this->kit_qty++;
 
-        $this->tot_price =  $this->kit_qty * $this->kit->price;
+        $kit = $this->kits->firstWhere('id', $kitId);
+        if ($kit) {
+            $this->tot_price = $this->kit_qty * $kit->price;
+        }
+        //$this->tot_price =  $this->kit_qty * $this->kits->first()->price;
     }
-    public function qtySubstract()
+    public function qtySubstract($kitId)
     {
         if ($this->kit_qty > 0) {
             $this->kit_qty--;
 
-            $this->tot_price =  $this->kit_qty * $this->kit->price;
+            $kit = $this->kits->firstWhere('id', $kitId);
+            if ($kit) {
+                $this->tot_price = $this->kit_qty * $kit->price;
+            }
         }
     }
     #[Layout('user-front.layouts.app')]
