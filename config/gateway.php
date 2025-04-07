@@ -30,4 +30,8 @@ return [
         'decResponseKey' => '75AEF0FA1B94B3C10D4F5B268F757F11',
         'api_url' => 'https://caller.atomtech.in/ots/aipay/auth',
     ],
+    'razorpay'=>[
+        'key' =>  env('RAZORPAY_KEY'),
+        'secret' =>  env('RAZORPAY_SECRET'),
+    ]
 ];

@@ -34,4 +34,8 @@ return [
         'api_url' => env('PASSPORT_READER_API_URL', 'https://ping.arya.ai/api/v1/kyc'),
         'token' => env('PASSPORT_READER_TOKEN', '9e76f79da63067c4a22cecb41984ff18'),
     ],
+    'razorpay' => [
+        'key' => env('RAZORPAY_KEY'),
+        'secret' => env('RAZORPAY_SECRET'),
+    ],
 ];

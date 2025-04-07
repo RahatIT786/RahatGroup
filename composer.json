@@ -14,6 +14,7 @@
         "laravel/ui": "^4.5",
         "livewire/livewire": "^3.4",
         "rap2hpoutre/fast-excel": "^5.4",
+        "razorpay/razorpay": "^2.9",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.6",
         "simplesoftwareio/simple-qrcode": "^4.2",
