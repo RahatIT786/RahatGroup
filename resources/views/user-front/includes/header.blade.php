@@ -722,7 +722,7 @@
                                         {{-- <li><a href="{{ route('customer.hajjKit', ['slug' => $kit->slug]) }}"
                                                 title=" {{ $kit->name }}"> {{ $kit->name }}</a></li> --}}
                                         <li>
-                                            <a href="{{ route('customer.hajjKit', ['slug' => $kit->category_id ]) }}"
+                                            <a href="{{ route('customer.HajjKit') }}"
                                                 title="{{ $kit->category_id == 1 ? 'Hajj Kid' : ($kit->category_id == 2 ? 'Umrah Kit' : 'Other') }}">
                                                 {{ $kit->category_id == 1 ? 'Hajj Kid' : ($kit->category_id == 2 ? 'Umrah Kit' : 'Other') }}
                                             </a>
