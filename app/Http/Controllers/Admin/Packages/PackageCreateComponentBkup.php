@@ -41,7 +41,7 @@ class PackageCreateComponent extends Component
     public $foodMaster = [], $food_type = [];
     public $lundrayMaster = [], $laundray_type = [];
     public $package_includes = [];
-    public $selectedPackgagesTypes = [];
+
     public $g_share_price = [], $qt_share_price = [], $qd_share_price = [], $t_share_price = [], $d_share_price = [], $single_price = [], $child_w_b = [], $child_wo_b = [], $infants = [];
 
     public $payment_policy, $important_notes, $cancellation_policy, $flight_transport, $meals, $meals1, $visa_taxes, $inclusion, $exlusion, $itinerary;
