@@ -72,14 +72,14 @@
                                             <p class="mb-0">
                                                 <img src="{{ asset('assets/user-front/images/minus_icon.png') }}"
                                                     class="item_number minus" id="minus-{{ $kit->id }}"
-                                                    width="20px" height="20px" wire:click="qtySubstract">
+                                                    width="20px" height="20px" wire:click="qtySubstract({{ $kit->id }})">
                                                 <input name="item_{{ $kit->id }}" id="item_{{ $kit->id }}"
                                                     type="text"
                                                     onblur="get_shop_price({{ $kit->price }}, 0, '{{ $kit->id }}')"
                                                     value="0" class="qty" wire:model ="kit_qty">
                                                 <img src="{{ asset('assets/user-front/images/add_icon.png') }}"
                                                     class="item_number add" id="add-{{ $kit->id }}" width="20px"
-                                                    height="20px" wire:click="qtyAdd">
+                                                    height="20px" wire:click="qtyAdd({{ $kit->id }})">
                                             </p>
                                         </div>
                                     </div>
