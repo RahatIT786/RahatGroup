@@ -35,10 +35,10 @@ class PaymentGateWayConfirmationComponent extends Component
         $return_url = route('agent.payment.response');
 
         // Razorpay keys from .env
-        $this->razorpayKey = env('RAZORPAY_KEY');
+        $this->razorpayKey = "rzp_live_ellFvUAMFK4vg7";
 
         // Create Razorpay Order
-        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+        $api = new Api("rzp_live_ellFvUAMFK4vg7", "JwazrlzzwRuLRoTrSlPqByHX");
 
         $order = $api->order->create([
             'receipt' => 'RQ_' . uniqid(),
@@ -51,10 +51,10 @@ class PaymentGateWayConfirmationComponent extends Component
         try {
             $this->data = $paymentService->createPayData($amount, $user_email, $user_contact_number, $return_url, $request_id, $order);
             Log::info('Payment Data:', $this->data);
-        
+
             // $this->atomTokenId = $paymentService->createTokenId($this->data);
             // Log::info('Atom Token ID: ' . $this->atomTokenId);
-        
+
         } catch (\Exception $e) {
             Log::error('Error occurred: ' . $e->getMessage());
             return response()->json(['error' => 'Something went wrong. Please try again later.'], 500);
