@@ -23,8 +23,8 @@ class PaymentGateWayConfirmationComponent extends Component
         $this->request = Booking::findOrFail($quote_id);
         $this->agent = Agency::findOrFail(auth()->user()->id);
 
-        //$this->payment_amount = session()->get('payment_amount');
-        $this->payment_amount = 1;
+        $this->payment_amount = session()->get('payment_amount');
+        //$this->payment_amount = 1;
         $this->amountInPaise = $this->payment_amount * 100;
 
         $paymentService =  new PaymentService();
